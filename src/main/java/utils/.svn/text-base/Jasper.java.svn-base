@@ -1,0 +1,93 @@
+// Decompiled by DJ v3.11.11.95 Copyright 2009 Atanas Neshkov  Date: 07/05/2010 13:15:32
+// Home Page: http://members.fortunecity.com/neshkov/dj.html  http://www.neshkov.com/dj.html - Check often for new version!
+// Decompiler options: packimports(3) 
+// Source File Name:   Jasper.java
+
+package utils;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.export.JRRtfExporter;
+
+// Referenced classes of package utils:
+//            Log4j, SQLManager
+  public class Jasper{
+
+  public static void main(String[] args) {
+	  		  /*JRProperties.
+	  		  setProperty("jasper.reports.compile.class.path","/var/lib/tomcat5.5/webapps/Panaderia/WEB-INF/lib/jasperreports-3.7.2.jar;");
+			  JRProperties.setProperty("jasper.reports.compile.temp","/var/lib/tomcat5.5/webapps/Panaderia/");
+			  System.setProperty("user.home", "/var/lib/tomcat5.5/webapps/Panaderia/WEB-INF/lib/pja.jar");
+			  System.setProperty("java2d.font.usePlatformFont", "false");
+	  System.setProperty("com.eteks.awt.nojava2d", "true");
+	  System.setProperty("java2d.font.usePlatformFont", "false");*/
+
+	  /*JRProperties.
+		  setProperty("jasper.reports.compile.class.path","C:/Tomcat 5.5/webapps/Panaderia/WEB-INF/lib/jasperreports-3.7.2.jar;");
+	  JRProperties.setProperty("jasper.reports.compile.temp","C:/Tomcat 5.5/webapps/Panaderia/");
+	  //System.setProperty("java.awt.headless", "true");
+	  //System.setProperty("java.awt.graphicsenv", "com.eteks.java2d.PJAGraphicsEnvironment");
+	  //System.setProperty("awt.toolkit", "com.eteks.awt.PJAToolkit");
+	  System.setProperty("user.home", "C:/Tomcat 5.5/webapps/Panaderia/WEB-INF/lib/pja.jar");
+	  System.setProperty("java.awt.fonts", "false");
+	  System.setProperty("java2d.font.usePlatformFont", "C:/Archivos de programa/Java/jdk1.5.0_05/jre/lib/fonts");
+	  System.setProperty("com.eteks.awt.nojava2d", "true");
+	  System.setProperty("java2d.font.usePlatformFont", "false");*/
+    Connection conexion = null;
+    try {
+      Map parameters = new HashMap();
+      Collection c = new ArrayList();
+      c.add("204");
+      parameters.put("listaFacturas", c);
+      //JasperReport report = JasperCompileManager.compileReport("/var/lib/tomcat5.5/webapps/Informe/WEB-INF/classes/informe.jrxml");
+      JasperReport report = JasperCompileManager.compileReport("C:\\Documents and Settings\\Ivan\\Escritorio\\informePadre.jrxml");
+      
+      conexion = utils.PoolConexiones.conexion();
+      JasperPrint print = JasperFillManager.fillReport(report, parameters, conexion);
+      JasperPrint print2 = JasperFillManager.fillReport(report, parameters, conexion);
+      ArrayList lista = new ArrayList();
+      lista.add(print);
+      lista.add(print2);
+      // Exporta el informe a PDF
+      //JasperExportManager.exportReportToPdfFile(print,"C:\\informe.pdf");
+      
+      JRRtfExporter exporter = new JRRtfExporter();
+
+      exporter.setParameter(JRExporterParameter.JASPER_PRINT_LIST, lista);
+      exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, "C:\\informe.rtf");
+      exporter.exportReport();
+      //Para visualizar el pdf directamente desde java
+      JasperViewer.viewReport(print, false);
+      //JasperPrint printer = new JasperPrint();
+      //JasperPrintManager.printReport(print,false);
+      
+    }
+    catch (Exception e) {
+    	Log4j.error("Error", e);
+    }
+    finally {
+      /*
+       * Cleanup antes de salir
+       */
+      try {
+        if (conexion != null) {
+          conexion.close();
+        }
+      }
+      catch (Exception e) {
+    	  Log4j.error("Error", e);
+      }
+    }
+
+  }
+}

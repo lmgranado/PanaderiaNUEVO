@@ -1,0 +1,393 @@
+	BODY{
+		margin: 0px 0px 0px 0px;
+		font-family: Verdana;
+		font-size: 11px;
+		font-weight: normal;
+		font-variant: normal;
+		background-color: white;
+	}
+	
+	.jsvalidation{
+		color: blue;
+		font-size: 11px;
+	}
+	
+	#contenedor-pie {
+		width: 100%;
+		background: #CCC;
+		position: relative;
+		bottom: 0 !importante;
+		bottom: -1px;
+		height: 40px;
+}
+
+	*[readonly]{
+		 color: black;
+		 background-color: #CCCCCC;
+	}
+		
+	*[disabled]{
+		 color: black;
+		 background-color: #CCCCCC;
+	}
+
+	IMG{
+		border: 0px;
+		margin: 0px;
+		vertical-align: middle;
+	}
+	
+	INPUT{
+		font-size: 11px;
+		padding: 2px 1px 2px 1px;
+		margin: 0px;
+		border: 1px solid #D9D9D9;
+		background-color: #FBFBFB;
+	}
+	
+	.textarea{
+		font-size: 11px;
+		padding: 2px 1px 2px 1px;
+		margin: 0px;
+		border: 1px solid #D9D9D9;
+		background-color: #FBFBFB;
+	}
+	
+	SELECT{
+		font-size: 11px;
+		padding: 2px 1px 2px 1px;
+		margin: 0px;
+		border: 1px solid #D9D9D9;
+		background-color: #FBFBFB;
+	}
+	
+	INPUT.check{
+		border: 0px solid transparent;
+		background-color: #FBFBFB;
+	}
+	
+	A {
+	  color: black;
+	  text-decoration: none;
+	  font-weight: bold;
+	  cursor: pointer;
+	}
+	
+	A:hover{
+		color: #8C9470;
+	}
+	
+	.fondo_pie{
+		background-image: url("../img/pixel_pie.gif");
+		background-repeat: repeat-x;
+		height: 62px;
+	}
+	
+	.fondo_sup{
+		background-image: url("../img/pixel_cab.jpg");
+		background-repeat: repeat-x;
+		height: 80px;
+	}
+	
+	
+	
+	.letra_inicio_grande{
+		color: #3A86C2;
+		font-size: 22px;
+		font-weight: bolder;
+		font-style: italic;
+	}
+	
+	.letra_inicio_peq{
+		color: #83B1C0;
+		font-size: 12px;
+		font-weight: bolder;
+	}
+	
+	.letra_negra{
+		color: #1B1B1B;
+		font-size: 11px;
+		font-weight: bolder;
+	}
+	
+	.letra_politica{
+		color: black;
+		font-size: 10px;
+		font-weight: bold;
+	}
+	
+	.letra_tit_politica{
+		color: #83B1C0;
+		font-size: 11px;
+		text-decoration: underline;
+	}
+	
+	.letra_pie{
+		color: #000000;
+		font-size: 12px;
+		font-family: Arial;
+	}
+	
+	.letra_pies{
+		color: white;
+		font-size: 12px;
+		font-family: Arial;
+	}
+	
+	.tabla_avisos{
+		background-color: #B0D3F7;
+		border: 1px solid #2887E8;
+		padding: 5px 5px 5px 5px;
+		font-family: Arial;
+		text-align: center;
+	}
+	
+	.botonera_tabla{
+		text-align: right;
+		width: 100%;
+		vertical-align: top;
+		padding: 0px;
+		margin-top: 0px;
+		
+	}
+	
+	.error{
+		color: red;
+		font-size: 11px;
+		font-weight: bolder;
+		text-align: left;
+		vertical-align: middle;
+	}
+	
+	.porcen0{
+		width: 0%;
+	}
+	
+	.porcen5{
+		width: 5%;
+	}
+	
+	.porcen8{
+		width: 8%;
+	}
+	
+	.porcen10{
+		width: 10%;
+	}
+	
+	.porcen15{
+		width: 15%;
+	}
+	
+	.porcen20{
+		width: 20%;
+	}
+	
+	.porcen30{
+		width: 30%;
+	}
+	
+	.porcen40{
+		width: 40%;
+	}
+	
+	.porcen50{
+		width: 50%;
+	}
+	
+	.porcen60{
+		width: 60%;
+	}
+	
+	.porcen70{
+		width: 70%;
+	}
+	
+	.porcen80{
+		width: 80%;
+	}
+	
+	.porcen90{
+		width: 90%;
+	}
+	
+	.porcen100{
+		width: 100%;
+	}
+	
+	.porcen2{
+		width: 2%;
+	}
+	
+	.porcen42{
+		width: 12%;
+	}
+	
+	.estilo_fecha_marco{
+	  font-size: 12px;
+	  color: #ffffff;
+	  background-color: transparent;
+	}
+	 
+	.estilo_hora_marco{
+	  font-weight: bold;
+	  color: #ffffff;
+	  background-color: transparent;
+	}
+	
+	.no_border{
+		border: 0px solid;
+	}
+	
+	.pestana_letra{
+		color: #40B7E5;
+		font-family: Verdana;
+		font-size: 14px;
+		text-align: center;
+	}
+	
+	.pestana_letra_des{
+		color: #9DB6C4;
+		font-family: Verdana;
+		font-size: 14px;
+		text-align: center;
+	}
+	
+	.pestana_fondo_color{
+		background-image: url("../img/pixel_pestana_activo.jpg");
+		background-repeat: repeat-x;
+		height: 27px;
+		border-left: 1px solid #E8E8E8;
+		border-right: 1px solid #E8E8E8;
+		border-top: 1px solid #E8E8E8;
+	}
+	
+	.pestana_fondo_color_padre{
+		background-image: url("../img/pixel_pestana_desactivo.jpg");
+		background-repeat: repeat-x;
+		height: 27px;
+		border-left: 1px solid #E8E8E8;
+		border-right: 1px solid #E8E8E8;
+		border-top: 1px solid #E8E8E8;
+	}
+	
+	.pestana_fondo_color_hijo{
+		background-color: #D6E3EB;
+		width: 128px;
+		height: 27px;
+		border: 1px solid #DFEAEA;
+	}
+	
+	.pestana_fondo_hijo_marcado{
+		background-color: #FFFFDF;
+		width: 128px;
+		height: 27px;
+		border: 1px solid #DFEAEA;
+	}
+	
+	.texto_negrita{
+		color: #FA7D3D;
+		font-family: Verdana;
+		font-size: 11px;
+	}
+	
+	.apartado{
+		color: black;
+		font-family: Verdana;
+		font-size: 11px;
+		font-weight: 600;
+		border-bottom: 1px solid darkgray;
+	}
+	
+	.radio{
+		border: 0px solid white;
+	}
+	
+	.enlace_menu{
+		font-family: Arial; 
+		font-size: 12px; 
+		color: white;
+		font-weight: normal;
+	}
+	
+	.texto_usuario{
+		color: white;
+		font-family: Verdana;
+		font-size: 11px;
+		font-style: italic;
+	}
+	
+	.capa_info{
+		float: right; 
+		position: absolute; 
+		background-color: #DAEBFB; 
+		display: none; 
+		border: 1px solid #B1B6A0; 
+		width: 200px; 
+		font-size: 10px
+	}
+	
+	.enlace{
+	  color: black;
+	  text-decoration: none;
+	  font-weight: bold;
+	  cursor: pointer;
+	}
+	
+	.tablaTituloSeccionAzul {
+		WIDTH: 100%
+	}
+	
+	.fondoblanco {
+		BACKGROUND-COLOR: #ffffff
+	}
+	
+	.bordeAzul {
+		BORDER-RIGHT: #22628e 1px solid; BORDER-TOP: #22628e 1px solid; BORDER-LEFT: #22628e 1px solid; BORDER-BOTTOM: #22628e 1px solid
+	}
+
+	TABLE.principal {
+		VERTICAL-ALIGN: middle; WIDTH: 100%; HEIGHT: 95%; TEXT-ALIGN: center
+	}
+	
+	TABLE.secundaria {
+		VERTICAL-ALIGN: middle; WIDTH: 50%; HEIGHT: 390px; TEXT-ALIGN: center
+	}
+	
+	.tituloSeccionAzul {
+		FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-TRANSFORM: uppercase; COLOR: #22628e; BORDER-BOTTOM: #cccccc thin solid; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial; TEXT-ALIGN: left
+	}
+	
+	.textoSencillo {
+		FONT-SIZE: 12px; COLOR: black; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial
+	}
+
+	.textoMensajeAzul {
+		FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #22628e; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial; BACKGROUND-COLOR: #f8fbfc; TEXT-ALIGN: center
+	}
+	
+	.textoMensajeAzulPeqJust {
+		FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #22628e; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial; BACKGROUND-COLOR: #f8fbfc; TEXT-ALIGN: justify
+	}
+	
+	.textoBotonVentana {
+		MARGIN-TOP: 3px; FONT-WEIGHT: bold; FONT-SIZE: 10px; VERTICAL-ALIGN: middle; COLOR: #ffffff; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial; TEXT-ALIGN: center
+	}
+	
+	.botonAzul {
+		BORDER-RIGHT: #22628e 1px solid; BORDER-TOP: #22628e 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 70%; BACKGROUND-IMAGE: url(../../imagenes/ventanasEmergentes/fondoBotonAzul.png); VERTICAL-ALIGN: middle; BORDER-LEFT: #22628e 1px solid; WIDTH: 100px; CURSOR: pointer; COLOR: #ffffff; BORDER-BOTTOM: #22628e 1px solid; BACKGROUND-REPEAT: repeat-x; FONT-FAMILY: "Trebuchet MS", Verdana, Tahoma, sans-serif, Arial; HEIGHT: 23px; BACKGROUND-COLOR: #22628e; TEXT-ALIGN: center
+	}
+	
+	.leyenda_i{
+		  float: left; 
+		  top: 45%; 
+		  position: absolute; 
+		  left: 40%; 
+		  background-color: rgb(250,250,215);
+		  border: 2px solid rgb(170,120,150);
+		  color: rgb(100,100,100);
+		  font-size: 12px;
+		  text-align: justify;
+		  padding: 5px 10px 5px 10px;
+		  margin-bottom: 10px;
+	}

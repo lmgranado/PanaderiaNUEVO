@@ -1,0 +1,599 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/86/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions
+END
+AlbaranesVentaFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/pinepan/!svn/ver/100/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaFormularioGrabarAction.java
+END
+EntregasGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/EntregasGrabarAction.java
+END
+FamiliasFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FamiliasFormularioAction.java
+END
+AlbaranesVentaFormularioEditarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaFormularioEditarAction.java
+END
+ComposicionProductosBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ComposicionProductosBorrarAction.java
+END
+PeriodosFacturacionGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/PeriodosFacturacionGrabarAction.java
+END
+VentanaSearchProductosFabricacionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosFabricacionAction.java
+END
+ProductosBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductosBorrarAction.java
+END
+FacturasCompraActualizarEstadoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraActualizarEstadoAction.java
+END
+FacturasFabricacionDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasFabricacionDetalleGrabarAction.java
+END
+FormasPagoGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FormasPagoGrabarAction.java
+END
+VentanaBarraProgresoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaBarraProgresoAction.java
+END
+AlbaranesVentaDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/58/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaDetalleGrabarAction.java
+END
+FacturasCompraFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraFormularioAction.java
+END
+FichasProductosFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/24/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FichasProductosFormularioAction.java
+END
+ProductoComposicionFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductoComposicionFormularioGrabarAction.java
+END
+FacturasVentaDetalleGrabarManualAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaDetalleGrabarManualAction.java
+END
+FacturasCompraFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraFormularioGrabarAction.java
+END
+FichasProductosFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FichasProductosFormularioGrabarAction.java
+END
+ComponentesProductoGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/20/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ComponentesProductoGrabarAction.java
+END
+ComposicionProductosFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ComposicionProductosFormularioGrabarAction.java
+END
+FacturasVentaActualizarEstadoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaActualizarEstadoAction.java
+END
+VentanaSearchClienteNotasEntregaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchClienteNotasEntregaAction.java
+END
+FacturasVentaCerrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaCerrarAction.java
+END
+FacturasVentaDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaDetalleBorrarAction.java
+END
+FacturasVentaFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaFormularioAction.java
+END
+FamiliasGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FamiliasGrabarAction.java
+END
+UsuariosBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/UsuariosBorrarAction.java
+END
+CobradoresFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CobradoresFormularioAction.java
+END
+FacturasVentaFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaFormularioGrabarAction.java
+END
+VentanaSearchProductosNotasEntregaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosNotasEntregaAction.java
+END
+FacturasVentaFormularioEditarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/94/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaFormularioEditarAction.java
+END
+CuadrantesDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CuadrantesDetalleGrabarAction.java
+END
+FacturasCompraDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/49/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraDetalleBorrarAction.java
+END
+CuadrantesDetalleEditarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CuadrantesDetalleEditarAction.java
+END
+FacturasFabricacionFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasFabricacionFormularioAction.java
+END
+FacturasVentaFormularioAction_bueno.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaFormularioAction_bueno.java
+END
+AlbaranesVentaDetalleGrabarManualAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaDetalleGrabarManualAction.java
+END
+NotasEntregaBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaBorrarAction.java
+END
+RepartidoresBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/RepartidoresBorrarAction.java
+END
+HistoricoAcGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/HistoricoAcGrabarAction.java
+END
+FacturasFabricacionDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasFabricacionDetalleBorrarAction.java
+END
+AlbaranesVentaDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaDetalleBorrarAction.java
+END
+ClientesFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ClientesFormularioAction.java
+END
+ProductoFichaFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/pinepan/!svn/ver/24/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductoFichaFormularioAction.java
+END
+ProveedoresBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/42/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProveedoresBorrarAction.java
+END
+ClientesFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ClientesFormularioGrabarAction.java
+END
+ProductoFichaFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductoFichaFormularioGrabarAction.java
+END
+AlbaranesVentaBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/57/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaBorrarAction.java
+END
+VentanaSearchClienteFacturaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchClienteFacturaAction.java
+END
+FacturasVentaReferenciaCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaReferenciaCrearAction.java
+END
+FamiliasBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FamiliasBorrarAction.java
+END
+HistoricoInventariosDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/pinepan/!svn/ver/43/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/HistoricoInventariosDetalleGrabarAction.java
+END
+RepartidoresFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/RepartidoresFormularioGrabarAction.java
+END
+HistoricoInventariosFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/pinepan/!svn/ver/34/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/HistoricoInventariosFormularioGrabarAction.java
+END
+ProveedoresFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProveedoresFormularioGrabarAction.java
+END
+ProductoComposicionBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductoComposicionBorrarAction.java
+END
+FacturasCompraBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/49/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraBorrarAction.java
+END
+FichasProductosBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FichasProductosBorrarAction.java
+END
+VentanaSearchProveedoresFacturaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/pinepan/!svn/ver/42/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProveedoresFacturaAction.java
+END
+FacturasVentaBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/pinepan/!svn/ver/58/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaBorrarAction.java
+END
+CobradoresBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CobradoresBorrarAction.java
+END
+VentanaSearchProductosFacturaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosFacturaAction.java
+END
+CuadrantesFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CuadrantesFormularioAction.java
+END
+VentanaSearchProductosClienteFacturaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosClienteFacturaAction.java
+END
+ProductosFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/pinepan/!svn/ver/86/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductosFormularioAction.java
+END
+ProductosClienteGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductosClienteGrabarAction.java
+END
+FacturasFabricacionBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/49/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasFabricacionBorrarAction.java
+END
+HistoricoInventariosDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/pinepan/!svn/ver/43/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/HistoricoInventariosDetalleBorrarAction.java
+END
+ProductosClienteEditarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductosClienteEditarAction.java
+END
+ProductosFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProductosFormularioGrabarAction.java
+END
+VentanaSearchClienteAlbaranAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchClienteAlbaranAction.java
+END
+NotasEntregaDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaDetalleGrabarAction.java
+END
+VentanaSearchProductosClienteNotasEntregaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosClienteNotasEntregaAction.java
+END
+CobradoresFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CobradoresFormularioGrabarAction.java
+END
+EntregasDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/EntregasDetalleGrabarAction.java
+END
+ClientesBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ClientesBorrarAction.java
+END
+UsuariosFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/UsuariosFormularioAction.java
+END
+CuadrantesGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/CuadrantesGrabarAction.java
+END
+FacturasFabricacionFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/pinepan/!svn/ver/42/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasFabricacionFormularioGrabarAction.java
+END
+UsuariosFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/UsuariosFormularioGrabarAction.java
+END
+FacturasVentaFormularioGrabarAction_bueno.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaFormularioGrabarAction_bueno.java
+END
+VacacionesClientesGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VacacionesClientesGrabarAction.java
+END
+EntregasFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/EntregasFormularioAction.java
+END
+NotasEntregaObsAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaObsAction.java
+END
+NotasEntregaDetalleGrabarManualAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaDetalleGrabarManualAction.java
+END
+VentanaSearchProductosClienteAlbaranAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/VentanaSearchProductosClienteAlbaranAction.java
+END
+NotasEntregaFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/pinepan/!svn/ver/49/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaFormularioAction.java
+END
+RepartidoresFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/RepartidoresFormularioAction.java
+END
+HistoricoInventariosFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/pinepan/!svn/ver/34/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/HistoricoInventariosFormularioAction.java
+END
+FacturasVentaDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/pinepan/!svn/ver/58/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasVentaDetalleGrabarAction.java
+END
+NotasEntregaDetalleBorrarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaDetalleBorrarAction.java
+END
+NotasEntregaFormularioGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaFormularioGrabarAction.java
+END
+NotasEntregaFormularioEditarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/NotasEntregaFormularioEditarAction.java
+END
+RutasGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/RutasGrabarAction.java
+END
+AlbaranesVentaActualizarEstadoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaActualizarEstadoAction.java
+END
+ProveedoresFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/ProveedoresFormularioAction.java
+END
+AlbaranesVentaFormularioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/pinepan/!svn/ver/57/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/AlbaranesVentaFormularioAction.java
+END
+FacturasCompraDetalleGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/panaderia/panaderia/struts/formularios/actions/FacturasCompraDetalleGrabarAction.java
+END

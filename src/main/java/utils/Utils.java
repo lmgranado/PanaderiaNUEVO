@@ -1,0 +1,309 @@
+package utils;
+
+import java.io.*;
+import java.math.*;
+import java.net.*;
+import java.text.*;
+import java.util.*;
+
+import panaderia.beans.AlbaranesVentaDetalle;
+import panaderia.struts.forms.EntidadBean;
+
+public class Utils
+{
+  public static Locale LOCALE_es_ES = new Locale("es", "ES");
+
+  public static String CONTENT_TYPE_PDF = "application/pdf";
+
+  public static String DATE_SHORT       = "dd/MM/yyyy";
+  public static String DATE_HOUR_SHORT  = "dd/MM/yyyy HH:mm:ss";
+  public static String DATE_LONG        = "dd 'de' MMMMM 'de' yyyy";
+  public static String DATE_HOUR_LONG   = "dd 'de' MMMMM 'de' yyyy HH:mm:ss";
+  public static String DATE_MYSQL_LONG       = "yyyy-MM-dd HH:mm:ss";
+  public static String DATE_MYSQL_SHORT      = "yyyy-MM-dd";
+
+
+  private Utils(){}
+
+  public static Date getFechaActualSinHora()
+  {
+    Calendar calendario = new GregorianCalendar(LOCALE_es_ES);
+    try
+    {
+      SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy", LOCALE_es_ES);
+      return formater.parse(formater.format(calendario.getTime()));
+    }
+    catch (ParseException e)
+    {
+      return calendario.getTime();
+    }
+  }
+  
+  public static String getFechaActualSinHoraString(){
+	  return Utils.date2String(getFechaActualSinHora(), DATE_SHORT);
+  }
+
+  public static String getFechaActualConHoraString(){
+	  return Utils.date2String(getFechaActualConHora(), DATE_HOUR_SHORT);
+  }
+
+  public static Date getFechaActualConHora()
+  {
+    Calendar calendario = new GregorianCalendar(LOCALE_es_ES);
+    return calendario.getTime();
+  }
+
+  public static String date2String(Date fecha, String formato)
+  {
+    if( fecha==null ){ return ""; }
+
+    SimpleDateFormat dateFormatter = new SimpleDateFormat(formato);
+    
+    return dateFormatter.format(fecha);
+  }
+
+  public static Date string2Date(String fecha, String formato) throws ParseException
+  {
+    if( fecha==null || fecha.equals("")){ return null; }
+
+    
+    
+    SimpleDateFormat dateFormatter = new SimpleDateFormat( formato );
+    return dateFormatter.parse(fecha);
+  }
+  
+
+  public static BigDecimal parseBigDecimal(String num)
+  {
+    if (num != null && num.length() != 0)
+    {
+      String expreg = "^\\d+\\.\\d\\d?$";
+      if(!num.matches(expreg))
+      {
+        num = num.replaceAll("\\.", "");
+        num = num.replace(',', '.');
+      }
+      return new BigDecimal(num).setScale(2,BigDecimal.ROUND_HALF_EVEN);
+    }
+    else return new BigDecimal("0").setScale(2,BigDecimal.ROUND_HALF_EVEN);
+  }
+
+
+  public static byte[] String2byte(String clave)
+  {
+    StringTokenizer token=new StringTokenizer(clave,",");
+    int f=token.countTokens();
+    byte[] b=new byte[f];
+    for (int i = 0; i < f; i++)
+    {
+      b[i]=Byte.decode(token.nextToken()).byteValue();
+    }
+    return b;
+  }
+
+
+  public static byte[] url2Byte(String direccion) throws Exception
+  {
+    URL         url = new URL (direccion);
+    InputStream is  = url.openStream();
+
+    return stream2Byte(is);
+  }
+
+  public static byte[] url2Byte( String url, String contentType ) throws Exception
+  {
+	url = url.replaceAll(" ", "_");
+    URL conexionURL = new URL(url);
+
+    URLConnection conexion = conexionURL.openConnection();
+    if( conexion==null || conexion.getContentType()==null || !conexion.getContentType().equals(contentType) )
+    {
+      throw new Exception("El tipo del contenido devuelto no se corresponde con el tipo del contenido esperado [tipoEsperado:"+contentType+", tipoDevuelto:"+conexion.getContentType()+", URL:"+url+"]");
+    }
+
+    InputStream is = conexion.getInputStream();
+    return stream2Byte(is);
+  }
+
+  public static byte[] stream2Byte( InputStream inputStream ) throws Exception
+  {
+    ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+    int k;
+    if(inputStream!=null){
+	    while( (k=inputStream.read())!=-1 )
+	    {
+	      byteArray.write(k);
+	    }
+    }
+
+    return byteArray.toByteArray();
+  }
+
+  public static String completarCeros(int longitud, String numero)
+  {
+	if(numero==null) numero = "0";
+    while( numero.length() < longitud)
+    {
+      numero = "0" + numero;
+    }
+
+    return numero;
+  }
+  
+  public static final String skipNull(String src)
+  {   
+      return ((src == null) || (src=="unknown") ?"":src.trim());
+  }
+  
+  public static final ArrayList listToArray(Object[] array){
+	  ArrayList listaResultado = new ArrayList();
+	  if(array!=null && array.length>0){
+		  for(int i=0; i<array.length; i++){
+			  listaResultado.add(array[i]);
+		  }
+	  }
+	  return listaResultado;
+  }
+  
+    public static final String skipNullNumero(String src)
+  {   
+      return ((src == null || "".equals(src) ) || (src=="unknown") ?"0":src.trim());
+  }
+  
+  public static String parseaCadenaEsp(String cadena){
+      Locale locales = new Locale("es","España");
+      double myNumber = Double.parseDouble(cadena);
+      NumberFormat form = new DecimalFormat();
+     form = NumberFormat.getInstance(locales);
+     cadena = form.format(myNumber);
+     
+     return cadena;
+ }
+  
+  public static String generarClaveAlfanumerica( int longitud )
+  {
+    String alfabeto = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+
+    StringBuffer clave = new StringBuffer();
+    Random random = new Random(System.currentTimeMillis());
+    for( int i=0; i<longitud; i++ )
+    {
+      clave.append(alfabeto.charAt(random.nextInt(alfabeto.length())));
+    }
+
+    return clave.toString();
+  }
+  
+  public static final boolean empty(String obj){
+	  boolean resultado = false;	  
+	  obj = ((obj == null) || (obj=="unknown") ?"":obj);
+	  if(obj.equals("")) resultado = true;
+	  return resultado;
+  }
+  
+  
+  public static final boolean empty(double obj){
+	  boolean resultado = false;
+	  if(obj!=0) resultado = true;
+	  return resultado;
+  }
+  
+  
+  public static String redondea( String num, int decimales )
+  {
+	  	BigDecimal resultado = new BigDecimal("0").setScale( decimales,BigDecimal.ROUND_UP );
+	    if( num != null && num.length() != 0 )
+	      resultado = new BigDecimal(num).setScale( decimales ,BigDecimal.ROUND_UP );
+	    
+	    return resultado.toString();
+  }
+  
+  
+  public static String formateaCantidadDosDecimales(String num){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  Float f = new Float(num);
+	  NumberFormat nf = NumberFormat.getInstance(new Locale("es_ES"));
+	  DecimalFormat df = (DecimalFormat)nf;
+	  df.applyPattern("###,###.##");
+	  String output = df.format(f);  
+	  return output;
+  }
+  
+  
+  public static String formateaCantidad(String num){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  Float f = new Float(num);
+	  NumberFormat nf = NumberFormat.getInstance(new Locale("es_ES"));
+	  DecimalFormat df = (DecimalFormat)nf;
+	  df.applyPattern("###,###.###");
+	  String output = df.format(f);  
+	  return output;
+  }
+  
+  public static String formateaCantidadUnDecimal(String num){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  Float f = new Float(num);
+	  NumberFormat nf = NumberFormat.getInstance(new Locale("es_ES"));
+	  DecimalFormat df = (DecimalFormat)nf;
+	  df.applyPattern("0.0#");
+	  String output = df.format(f);  
+	  return output;
+  }
+  
+  public static String formateaCantidad(String num, int multiplica){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  String resultado = Utils.formateaCantidad(Float.toString( Float.parseFloat(num)*multiplica ));
+	  return resultado;
+  }
+  
+  
+  public static String parseFloat(String num){
+	  if(num==null || num.equals("")) num = "0";
+	  num = num.replace(',', '.');
+	  return num;
+  }
+  
+  public static String arrayToComaString(String[] valores){
+	  String resultado = "";
+	  for(int i=0; i<valores.length; i++){
+		  resultado += valores[i] + ",";
+	  }
+	  
+	  if(resultado.length()>0){
+		  resultado = resultado.substring(0, resultado.length()-1);
+	  }
+	  
+	  return resultado;
+  }
+  
+  public static String formateaCantidadFactura(String num){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  Float f = new Float(num);
+	  //NumberFormat nf = NumberFormat.getInstance(new Locale("es_ES"));
+	  //nf.setMinimumFractionDigits(2);
+	  //DecimalFormat df = (DecimalFormat)nf;
+	  DecimalFormat df = new DecimalFormat("0.00");
+	  //df.applyPattern("#.##");
+	  String output = df.format(f);  
+	  return output;
+  }
+  
+  public static String formateaCantidadUnidades(String num){
+	  if(num==null) num = "0";
+	  num = num.replace(',', '.');
+	  Float f = new Float(num);
+	  //NumberFormat nf = NumberFormat.getInstance(new Locale("es_ES"));
+	  //nf.setMinimumFractionDigits(2);
+	  //DecimalFormat df = (DecimalFormat)nf;
+	  DecimalFormat df = new DecimalFormat("0.##");
+	  //df.applyPattern("#.##");
+	  String output = df.format(f);  
+	  return output;
+  }
+  
+}

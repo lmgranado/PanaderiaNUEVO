@@ -1,0 +1,191 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/pinepan/!svn/ver/89/PanaderiaNUEVO/WebRoot/WEB-INF/formularios
+END
+login.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/login.jsp
+END
+barraprogreso.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/barraprogreso.jsp
+END
+cobradores.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/pinepan/!svn/ver/9/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/cobradores.jsp
+END
+facturasventa.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/58/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/facturasventa.jsp
+END
+historicoinventarios.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/pinepan/!svn/ver/43/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/historicoinventarios.jsp
+END
+cuadrantes.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/cuadrantes.jsp
+END
+searchClientesNE.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchClientesNE.jsp
+END
+clientes.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/pinepan/!svn/ver/28/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/clientes.jsp
+END
+facturascompra.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/47/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/facturascompra.jsp
+END
+fichasproductos.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/fichasproductos.jsp
+END
+entregas.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/entregas.jsp
+END
+searchProductosClienteNotasEntrega.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductosClienteNotasEntrega.jsp
+END
+searchProductosNE.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductosNE.jsp
+END
+searchProveedoresF.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/pinepan/!svn/ver/47/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProveedoresF.jsp
+END
+usuarios.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/usuarios.jsp
+END
+familias.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/familias.jsp
+END
+searchProductosClienteAlbaran.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductosClienteAlbaran.jsp
+END
+facturasfabricacion.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/pinepan/!svn/ver/89/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/facturasfabricacion.jsp
+END
+productos_bueno.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/93/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/productos_bueno.jsp
+END
+albaranesventa.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/57/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/albaranesventa.jsp
+END
+searchProductosClienteFactura.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductosClienteFactura.jsp
+END
+searchProductos.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductos.jsp
+END
+proveedores.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/9/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/proveedores.jsp
+END
+repartidores.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/pinepan/!svn/ver/9/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/repartidores.jsp
+END
+notasentrega.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/93/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/notasentrega.jsp
+END
+productos.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/pinepan/!svn/ver/93/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/productos.jsp
+END
+notasentrega_obs.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/notasentrega_obs.jsp
+END
+searchClientesALB.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchClientesALB.jsp
+END
+searchProductosFabricacion.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchProductosFabricacion.jsp
+END
+productoficha.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/28/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/productoficha.jsp
+END
+searchClientesF.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/formularios/searchClientesF.jsp
+END

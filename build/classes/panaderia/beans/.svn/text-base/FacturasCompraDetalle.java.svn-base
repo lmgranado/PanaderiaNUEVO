@@ -1,0 +1,336 @@
+package panaderia.beans;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import org.displaytag.pagination.PaginatedListTest;
+
+import panaderia.struts.forms.EntidadBean;
+import utils.UtilesDAO;
+import utils.Utils;
+import utils.UtilsFacturacion;
+
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+public class FacturasCompraDetalle extends panaderia.beans.entidad.FacturasCompraDetalleEntidad
+{
+  private static final long serialVersionUID = 1L;
+  
+  public FacturasCompraDetalle(){ super(); }
+
+  public static ArrayList getFacturasCompraDetalleByFcdFcId(String fcdFcId)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    ArrayList lista =  elto.consultaAVectorReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle WHERE fcd_fc_id='"+fcdFcId+"'");
+    for(int i = 0; i<lista.size(); i++){
+    	((FacturasCompraDetalle)lista.get(i)).setComponentesUsados(ComposicionFabricacion.getComposicionFabricacionByCfIdStFabricado(((FacturasCompraDetalle)lista.get(i)).getFcdStId()));
+    }
+    return lista;
+  }
+  
+  public static int eliminaDetalles( String fcdFcId ) 
+  {
+	   
+	  Connection conexion  = utils.PoolConexiones.conexion(); 
+	  int n = -1;
+	  try{
+	      PreparedStatement sentencia = conexion.prepareStatement("DELETE FROM facturas_compra_detalle WHERE fcd_fc_id=?");
+	      sentencia.setString( 1, fcdFcId );
+	      n = sentencia.executeUpdate();
+	      sentencia.close();
+	  }catch( SQLException e ){ utils.Log4j.error("Error", e); return -1; }
+	    finally{ utils.PoolConexiones.cerrarConexion(conexion); }
+	    
+	  return n;
+  }
+  
+  
+  public static int anadeDetalleALista( HttpServletRequest request ) throws Exception 
+  {
+	//Si es de compra, solo metenemos stockaje
+		//Si es de fabricación calculamos si se puede meter, quitamos los productos utilizados para la fabricación
+		//y despues metemos el stockaje de los productos creados
+		//Si todo va bien metemos lso productos en la factura
+	  int resultado = -2;
+	  	try{
+	  		FacturasCompraDetalle facturascompradetalle = new FacturasCompraDetalle();
+	  		String fcPrId = request.getParameter("fcPrId");	  		
+	  		Proveedores proveedor = Proveedores.getProveedoresByPrId( fcPrId );
+	  		Productos producto = Productos.getProductosByProdId( request.getParameter("prodId") );
+	  		
+	  		float descuento =  Float.parseFloat(Utils.skipNullNumero( proveedor.getPrDescuento() ) );	  		
+	  		float precio =  Float.parseFloat(quitar_comas(Utils.skipNull(request.getParameter("prodPrecio"))));
+	  		float cantidad =  Float.parseFloat(quitar_comas(Utils.skipNull(request.getParameter("prodCantidad"))));
+	  		float iva = Float.parseFloat(Utils.skipNullNumero( producto.getProdIva()));
+	  		float importeNeto = UtilsFacturacion.getImporte( precio, descuento, iva, cantidad );
+	    	
+	  		//Lo añadimos a la lista y el stock si es de compra
+	  		Stock stock = new Stock();
+	  		if(!proveedor.getPrId().equals("999") && !proveedor.getPrId().equals("998")){
+		    	stock.setStProdId(producto.getProdId());
+		    	stock.setStCantidadInicial(String.valueOf(cantidad));
+		    	stock.setStCantidadFinal(String.valueOf(cantidad));
+		    	stock.setStFCaducidad(request.getParameter("stFCaducidad"), Utils.DATE_SHORT);
+		    	facturascompradetalle.setStock(stock);
+	  		}
+	  		
+	    	//Añadimos las lineas de Detalle
+	    	facturascompradetalle.setFcdReferencia( producto.getProdReferencia() );	
+	    	facturascompradetalle.setFcdProducto( producto.getProdNombre() );	    	
+	    	facturascompradetalle.setFcdCantidad( String.valueOf(cantidad) );
+	    	facturascompradetalle.setFcdPrecioCompra( String.valueOf(precio) );
+	    	facturascompradetalle.setFcdDescuento( String.valueOf( descuento ) );
+	    	facturascompradetalle.setFcdImporte( String.valueOf(importeNeto) );
+	    	facturascompradetalle.setFcdIva( String.valueOf(iva) );
+	    	facturascompradetalle.setFcdFcId( request.getParameter("fcId") );
+	    	facturascompradetalle.setFcdStId(stock.getStId());
+	    	facturascompradetalle.setFcdLote(request.getParameter("fcdLote"));
+	    	
+	    	String lista = FacturasCompraDetalle.getFacturasCompraDetalleByFvdMaxLinea(request.getParameter("fcId"));
+	    	int linea = Integer.parseInt(Utils.skipNullNumero(lista));
+	    	facturascompradetalle.setFcdLinea(Integer.toString(linea + 1));
+	    	
+	    	resultado = facturascompradetalle.inserta();
+	    	
+	  	}catch(Exception e){
+	  		throw e;
+	  	}
+    	return resultado;
+  }
+  
+
+  public static String getFacturasCompraDetalleByFvdMaxLinea(String fcdFcId)
+  {
+    String resultado = EntidadBean.consultarValor("select max(fcd_linea) from facturas_compra_detalle where fcd_fc_id ='"+fcdFcId+"'");
+    return resultado;
+  }
+
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdId(String fcdId)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle WHERE fcd_id='"+fcdId+"'");
+    return elto;
+  }
+
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdLinea(String fcdLinea)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle WHERE fcd_linea='"+fcdLinea+"'");
+    return elto;
+  }
+  
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdProductoAndFcdLote(String fcdProducto, String fcdLote)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle WHERE fcd_producto='"+fcdProducto+"' AND fcd_lote ='"+fcdLote+"'");
+    return elto;
+  }
+
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdStId(String fcdStId)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle WHERE fcd_st_id='"+fcdStId+"'");
+    return elto;
+  }
+
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdStIdFechaEntradaMenor( String fcdStId )
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle " +
+    		" WHERE fcd_id=( select fcd_id from facturas_compra_detalle where fcd_st_id='"+fcdStId+"' order by fcd_f_entrada desc limit 1)");
+    return elto;
+  }
+  
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdStIdDisctictLote(String fcdStId)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT distinct(fcd_lote) FROM facturas_compra_detalle WHERE fcd_st_id='"+fcdStId+"'");
+    return elto;
+  }
+  
+  public static FacturasCompraDetalle getFacturasCompraDetalleByFcdStIdDisctictProductoLote(String fcdProducto,String fcdLote)
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    elto.consultaReflexiva("SELECT distinct(fcd_st_id) FROM facturas_compra_detalle WHERE fcd_producto='"+fcdProducto+"' and fcd_lote='"+fcdLote+"'");
+    return elto;
+  }
+  
+  public static ArrayList getAllFacturasCompraDetalle()
+  {
+    FacturasCompraDetalle elto = new FacturasCompraDetalle();
+    ArrayList lista = elto.consultaAVectorReflexiva("SELECT "+ALL_COLUMNS+" FROM facturas_compra_detalle");
+    return lista;
+  }
+  
+  protected Object rsToBean(ResultSet rs) throws Exception 
+  {
+    FacturasCompraDetalle facturascompradetalle = new FacturasCompraDetalle();
+  	try{
+    	facturascompradetalle.setFcdCantidad(rs.getString(FCDCANTIDAD));
+    	facturascompradetalle.setFcdDescuento(rs.getString(FCDDESCUENTO));
+    	facturascompradetalle.setFcdFCaducidad(rs.getTimestamp(FCDFCADUCIDAD));
+    	facturascompradetalle.setFcdFEntrada(rs.getTimestamp(FCDFENTRADA));
+    	facturascompradetalle.setFcdFcId(rs.getString(FCDFCID));
+    	facturascompradetalle.setFcdId(rs.getString(FCDID));
+    	facturascompradetalle.setFcdImporte(rs.getString(FCDIMPORTE));
+    	facturascompradetalle.setFcdIva(rs.getString(FCDIVA));
+    	facturascompradetalle.setFcdLinea(rs.getString(FCDLINEA));
+    	facturascompradetalle.setFcdLote(rs.getString(FCDLOTE));
+    	facturascompradetalle.setFcdPrecioCompra(rs.getString(FCDPRECIOCOMPRA));
+    	facturascompradetalle.setFcdProducto(rs.getString(FCDPRODUCTO));
+    	facturascompradetalle.setFcdReferencia(rs.getString(FCDREFERENCIA));
+    	facturascompradetalle.setFcdStId(rs.getString(FCDSTID));
+    	facturascompradetalle.setStock(Stock.getStockByStId(facturascompradetalle.getFcdStId()));
+  	}catch(Exception e){
+  		throw e;
+  	}
+    	return facturascompradetalle;
+  }
+
+  public static Object[] getFacturasCompraDetalleLista(PaginatedListTest listaPaginada) 
+  {
+	String sqlAñadido = " ";
+	FacturasCompraDetalle facturascompradetalle = new FacturasCompraDetalle();
+	String sql = "SELECT * FROM facturas_compra_detalle " +
+				 " WHERE 1 = 1 ";
+  	try{
+		FacturasCompraDetalle facturascompradetalleFiltro = new FacturasCompraDetalle();
+		if(listaPaginada.getRequest().getSession().getAttribute("FFACTURAS_COMPRA_DETALLE")!=null){
+			facturascompradetalleFiltro = (FacturasCompraDetalle)listaPaginada.getRequest().getSession().getAttribute("FFACTURAS_COMPRA_DETALLE");
+		}
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdCantidad()))
+    		sqlAñadido += "AND " + FCDCANTIDAD + " = '" + facturascompradetalleFiltro.getFcdCantidad() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdDescuento()))
+    		sqlAñadido += "AND " + FCDDESCUENTO + " = '" + facturascompradetalleFiltro.getFcdDescuento() + "'";
+    	if(facturascompradetalleFiltro.getFcdFCaducidad()!=null)
+    		sqlAñadido += "AND " + FCDFCADUCIDAD + " = '" + facturascompradetalleFiltro.getFcdFCaducidad() + "'";
+    	if(facturascompradetalleFiltro.getFcdFEntrada()!=null)
+    		sqlAñadido += "AND " + FCDFENTRADA + " = '" + facturascompradetalleFiltro.getFcdFEntrada() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdFcId()))
+    		sqlAñadido += "AND " + FCDFCID + " = '" + facturascompradetalleFiltro.getFcdFcId() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdId()))
+    		sqlAñadido += "AND " + FCDID + " = '" + facturascompradetalleFiltro.getFcdId() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdImporte()))
+    		sqlAñadido += "AND " + FCDIMPORTE + " = '" + facturascompradetalleFiltro.getFcdImporte() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdIva()))
+    		sqlAñadido += "AND " + FCDIVA + " = '" + facturascompradetalleFiltro.getFcdIva() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdLinea()))
+    		sqlAñadido += "AND " + FCDLINEA + " = '" + facturascompradetalleFiltro.getFcdLinea() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdLote()))
+    		sqlAñadido += "AND " + FCDLOTE + " = '" + facturascompradetalleFiltro.getFcdLote() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdPrecioCompra()))
+    		sqlAñadido += "AND " + FCDPRECIOCOMPRA + " = '" + facturascompradetalleFiltro.getFcdPrecioCompra() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdProducto()))
+    		sqlAñadido += "AND " + FCDPRODUCTO + " = '" + facturascompradetalleFiltro.getFcdProducto() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdReferencia()))
+    		sqlAñadido += "AND " + FCDREFERENCIA + " = '" + facturascompradetalleFiltro.getFcdReferencia() + "'";
+    	if(!Utils.empty(facturascompradetalleFiltro.getFcdStId()))
+    		sqlAñadido += "AND " + FCDSTID + " = '" + facturascompradetalleFiltro.getFcdStId() + "'";
+  	}catch(Exception e){
+  		System.out.println(e);
+  	}
+    return UtilesDAO.generaSqlListadoPaginado(sql + sqlAñadido, listaPaginada, facturascompradetalle);
+  }
+  
+  public static ArrayList getDatosTrazabilidad(String FechaDesde, String FechaHasta, String stStockCero, String prodId, String desglosado)
+  {
+	  
+	  String filtro1 = "";
+	  String filtro2 = "";
+	  String filtro3 = "";
+	  String filtroDesglosado = "";
+	  
+	  if(!Utils.skipNull(prodId).equals("")){
+		  filtro1 += " AND prod_id in (0" + prodId + ")";
+		  filtro2 += " AND st_prod_id in (0" + prodId + ")";
+		  filtro3 += " AND prod_id in (0" + prodId + ")";
+	  }
+	  
+	  if(!Utils.skipNull(FechaDesde).equals("")){
+		  filtro1 += " AND fv_fecha >= STR_TO_DATE('" + FechaDesde + "','%d/%m/%Y')";
+		  filtro2 += " AND fc_fecha >= STR_TO_DATE('" + FechaDesde + "','%d/%m/%Y')";
+		  filtro3 += " AND fc_fecha >= STR_TO_DATE('" + FechaDesde + "','%d/%m/%Y')";
+	  }
+	  
+	  if(!Utils.skipNull(FechaHasta).equals("")){
+		  filtro1 += " AND fv_fecha <= STR_TO_DATE('" + FechaHasta + "','%d/%m/%Y')";
+		  filtro2 += " AND fc_fecha <= STR_TO_DATE('" + FechaHasta + "','%d/%m/%Y')";
+		  filtro3 += " AND fc_fecha <= STR_TO_DATE('" + FechaHasta + "','%d/%m/%Y')";
+	  }
+	  
+	  if(Utils.skipNull(stStockCero).equals("")){
+		  filtro2 += " AND st_cantidad_final != 0 ";
+		  filtro3 += " AND st_cantidad_final != 0 ";
+	  }
+	  
+	  if(!Utils.skipNull(desglosado).equals("")){
+		  filtroDesglosado = " UNION " +
+							 "select  " +
+							 "      fc_fecha as fecha, " +
+							 "      'Fabricacion' as tipo, " +
+							 "      fc_numero_factura as documento, " +
+							 "      pr_nombre as nombre, " +
+							 "      0 as entrada, " +
+							 "      cf_cantidad as salidas, " +
+							 "      (select fcd_lote from facturas_compra_detalle where fcd_st_id = cf_id_st_usado) as lote, " +
+							 "      fcd_lote as lote_fabricado, " +
+							 "      fcd_producto as producto_fabricado, " +
+							 "      fcd_cantidad as cantidad_fabricada, " +
+							 "	    (select prod_nombre from productos where prod_id = st_prod_id) as fcd_producto, " +
+							 "		st_regularizacion as regularizacion " +
+							 "         from stock " +
+							 "         join composicion_fabricacion on st_id = cf_id_st_usado " +
+							 "         join facturas_compra_detalle on cf_id_st_fabricado = fcd_st_id " +
+							 "         join facturas_compra on fcd_fc_id = fc_id " +
+							 "         join proveedores on pr_id = fc_pr_id " +
+							 "where 1 = 1 " +
+							 filtro2;
+	  }
+	  
+    ArrayList lista =  EntidadBean.consulta("select fv_fecha as fecha, " +
+													 "     'Venta 'as tipo, " +
+													 "      fv_numero_factura as documento, " +
+													 "      cl_nombre as nombre, " +
+													 "      0 as entrada, " +
+													 "      fvd_cantidad as salidas, " + 
+													 "      fcd_lote as lote, " +
+													 "      '' as lote_fabricado, " +
+													 "      '' as producto_fabricado, " +
+													 "      '' as cantidad_fabricada, " +
+													 "		fvd_producto ," +
+													 "		0 as regularizacion " +	
+													 "from facturas_venta_detalle  " +
+													 "         join facturas_venta on fvd_fv_id = fv_id " +
+													 "         join clientes on fv_cl_id = cl_id " +
+													 "         join facturas_compra_detalle on fvd_st_id = fcd_st_id " +
+													 "		   join productos on fvd_producto = prod_nombre " + 	
+													 "where 1 = 1 " +
+													 filtro1 + 
+													 filtroDesglosado + 
+													 " UNION " +
+													 "select fc_fecha as fecha, " +
+													 "      case when fc_pr_id in (998,999) then 'Fabricación' else 'Entrada' end as tipo, " +
+													 "      fc_numero_factura as documento, " +
+													 "      pr_nombre as nombre, " +
+													 "      fcd_cantidad as entrada, " +
+													 "      0 as salidas,  " +
+													 "      fcd_lote as lote, " +
+													 "      '' as lote_fabricado, " +
+													 "      '' as producto_fabricado, " +
+													 "      '' as cantidad_fabricada, " +
+													 "		fcd_producto, " +
+													 "		st_regularizacion as regularizacion " +
+													 "from facturas_compra_detalle  " +
+													 "         join facturas_compra on fcd_fc_id = fc_id " +
+													 "         join proveedores on fc_pr_id = pr_id " +
+													 "         join stock on fcd_st_id = st_id " +
+													 "		   join productos on fcd_producto = prod_nombre " + 
+												 	 "where 1 = 1 " +
+												 	 filtro3 + 
+												 	 " order by fvd_producto, tipo");
+
+    return lista;
+  }
+}

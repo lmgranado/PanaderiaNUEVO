@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/pinepan/!svn/ver/59/PanaderiaNUEVO/src/panaderia/informes
+END
+GenerarListadoProductosPDF.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/informes/GenerarListadoProductosPDF.java
+END
+GenerarListadoClientesPDF.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/informes/GenerarListadoClientesPDF.java
+END
+GenerarListadoProveedoresPDF.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/informes/GenerarListadoProveedoresPDF.java
+END
+GenerarListadoPreciosPDF.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/informes/GenerarListadoPreciosPDF.java
+END
+GenerarListadoStockPorLote.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pinepan/!svn/ver/59/PanaderiaNUEVO/src/panaderia/informes/GenerarListadoStockPorLote.java
+END

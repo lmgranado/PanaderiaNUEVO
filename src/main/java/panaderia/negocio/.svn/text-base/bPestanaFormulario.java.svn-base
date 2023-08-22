@@ -1,0 +1,39 @@
+package panaderia.negocio;
+
+import java.util.Vector;
+
+import panaderia.beans.Pestana;
+import panaderia.utilidades.RecuperaProperties;
+
+
+public class bPestanaFormulario {
+	private Vector pestanas;
+	
+	RecuperaProperties rProperties = new RecuperaProperties("panaderia.properties.Recursos");
+	
+	/** Constructor
+	 * 
+	 */
+	public bPestanaFormulario(){
+		this.pestanas = new Vector();
+	}
+	
+	/** Añade una nueva pestana
+	 * 
+	 * @param orden
+	 * @param boton
+	 */	
+	public void addPestana(int orden, Pestana pestana){
+		this.pestanas.add(orden, pestana);
+	}
+
+	
+	/** Devuelve la lista de pestanas básica
+	 * 
+	 * @return Vector
+	 */
+	public Vector getPestanas(){
+		return this.pestanas;
+	}
+	
+}

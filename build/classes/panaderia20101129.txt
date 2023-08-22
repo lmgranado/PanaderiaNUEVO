@@ -1,0 +1,6 @@
+1081ALTER TABLE facturas_venta
+ DROP FOREIGN KEY facturas_venta_ibfk_1,
+ ADD fv_invalida INT(1) DEFAULT '0' AFTER fv_tipo,
+ ADD fv_fv_ref INT(11);
+ALTER TABLE facturas_venta
+ ADD CONSTRAINT facturas_venta_ibfk_1 FOREIGN KEY (fv_cl_id) REFERENCES clientes (cl_id) ON UPDATE RESTRICT ON DELETE RESTRICT;

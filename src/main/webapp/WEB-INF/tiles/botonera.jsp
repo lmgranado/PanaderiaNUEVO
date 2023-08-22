@@ -1,0 +1,60 @@
+<%-- /WEB-INF/tiles/botonera.jsp --%>
+<%@page language="java" pageEncoding="UTF-8"%>
+<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@taglib uri="/WEB-INF/c-1_0-rt.tld" prefix="c"%>
+
+<!-- Inicializamos parametros -->
+<c:set var="ESCRITURA" value="${LOG_ESCRITURA}"></c:set>
+<c:set var="LECTURA" value="${LOG_LECTURA}"></c:set>
+<c:set var="GRABAR" value="Grabar"></c:set>
+<c:set var="NUEVO" value="Nuevo"></c:set>
+<c:set var="BORRAR" value="Borrar"></c:set>
+<html:xhtml />
+<!--  Botonera -->
+	<c:if test="${!empty BOTONERA}">
+		<table cellpadding="0" cellspacing="0" class="botonera_tabla" style="vertical-align: top;background-image: url('img/pixel_cueo.jpg'); background-repeat: x; background-position: bottom;" border="0" summary="Botonera Tabla">
+			<tbody>
+				<tr>
+					<td class="centrado texto_negrita" style="font-size:16px; text-align: left; color: red; font-weight: bold;">
+						<logic:messagesPresent property="info" message="true">
+								<html:messages id="msg" property="info" header="messages.header" footer="messages.footer" message="true">
+									<bean:message key="messages.prefix"/><bean:write  name="msg"/><bean:message key="messages.sufix"/>
+								</html:messages>
+								<html:errors property="info"/>
+						</logic:messagesPresent>&nbsp;
+					</td>
+					<td class="centrado" style="background-color: transparent; padding: 2px 0px 2px 0px">
+						<c:forEach var="boton" items="${BOTONERA}">
+							<c:choose>
+								<c:when test="${boton.action==NUEVO}">
+									<html:img style="cursor: pointer; border: 1px solid black" alt="${boton.alt}" title="${boton.alt}" styleClass="${boton.css}" onclick="${boton.javascript}" src="${boton.img}"></html:img>&nbsp;
+								</c:when>
+								<c:when test="${boton.action==BORRAR}">
+									<html:img style="cursor: pointer; border: 1px solid black" alt="${boton.alt}" title="${boton.alt}" styleClass="${boton.css}" onclick="${boton.javascript}" src="${boton.img}"></html:img>&nbsp;
+								</c:when>
+								<c:when test="${boton.action=='BUSCAR'}">
+									<c:choose>
+									<c:when test="${BUSCAR == 'si'}">
+										<html:img alt="${boton.alt}" styleId="${boton.action}" title="${boton.alt}" style="visibility: hidden; border: 1px solid black" styleClass="${boton.css}" onclick="${boton.javascript}" src="${boton.img}"></html:img>&nbsp;
+									</c:when>
+									<c:otherwise>
+										<html:img alt="${boton.alt}" styleId="${boton.action}" title="${boton.alt}" styleClass="${boton.css}" style="visibility: visible; cursor: pointer; border: 1px solid black"  onclick="${boton.javascript}" src="${boton.img}"></html:img>&nbsp;
+									</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:when test="${boton.action==GRABAR}">
+									<html:img styleId="${boton.action}"  style="text-align: center;cursor: pointer; border: 1px solid black" alt="${boton.alt}" title="${boton.alt}" onclick="${boton.javascript}" src="${boton.img}"></html:img>&nbsp;	
+								</c:when>
+								<c:otherwise>
+									<html:img alt="${boton.alt}" title="${boton.alt}" styleClass="${boton.css}" onclick="${boton.javascript}" src="${boton.img}" style="cursor: pointer; border: 1px solid black"></html:img>&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</c:if>
+<!--  Fin Botonera -->

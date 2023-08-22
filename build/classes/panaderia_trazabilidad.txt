@@ -1,0 +1,76 @@
+CREATE TABLE `stock` (
+  `st_id` int(11) NOT NULL AUTO_INCREMENT,
+  `st_prod_id` int(11) NOT NULL,
+  `st_cantidad_inicial` double(32,3) NOT NULL,
+  `st_cantidad_final` double(32,3) DEFAULT 0,
+  `st_regularizacion` double(32,3) DEFAULT 0,
+  `st_salidas` double(32,3) DEFAULT 0,
+  `st_f_caducidad` date NOT NULL,
+  PRIMARY KEY (`st_id`),
+  UNIQUE KEY `st_unico_uk` (`st_id`),
+  CONSTRAINT `st_prod_id` FOREIGN KEY (`st_prod_id`) REFERENCES `productos` (`prod_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
+
+
+alter table facturas_compra_detalle
+add fcd_f_entrada DATE,
+add fcd_f_caducidad DATE,
+add fcd_lote varchar(32) NOT NULL,
+add fcd_st_id int (11) NOT NULL;
+alter table facturas_compra_detalle
+drop foreign key facturas_compra_detalle_ibfk_1;
+alter table facturas_compra_detalle
+add constraint fcd_st_fk foreign key (fcd_st_id) references stock (st_id),
+add constraint facturas_compra_detalle_ibfk_1 foreign key (fcd_fc_id) references facturas_compra (fc_id);
+
+CREATE TABLE `componentes_producto` (
+  `cp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cp_prod_id_fabricado` int(11) NOT NULL,
+  `cp_prod_id_usado` int(11) NOT NULL,
+  `cp_cantidad` double(32,3) DEFAULT 0,
+  PRIMARY KEY (`cp_id`),
+  UNIQUE KEY `cp_unico_uk` (`cp_id`),
+  CONSTRAINT `cp_prod_id_fabricado` FOREIGN KEY (`cp_prod_id_fabricado`) REFERENCES `productos` (`prod_id`),
+  CONSTRAINT `cp_prod_id_usado` FOREIGN KEY (`cp_prod_id_usado`) REFERENCES `productos` (`prod_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `composicion_fabricacion` (
+  `cf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cf_id_st_fabricado` int(11) NOT NULL,
+  `cf_id_st_usado` int(11) NOT NULL,
+  `cf_cantidad` double(32,3) DEFAULT 0,
+  PRIMARY KEY (`cf_id`),
+  UNIQUE KEY `cf_unico_uk` (`cf_id`),
+  CONSTRAINT `cf_id_st_fabricado` FOREIGN KEY (`cf_id_st_fabricado`) REFERENCES `stock` (`st_id`),
+  CONSTRAINT `cf_id_st_usado` FOREIGN KEY (`cf_id_st_usado`) REFERENCES `stock` (`st_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+alter table facturas_venta_detalle
+add fvd_st_id int (11) NULL;
+alter table facturas_venta_detalle
+drop foreign key facturas_venta_detalle_ibfk_1;
+alter table facturas_venta_detalle
+add constraint fvd_st_fk foreign key (fvd_st_id) references stock (st_id),
+add constraint facturas_venta_detalle_ibfk_1 foreign key (fvd_st_id) references facturas_venta (fv_id);
+
+INSERT INTO `proveedores` (pr_id,pr_nombre,pr_apellidos,pr_nombre_comercial,pr_direccion,pr_codigo_postal,pr_nif,pr_telefono,pr_movil,pr_fax,pr_web,pr_email,pr_persona_contacto,pr_nombre_banco,pr_ccc,pr_descuento,pr_observaciones,pr_prov_id,pr_loc_id,pr_fp_id,pr_pf_id) VALUES (998,'OBRADOR','EL VISO','OBRADOR EL VISO','direccion','41000','A00000000','954000000','','','','','Jose','','',0.00000,'',1,104,2,1);
+INSERT INTO `proveedores` (pr_id,pr_nombre,pr_apellidos,pr_nombre_comercial,pr_direccion,pr_codigo_postal,pr_nif,pr_telefono,pr_movil,pr_fax,pr_web,pr_email,pr_persona_contacto,pr_nombre_banco,pr_ccc,pr_descuento,pr_observaciones,pr_prov_id,pr_loc_id,pr_fp_id,pr_pf_id) VALUES (999,'OBRADOR','TORREBLANCA','OBRADOR TORREBLANCA','direccion','41000','A00000001','954000000','','','','','Jose','','',0.00000,'',1,93,2,1);
+
+alter table facturas_compra_detalle MODIFY fcd_cantidad DOUBLE(11,2) NOT NULL;
+
+alter table albaranes_venta_detalle
+add avd_st_id int (11) NULL;
+alter table albaranes_venta_detalle
+drop foreign key avd_av;
+alter table albaranes_venta_detalle
+add constraint avd_av_st foreign key (avd_st_id) references stock (st_id),
+add constraint avd_av foreign key (avd_av_id) references albaranes_venta (av_id);
+
+alter table notas_entrega_detalle
+add notdet_st_id int (11) NULL;
+alter table notas_entrega_detalle
+drop foreign key notas_entrega_detalle_ibfk_1;
+alter table notas_entrega_detalle
+add constraint notdet_st foreign key (notdet_st_id) references stock (st_id),
+add constraint notas_entrega_detalle_ibfk_1 foreign key (notdet_not_id) references notas_entrega (not_id);
+

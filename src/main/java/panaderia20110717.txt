@@ -1,0 +1,29 @@
+CREATE TABLE `historico_inventarios` (
+  `hinv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hinv_fecha` date NOT NULL,  
+  `hinv_us_id` int(11) NOT NULL,
+  PRIMARY KEY (`hinv_id`), 
+  CONSTRAINT `hinv_us_id_fk` FOREIGN KEY (`hinv_us_id`) REFERENCES `usuarios` (`us_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `historico_inventarios_detalle` (
+  `hinvd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hinvd_prod_id` int(11) NOT NULL,
+  `hinvd_nombre_producto` varchar(32) NOT NULL,
+  `hinvd_lote` varchar(64) NOT NULL,
+  `hinvd_recuento` double(32,3) NOT NULL,
+  `hinvd_regularizacion` double(32,3) NOT NULL,
+  `hinvd_observaciones` varchar(2000) DEFAULT NULL,
+  `hinvd_hinv_id` int(11) NOT NULL,
+  PRIMARY KEY (`hinvd_id`),
+  KEY `hinvd_prod_id_fk` (`hinvd_prod_id`),
+  KEY `hinvd_hinv_id_fk` (`hinvd_hinv_id`),
+  CONSTRAINT `hinvd_prod_id_fk` FOREIGN KEY (`hinvd_prod_id`) REFERENCES `productos` (`prod_id`),
+  CONSTRAINT `hinvd_hinv_id_fk` FOREIGN KEY (`hinvd_hinv_id`) REFERENCES `historico_inventarios` (`hinv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+---------------------------------------------
+LUIS MIGUEL - 10/10/11
+--------------------------------------------
+ALTER TABLE productos add column `prod_de_venta` int(11) NOT NULL DEFAULT '1';

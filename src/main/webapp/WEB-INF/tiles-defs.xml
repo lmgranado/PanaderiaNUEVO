@@ -1,0 +1,634 @@
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+"http://jakarta.apache.org/struts/dtds/tiles-config_1_1.dtd">
+
+<tiles-definitions>
+
+<!-- *** PLANTILLAS ************************************************************************* -->	
+	<definition name=".modelo" path="/WEB-INF/plantillas/modelo.tpl.jsp">
+		<put name="head" value="/WEB-INF/tiles/head.jsp" />
+		<put name="cabecera" value="/WEB-INF/tiles/cabecera.jsp" />
+		<put name="body" value="/WEB-INF/tiles/body.jsp" />
+		<put name="menu_izdo" value="" />
+		<put name="mensajesM" value="" />
+		<put name="titulo_opcion" type="string" value="titulo_fundacion"/>
+		<put name="foot" value="/WEB-INF/tiles/pie_pagina.jsp"/>
+		<put name="fondo" type="string" value=""/>
+	</definition>
+	
+					
+	<definition name=".modelo" path="/WEB-INF/plantillas/modelo.tpl.jsp">
+		<put name="head" value="/WEB-INF/tiles/head.jsp" />
+		<put name="cabecera" value="/WEB-INF/tiles/cabecera.jsp" />
+		<put name="body" value="/WEB-INF/tiles/body.jsp" />
+		<put name="menu_izdo" value="" />
+		<put name="mensajesM" value="" />
+		<put name="titulo_opcion" type="string" value="titulo_fundacion"/>
+		<put name="foot" value="/WEB-INF/tiles/pie_pagina.jsp"/>
+		<put name="fondo" type="string" value=""/>
+	</definition>
+
+	<definition name=".listado" extends=".modelo" path="/WEB-INF/plantillas/lista.tpl.jsp">
+		<put name="titulo_opcion" type="string" value=""/>
+		<put name="img_opcion" type="string" value=""/>
+		<put name="botonera" value="/WEB-INF/tiles/botonera.jsp" />
+		<put name="mensajes" value="/WEB-INF/tiles/mensajes.jsp" />
+		<put name="fondo" type="string" value=""/>
+		<put name="texto_ayuda" type="string" value="texto_ayuda"/>
+		<put name="pestanas" value="/WEB-INF/tiles/pestanas.jsp" />
+	</definition>
+
+	<definition name=".formulario" extends=".modelo" page="/WEB-INF/plantillas/formulario.tpl.jsp">		
+		<put name="titulo_opcion" type="string" value=""/>
+		<put name="img_opcion" type="string" value=""/>
+		<put name="botonera" value="/WEB-INF/tiles/botonera.jsp" />
+		<put name="mensajes" value="/WEB-INF/tiles/mensajes.jsp" />
+		<put name="fondo" type="string" value=""/>
+		<put name="texto_ayuda" type="string" value="texto_ayuda"/>
+		<put name="enctype" type="string" value="" />
+		<put name="action" type="string" value="" />
+		<put name="pestanas" value="/WEB-INF/tiles/pestanas.jsp" />
+	</definition>
+	
+	<definition name=".modelo_popup" path="/WEB-INF/plantillas/modelo.popup.tpl.jsp">
+		<put name="head" value="/WEB-INF/tiles/head.jsp" />
+		<put name="body" value="/WEB-INF/tiles/body.jsp" />
+		<put name="mensajes" value="/WEB-INF/tiles/mensajes_popup.jsp" />
+		<put name="texto_ayuda" type="string" value=""/>
+		<put name="titulo_opcion" type="string" value="titulo_fundacion"/>
+		<put name="isPopup" type="string" value=""/>
+	</definition>
+	
+<!--  -->	
+
+	<!-- *** GENERAL ********************************************* -->
+	<definition name="inicio.page" extends=".modelo">
+	  <put name="body" value="/index.jsp" />
+	  <put name="titulo_opcion" type="string" value=""/>
+	</definition>
+	
+	<definition name="rutas.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/rutas_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Entregas"/>
+	  <put name="img_opcion" type="string" value="img/rutas.gif"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="clientes.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/clientes_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Clientes"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="productos.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/productos_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Productos"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="img_opcion" type="string" value="img/productos.png"/>
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="proveedores.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/proveedores_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Proveedores"/>
+	  <put name="img_opcion" type="string" value="img/proveedor.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="repartidores.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/repartidores_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Repartidores"/>
+	   <put name="img_opcion" type="string" value="img/camion.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="cobradores.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/cobradores_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Cobradores"/>
+	   <put name="img_opcion" type="string" value="img/caja.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="facturasventa.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/facturasventa_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Listado Facturas De Venta"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="cobros.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/cobros_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Módulo de Cobros"/>
+	   <put name="img_opcion" type="string" value="img/cobros.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="facturascompra.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/facturascompra_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Facturas De Compra"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="facturasfabricacion.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/facturasfabricacion_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Fabricacion"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="albaranesventa.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/albaranesventa_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Albaranes De Venta"/>
+	   <put name="img_opcion" type="string" value="img/albaranes.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="productoscliente.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/productoscliente_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Productos Clientes"/>
+	  <put name="img_opcion" type="string" value="img/productos.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="familias.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/familias_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Familias"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="formaspago.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/formaspago_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Formas De Pago"/>
+	  <put name="img_opcion" type="string" value="img/formapago.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="periodosfacturacion.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/periodosfacturacion_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Periodos De Facturación"/>
+	  <put name="img_opcion" type="string" value="img/periodosfacturacion.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="fichasproductos.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/fichasproductos_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Fichas de Productos"/>
+	  <put name="img_opcion" type="string" value="img/periodosfacturacion.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="historicoac.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/historicoac_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Historico Ac"/>
+	  <put name="img_opcion" type="string" value="img/periodosfacturacion.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="vacacionesclientes.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/vacacionesclientes_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Vacaciones"/>
+	  <put name="img_opcion" type="string" value="img/vacaciones.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="componentesproducto.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/componentesproducto_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Componentes"/>
+	  <put name="img_opcion" type="string" value="img/componentes.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="historicoinventarios.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/historicoinventarios_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Histórico de Inventarios y Regularizaciones"/>
+	  <put name="img_opcion" type="string" value="img/inventario.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="stock.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/stock_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Stock por Lotes"/>
+	  <put name="img_opcion" type="string" value="img/stock.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<!-- productos Formulario -->
+	<definition name="familias.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/familias.jsp" />
+	  <put name="titulo_opcion" type="string" value="Familia"/>
+	  <put name="img_opcion" type="string" value="img/productos.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doFamiliasGrabar.do" />
+	</definition>
+	
+	<!-- productos Formulario -->
+	<definition name="productos.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/productos.jsp" />
+	  <put name="titulo_opcion" type="string" value="Productos"/>
+	  <put name="img_opcion" type="string" value="img/productos.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doProductosFormularioGrabar.do" />
+	</definition>	
+	<!-- Fin productos Formulario -->
+	
+	<definition name="cuadrantes.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/cuadrantes_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Cuadrantes Clientes"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="cuadrantesdetalle.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/cuadrantesdetalle_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Cuadrantes Detalle"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="usuarios.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/usuarios_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Usuarios"/>
+	   <put name="img_opcion" type="string" value="img/usuarios.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="notasentrega.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/notasentrega_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Notas de Entrega"/>
+	   <put name="img_opcion" type="string" value="img/notas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="prevision.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/prevision_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Previsión de Fabricación"/>
+	   <put name="img_opcion" type="string" value="img/prevision.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="informesventa.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/informesventa_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Informes De Ventas"/>
+	   <put name="img_opcion" type="string" value="img/graficas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="informesproductos.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/productosf_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Informes De Productos"/>
+	   <put name="img_opcion" type="string" value="img/graficas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="informesprecios.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/preciosf_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Informes De Precios"/>
+	   <put name="img_opcion" type="string" value="img/graficas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	
+	<definition name="informetrazabilidad.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/informetrazabilidad_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Filtro Plan de Trazabilidad por producto"/>
+	   <put name="img_opcion" type="string" value="img/graficas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="actualiza.precios.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/actualizar_precios.jsp" />
+	  <put name="titulo_opcion" type="string" value="Actualizar Precios"/>
+	   <put name="img_opcion" type="string" value="img/calculadora.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+
+	<definition name="entregasdetalle.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/entregasdetalle_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Rutas Detalle"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<definition name="entregas.popup" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/entregas.jsp" />
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>	
+	
+	<definition name="entregas.lista.page" extends=".listado">
+	  <put name="body" value="/WEB-INF/listados/entregas_lista.jsp" />
+	  <put name="titulo_opcion" type="string" value="Rutas"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>
+	
+	<!-- Cuadrantes Formulario -->
+	<definition name="cuadrantes.popup" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/cuadrantes.jsp" />
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>	
+	<!-- Fin Cuadrantes Formulario -->
+	
+	<!-- Observaciones nota Formulario -->
+	<definition name="notasentrega.obs.popup" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/notasentrega_obs.jsp" />
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/>
+	</definition>	
+	<!-- Fin Observaciones nota Formulario -->
+	
+	
+	<!-- *** FORMULARIOS ********************************************* -->
+	
+	<!-- Datos Proyectos Formulario -->
+	<definition name="clientes.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/clientes.jsp" />
+	  <put name="titulo_opcion" type="string" value="Clientes"/>
+	  <put name="img_opcion" type="string" value="img/cliente.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doClientesFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="proveedores.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/proveedores.jsp" />
+	  <put name="titulo_opcion" type="string" value="Proveedores"/>
+	  <put name="img_opcion" type="string" value="img/proveedor.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doProveedoresFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="repartidores.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/repartidores.jsp" />
+	  <put name="titulo_opcion" type="string" value="Repartidores"/>
+	   <put name="img_opcion" type="string" value="img/camion.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doRepartidoresFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="cobradores.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/cobradores.jsp" />
+	  <put name="titulo_opcion" type="string" value="Cobradores"/>
+	   <put name="img_opcion" type="string" value="img/caja.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doCobradoresFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="facturasventa.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/facturasventa.jsp" />
+	  <!--  <put name="titulo_opcion" type="string" value="Facturas de Venta"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>-->
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doFacturasVentaFormulario.do" />
+	</definition>
+	
+	<definition name="albaranesventa.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/albaranesventa.jsp" />
+	  <put name="titulo_opcion" type="string" value="Albaranes de Venta"/>
+	   <put name="img_opcion" type="string" value="img/albaranes.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doAlbaranesVentaFormulario.do" />
+	</definition>
+	
+	<definition name="notasentrega.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/notasentrega.jsp" />
+	  <put name="titulo_opcion" type="string" value="Notas de Entrega"/>
+	   <put name="img_opcion" type="string" value="img/notas.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doNotasEntregaFormulario.do" />
+	</definition>	
+	
+	<definition name="facturascompra.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/facturascompra.jsp" />
+	  <put name="titulo_opcion" type="string" value="Facturas de compra"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doFacturasCompraFormulario.do" />
+	</definition>	
+	
+	<definition name="facturasfabricacion.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/facturasfabricacion.jsp" />
+	  <put name="titulo_opcion" type="string" value="Fabricación"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doFacturasFabricacionFormulario.do" />
+	</definition>		
+	
+	<definition name="searchClienteFactura.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchClientesF.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchClienteAlbaran.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchClientesALB.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchClienteNotasEntrega.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchClientesNE.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProveedoresFactura.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProveedoresF.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosFabricacion.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductosFabricacion.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosFactura.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductos.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="imprimirEtiquetasCompras.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/imprimirEtiquetasCompras.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="imprimirEtiquetasVentas.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/imprimirEtiquetasVentas.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosNotasEntrega.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductosNE.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosClienteFactura.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductosClienteFactura.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosClienteAlbaran.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductosClienteAlbaran.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="searchProductosClienteNotasEntrega.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/searchProductosClienteNotasEntrega.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="usuarios.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/usuarios.jsp" />
+	  <put name="titulo_opcion" type="string" value="Datos del Usuario"/>
+	   <put name="img_opcion" type="string" value="img/usuarios.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doUsuariosFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="fichasproductos.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/fichasproductos.jsp" />
+	  <put name="titulo_opcion" type="string" value="Datos de la Ficha"/>
+	   <put name="img_opcion" type="string" value="img/usuarios.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doFichasProductosFormularioGrabar.do" />
+	</definition>	
+	
+	<definition name="productoficha.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/productoficha.jsp" />
+	  <put name="titulo_opcion" type="string" value="Datos de la Ficha"/>
+	   <put name="img_opcion" type="string" value="img/usuarios.png"/>
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doProductoFichaFormularioGrabar.do" />
+	</definition>	
+	
+	
+	<definition name="barraprogreso.opener" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/formularios/barraprogreso.jsp" />	
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" /> 
+	  <put name="titulo_opcion" type="string" value=""/>
+	  <put name="texto_ayuda" type="string" value=""/> 
+	</definition>
+	
+	<definition name="historicoinventarios.formulario" extends=".formulario">
+	  <put name="body" value="/WEB-INF/formularios/historicoinventarios.jsp" />
+	  <!--  <put name="titulo_opcion" type="string" value="Facturas de Venta"/>
+	   <put name="img_opcion" type="string" value="img/factura.png"/>-->
+	  <put name="menu_izdo" value="/WEB-INF/tiles/menu_izdo.jsp" />
+	  <put name="texto_ayuda" type="string" value=""/>
+	  <put name="action" type="string" value="/doHistoricoInventariosFormulario.do" />
+	</definition>
+	
+	<!-- Fin Datos Proyectos Formulario -->
+	
+	<!-- *** COMUNES ********************************************************* -->
+	<!-- Acceso Denegado Popup -->	
+	<definition name="acceso_denegado.page.popup" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/tiles/results/acceso_denegado.jsp" />
+	  <put name="titulo_opcion" type="string" value="acceso_denegado" />
+	  <put name="isPopup" type="string" value="true" />	  
+	</definition>
+	
+	<!-- Rol No Ajustado Popup -->	
+	<definition name="rol_no_ajustado.page.popup" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/tiles/results/rol_no_ajustado.jsp" />
+	  <put name="titulo_opcion" type="string" value="error.general" />
+	  <put name="isPopup" type="string" value="true" />	  
+	</definition>
+	
+	<!-- Acceso Denegado -->	
+	<definition name="acceso_denegado.page" extends=".modelo">
+	  <put name="body" value="/WEB-INF/tiles/results/acceso_denegado.jsp" />
+	  <put name="titulo_opcion" type="string" value="acceso_denegado" />	  
+	</definition>
+	
+	<!-- Rol No Ajustado -->	
+	<definition name="rol_no_ajustado.page" extends=".modelo">
+	  <put name="body" value="/WEB-INF/tiles/results/rol_no_ajustado.jsp" />
+	  <put name="titulo_opcion" type="string" value="error.general" />	  
+	</definition>
+	
+	<definition name="mensaje.error.page" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/tiles/results/mensaje_error.jsp" />
+	  <put name="titulo_opcion" type="string" value="error.general" />	  
+	</definition>
+	
+	<definition name="mensaje.popup.page" extends=".modelo_popup">
+	  <put name="body" value="/WEB-INF/tiles/results/mensaje_popup.jsp" /> 
+	  <put name="titulo_opcion" type="string" value="error.general" />	 
+	</definition>
+	
+	<!-- Error -->
+	<definition name="error.page" path="/WEB-INF/tiles/results/error.jsp"></definition>
+	<!-- *** FIN COMUNES ***************************************************** -->
+  	
+</tiles-definitions>

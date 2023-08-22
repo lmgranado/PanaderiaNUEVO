@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/pinepan/!svn/ver/90/PanaderiaNUEVO/WebRoot/WEB-INF/listados
+END
+cobradores_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/cobradores_lista.jsp
+END
+facturasventa_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/9/PanaderiaNUEVO/WebRoot/WEB-INF/listados/facturasventa_lista.jsp
+END
+historicoinventarios_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/pinepan/!svn/ver/43/PanaderiaNUEVO/WebRoot/WEB-INF/listados/historicoinventarios_lista.jsp
+END
+productosf_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/productosf_lista.jsp
+END
+vacacionesclientes_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/vacacionesclientes_lista.jsp
+END
+cuadrantes_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/8/PanaderiaNUEVO/WebRoot/WEB-INF/listados/cuadrantes_lista.jsp
+END
+periodosfacturacion_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/periodosfacturacion_lista.jsp
+END
+clientes_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/clientes_lista.jsp
+END
+facturascompra_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/pinepan/!svn/ver/27/PanaderiaNUEVO/WebRoot/WEB-INF/listados/facturascompra_lista.jsp
+END
+fichasproductos_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/fichasproductos_lista.jsp
+END
+entregas_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/entregas_lista.jsp
+END
+cuadrantesdetalle_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/cuadrantesdetalle_lista.jsp
+END
+rutas_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/rutas_lista.jsp
+END
+usuarios_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/usuarios_lista.jsp
+END
+familias_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/familias_lista.jsp
+END
+facturasfabricacion_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pinepan/!svn/ver/90/PanaderiaNUEVO/WebRoot/WEB-INF/listados/facturasfabricacion_lista.jsp
+END
+productoscliente_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/productoscliente_lista.jsp
+END
+albaranesventa_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/pinepan/!svn/ver/100/PanaderiaNUEVO/WebRoot/WEB-INF/listados/albaranesventa_lista.jsp
+END
+prevision_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/100/PanaderiaNUEVO/WebRoot/WEB-INF/listados/prevision_lista.jsp
+END
+componentesproducto_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pinepan/!svn/ver/27/PanaderiaNUEVO/WebRoot/WEB-INF/listados/componentesproducto_lista.jsp
+END
+proveedores_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/proveedores_lista.jsp
+END
+formaspago_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/formaspago_lista.jsp
+END
+historicoac_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/historicoac_lista.jsp
+END
+repartidores_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/repartidores_lista.jsp
+END
+notasentrega_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/notasentrega_lista.jsp
+END
+productos_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/98/PanaderiaNUEVO/WebRoot/WEB-INF/listados/productos_lista.jsp
+END
+informesventa_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/informesventa_lista.jsp
+END
+informetrazabilidad_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/pinepan/!svn/ver/87/PanaderiaNUEVO/WebRoot/WEB-INF/listados/informetrazabilidad_lista.jsp
+END
+stock_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/pinepan/!svn/ver/62/PanaderiaNUEVO/WebRoot/WEB-INF/listados/stock_lista.jsp
+END
+preciosf_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/7/PanaderiaNUEVO/WebRoot/WEB-INF/listados/preciosf_lista.jsp
+END
+actualizar_precios.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/actualizar_precios.jsp
+END
+entregasdetalle_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/pinepan/!svn/ver/9/PanaderiaNUEVO/WebRoot/WEB-INF/listados/entregasdetalle_lista.jsp
+END
+cobros_lista.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/listados/cobros_lista.jsp
+END

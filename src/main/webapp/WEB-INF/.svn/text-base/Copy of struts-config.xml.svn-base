@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  
+  <form-beans>
+  		<form-bean name="FormVacio" 
+				   type="org.apache.struts.action.DynaActionForm"/>
+  		<form-bean name="ClientesForm" 
+				   type="panaderia.beans.Clientes"/>
+		<form-bean name="RepartidoresCobradoresForm" 
+				   type="panaderia.beans.RepartidoresCobradores"/>	
+		<form-bean name="FacturasVentaForm" 
+				   type="panaderia.beans.FacturasVenta"/> 
+		<form-bean name="FacturasCompraForm" 
+				   type="panaderia.beans.FacturasCompra"/>  
+		<form-bean name="ProductosForm" 
+				   type="panaderia.beans.Productos"/>
+		<form-bean name="ProductosClienteForm" 
+				   type="panaderia.beans.ProductosCliente"/> 
+		<form-bean name="CuadrantesForm" 
+				   type="panaderia.beans.Cuadrantes"/> 
+		<form-bean name="CuadrantesDetalleForm" 
+				   type="panaderia.beans.CuadrantesDetalle"/> 
+		<form-bean name="EntregasForm" 
+				   type="panaderia.beans.Entregas"/> 
+		<form-bean name="EntregasDetalleForm" 
+				   type="panaderia.beans.EntregasDetalle"/> 
+		<form-bean name="NotasEntregaForm" 
+				   type="panaderia.beans.NotasEntrega"/> 
+		<form-bean name="NotasEntregaDetalleForm" 
+				   type="panaderia.beans.NotasEntregaDetalle"/> 
+		<form-bean name="RepartidoresForm" 
+				   type="panaderia.beans.Repartidores"/>	
+		<form-bean name="CobradoresForm" 
+				   type="panaderia.beans.Cobradores"/>
+		<form-bean name="FacturasVentaForm" 
+				   type="panaderia.beans.FacturasVenta"/>  
+		<form-bean name="UsuariosForm" 
+				   type="panaderia.beans.Usuarios"/> 
+		<form-bean name="RutasForm" 
+				   type="panaderia.beans.Rutas"/> 
+		<form-bean name="ProveedoresForm" 
+				   type="panaderia.beans.Proveedores"/>
+		<form-bean name="AlbaranesVentaForm" 
+				   type="panaderia.beans.AlbaranesVenta"/>
+		<form-bean name="FamiliasForm" 
+				   type="panaderia.beans.Familias"/> 
+		<form-bean name="FormasPagoForm" 
+				   type="panaderia.beans.FormasPago"/> 
+		<form-bean name="PeriodosFacturacionForm" 
+				   type="panaderia.beans.PeriodosFacturacion"/> 
+		<form-bean name="FichasProductosForm" 
+				   type="panaderia.beans.FichasProductos"/> 
+	 	<form-bean name="HistoricoAcForm" 
+				   type="panaderia.beans.HistoricoAc"/> 
+		<form-bean name="VacacionesClientesForm" 
+				   type="panaderia.beans.VacacionesClientes"/>
+		<form-bean name="ProductoFichaForm" 
+				   type="panaderia.beans.ProductoFicha"/> 
+		<form-bean name="ComponentesProductoForm" 
+				   type="panaderia.beans.ComponentesProducto"/> 
+		<form-bean name="HistoricoInventariosForm" 
+				   type="panaderia.beans.HistoricoInventarios"/> 
+  </form-beans>
+   
+  
+  <global-exceptions>
+  	<exception key="" 
+  			   type="java.lang.Exception" 
+  			   path="/doAccesoDenegado.do"
+  			   handler="panaderia.utilidades.PanaderiaExceptionHandler">
+  			   </exception>
+  </global-exceptions>
+   
+  <global-forwards>
+  	<forward name="acceso_denegado" path="/doAccesoDenegado.do"/>
+  	<forward name="error_login" path="/doAccesoDenegado.do"/>
+  	<forward name="error" path="/doRolNoAjustado.do"/> 
+  	<forward name="acceso_denegado_popup" path="/doAccesoDenegadoPopup.do"/>
+  	<forward name="error_login_popup" path="/doAccesoDenegadoPopup.do"/>
+  	<forward name="error_popup" path="/doRolNoAjustadoPopup.do"/> 
+  	<forward name="mensaje_error" path="/doMensajeError.do"/> 
+  	<forward name="mensaje_popup" path="/doMensajePopup.do"/> 
+  </global-forwards>
+   
+  <action-mappings>
+  
+  <!--************* Zona de inicio y acceso ******************-->
+  
+  <!-- Acceso Denegado -->
+  		<action path="/doLogin"
+	      		type="panaderia.struts.actions.LoginAction"
+	      		name="UsuariosForm"
+	      		scope="request" roles="inicio">
+	      		<forward name="ok" path="/doListadoClientes.do"/>
+	      		<forward name="error" path="/login.jsp"/>	      		
+		</action>
+  
+	 	<!-- Acceso Denegado -->
+	    <action path="/doAccesoDenegado"
+	      		type="panaderia.struts.actions.AccesoDenegadoAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="acceso_denegado.page"/>      			
+		</action>
+		<!-- Fin Acceso Denegado -->
+		
+		<!-- Rol no Ajustado -->
+	    <action path="/doRolNoAjustado"
+	      		type="panaderia.struts.actions.ErrorLoginAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="rol_no_ajustado.page"/>      			
+		</action>
+		<!-- Fin Rol no Ajustado -->
+		
+		<action path="/doMensajeError"
+	      		type="panaderia.struts.actions.ErrorLoginAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="mensaje.error.page"/>      			
+		</action>
+		
+		<action path="/doMensajePopup"
+	      		type="panaderia.struts.actions.ErrorLoginAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="mensaje.popup.page"/>      			
+		</action>
+		
+	 	<!-- Acceso Denegado -->
+	    <action path="/doAccesoDenegadoPopup"
+	      		type="panaderia.struts.actions.AccesoDenegadoAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="acceso_denegado.page.popup"/>      			
+		</action>
+		<!-- Fin Acceso Denegado -->
+		
+		<!-- Rol no Ajustado -->
+	    <action path="/doRolNoAjustadoPopup"
+	      		type="panaderia.struts.actions.RolNoAjustadoAction"
+	      		scope="request" roles="inicio">
+	 		<forward name="ok" path="rol_no_ajustado.page.popup"/>      			
+		</action>
+		
+		<action path="/doCargaProvincias"
+	      		type="panaderia.struts.actions.CargaProvinciasAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCargaLotes"
+	      		type="panaderia.struts.actions.CargaLotesAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCargaStockLote"
+	      		type="panaderia.struts.actions.CargaStockLoteAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCompruebaCifCliente"
+	      		type="panaderia.struts.actions.CompruebaCifClienteAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCompruebaImportePendienteFacturas"
+	      		type="panaderia.struts.actions.CompruebaImportePendienteFacturasAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCargaRutas"
+	      		type="panaderia.struts.actions.CargaRutasAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doCargaCuadrantes"
+	 			roles="logado"
+	      		type="panaderia.struts.actions.CargaCuadrantesAction"
+	      		scope="request">
+	 	</action>
+	 	
+	 	<action path="/doGenerarNotasEntrega"
+	 			roles="logado"
+	      		type="panaderia.struts.actions.GenerarNotasEntregaAction"
+	      		scope="request">
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaCrear"
+	 			roles="logado"
+	      		type="panaderia.struts.actions.NotasEntregaCrearAction"
+	      		name="EntregasForm"
+	      		scope="request">
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaCrear"
+	      		type="panaderia.struts.actions.AlbaranesVentaCrearAction"
+	      		name="AlbaranesVentaForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="/doListadoAlbaranesVenta.do"/>
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaCerrarDia"
+	      		type="panaderia.struts.actions.AlbaranesVentaCerrarDiaAction"
+	      		name="AlbaranesVentaForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="/doListadoAlbaranesVenta.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaCrear"
+	      		type="panaderia.struts.actions.FacturasVentaCrearAction"
+	      		name="FacturasVentaForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="/doListadoFacturasVenta.do"/>
+	 	</action>
+	 	
+	 	
+	 	<action path="/doActualizadorPrecios"
+	      		type="panaderia.struts.actions.ActualizadorPreciosAction"
+	      		name="FormVacio"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="actualiza.precios.page"/>
+	 	</action>
+	 	
+	 	
+	 	<action path="/doActualizadorPreciosGrabar"
+	      		type="panaderia.struts.actions.ActualizadorPreciosGrabarAction"
+	      		name="FormVacio"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="/doActualizadorPrecios.do"/>
+	 	</action>
+	 	
+	 	
+  <!--************* Zona de listados ******************-->
+	 	
+	 	<action path="/doListadoProductos"
+	      		type="panaderia.struts.listado.actions.ProductosListadoAction"
+	      		name="ProductosForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="productos.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoClientes"
+	      		type="panaderia.struts.listado.actions.ClientesListadoAction"
+	      		name="ClientesForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="clientes.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoProveedores"
+	      		type="panaderia.struts.listado.actions.ProveedoresListadoAction"
+	      		name="ProveedoresForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="proveedores.lista.page"/>
+	 	</action>
+
+	 	<action path="/doListadoRepartidoresCobradores"
+	      		type="panaderia.struts.listado.actions.RepartidoresCobradoresListadoAction"
+	      		name="RepartidoresCobradoresForm"
+	      		roles="logado"
+	      		scope="request">
+	      		<forward name="ok" path="repartidores.lista.page"/>
+	 	</action>
+
+		<action path="/doListadoFacturasVenta"
+	      		type="panaderia.struts.listado.actions.FacturasVentaListadoAction"
+	      		name="FacturasVentaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="facturasventa.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoCobros"
+	      		type="panaderia.struts.listado.actions.CobrosListadoAction"
+	      		name="FacturasVentaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cobros.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoFacturasCompra"
+	      		type="panaderia.struts.listado.actions.FacturasCompraListadoAction"
+	      		name="FacturasCompraForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="facturascompra.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoProductosCliente"
+	      		type="panaderia.struts.listado.actions.ProductosClienteListadoAction"
+	      		name="ProductosClienteForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="productoscliente.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doProductosClienteEditar"
+	      		type="panaderia.struts.formularios.actions.ProductosClienteEditarAction"
+	      		name="CuadrantesDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoProductosCliente.do"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoCuadrantes"
+	      		type="panaderia.struts.listado.actions.CuadrantesListadoAction"
+	      		name="CuadrantesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cuadrantes.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doCuadrantesCopiar"
+	      		type="panaderia.struts.actions.CuadrantesCopiarAction"
+	      		name="CuadrantesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoCuadrantes.do"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoCuadrantesDetalle"
+	      		type="panaderia.struts.listado.actions.CuadrantesDetalleListadoAction"
+	      		name="CuadrantesDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cuadrantesdetalle.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoEntregas"
+	      		type="panaderia.struts.listado.actions.EntregasListadoAction"
+	      		name="EntregasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="entregas.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoEntregasDetalle"
+	      		type="panaderia.struts.listado.actions.EntregasDetalleListadoAction"
+	      		name="EntregasDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="entregasdetalle.lista.page"/>
+	 	</action>
+
+	 	<action path="/doListadoRutas"
+	      		type="panaderia.struts.listado.actions.RutasListadoAction"
+	      		name="RutasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="rutas.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoRepartidores"
+	      		type="panaderia.struts.listado.actions.RepartidoresListadoAction"
+	      		name="RepartidoresForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="repartidores.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoCobradores"
+	      		type="panaderia.struts.listado.actions.CobradoresListadoAction"
+	      		name="CobradoresForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cobradores.lista.page"/>
+	 	</action>
+
+		<action path="/doListadoFacturasVenta"
+	      		type="panaderia.struts.listado.actions.FacturasVentaListadoAction"
+	      		name="FacturasVentaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="facturasventa.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoAlbaranesVenta"
+	      		type="panaderia.struts.listado.actions.AlbaranesVentaListadoAction"
+	      		name="AlbaranesVentaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="albaranesventa.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoUsuarios"
+	      		type="panaderia.struts.listado.actions.UsuariosListadoAction"
+	      		name="UsuariosForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="usuarios.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoNotasEntrega"
+	      		type="panaderia.struts.listado.actions.NotasEntregaListadoAction"
+	      		name="NotasEntregaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="notasentrega.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoFamilias"
+	      		type="panaderia.struts.listado.actions.FamiliasListadoAction"
+	      		name="FamiliasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="familias.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoFormasPago"
+	      		type="panaderia.struts.listado.actions.FormasPagoListadoAction"
+	      		name="FormasPagoForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="formaspago.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoPeriodosFacturacion"
+	      		type="panaderia.struts.listado.actions.PeriodosFacturacionListadoAction"
+	      		name="PeriodosFacturacionForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="periodosfacturacion.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoFichasProductos"
+	      		type="panaderia.struts.listado.actions.FichasProductosListadoAction"
+	      		name="FichasProductosForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="fichasproductos.lista.page"/>
+	 	</action>
+
+		<action path="/doListadoHistoricoAc"
+	      		type="panaderia.struts.listado.actions.HistoricoAcListadoAction"
+	      		name="HistoricoAcForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="historicoac.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoVacacionesClientes"
+	      		type="panaderia.struts.listado.actions.VacacionesClientesListadoAction"
+	      		name="VacacionesClientesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="vacacionesclientes.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doListadoComponentesProducto"
+	      		type="panaderia.struts.listado.actions.ComponentesProductoListadoAction"
+	      		name="ComponentesProductoForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="componentesproducto.lista.page"/>
+	 	</action>
+	 	
+	 	
+	 	<action path="/doListadoHistoricoInventarios"
+	      		type="panaderia.struts.listado.actions.HistoricoInventariosListadoAction"
+	      		name="HistoricoInventariosForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="historicoinventarios.lista.page"/>
+	 	</action>
+
+  <!--************* Zona de formularios ******************-->
+  	
+  		
+  		<!--************* Informes de Ventas (con Gráficas) ******************-->
+	 	
+	 	<action path="/doListadoInformesVenta"
+	      		type="panaderia.struts.informes.actions.InformesVentaListadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="informesventa.lista.page"/>
+	 	</action>
+  
+  		<action path="/doGraficasVentasCrear"
+	      		type="panaderia.struts.actions.GraficasVentasCrearAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	 	</action>
+  
+  	 	<!--************* Prevision de fabricacion ******************-->
+	 	
+	 	<action path="/doListadoPrevision"
+	      		type="panaderia.struts.listado.actions.PrevisionListadoAction"
+	      		name="NotasEntregaForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="prevision.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doPrevisionCrear"
+	      		type="panaderia.struts.actions.PrevisionCrearAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	 	</action>
+  
+  	 	<!--************* Proveedores ******************-->
+	 	
+		<action path="/doProveedoresFormulario"
+	      		type="panaderia.struts.formularios.actions.ProveedoresFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="proveedores.formulario"/>
+	 	</action>
+	 	
+		<action path="/doProveedoresFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ProveedoresFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProveedoresFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doProveedoresBorrar"
+	      		type="panaderia.struts.formularios.actions.ProveedoresBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoProveedores.do"/>
+	 	</action>
+
+	 	<!--************* Clientes ******************-->
+	 	
+		<action path="/doClientesFormulario"
+	      		type="panaderia.struts.formularios.actions.ClientesFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="clientes.formulario"/>
+	 	</action>
+	 	
+		<action path="/doClientesFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ClientesFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doClientesFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doClientesBorrar"
+	      		type="panaderia.struts.formularios.actions.ClientesBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoClientes.do?session=1"/>
+	 	</action>
+	 	
+	 	<action path="/doProductosClienteGrabar"
+	      		type="panaderia.struts.formularios.actions.ProductosClienteGrabarAction"
+	      		name="ProductosClienteForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoProductosCliente.do"/>
+	 	</action>
+	 	
+	 	<action path="/doRutasGrabar"
+	      		type="panaderia.struts.formularios.actions.RutasGrabarAction"
+	      		name="RutasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoRutas.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFormasPagoGrabar"
+	      		type="panaderia.struts.formularios.actions.FormasPagoGrabarAction"
+	      		name="FormasPagoForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFormasPago.do"/>
+	 	</action>
+	 	
+	 	<action path="/doPeriodosFacturacionGrabar"
+	      		type="panaderia.struts.formularios.actions.PeriodosFacturacionGrabarAction"
+	      		name="PeriodosFacturacionForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoPeriodosFacturacion.do"/>
+	 	</action>
+	 	
+	 	
+	 	<!--****************** Familias ******************-->
+	 	<action path="/doFamiliasFormulario"
+	      		type="panaderia.struts.formularios.actions.FamiliasFormularioAction"
+	      		name="FamiliasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="familias.formulario"/>
+	 	</action>
+	 	
+	 	<action path="/doFamiliasGrabar"
+	      		type="panaderia.struts.formularios.actions.FamiliasGrabarAction"
+	      		name="FamiliasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFamilias.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFamiliasBorrar"
+	      		type="panaderia.struts.formularios.actions.FamiliasBorrarAction"
+	      		name="FamiliasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFamilias.do"/>
+	 	</action>
+	 	
+	 	<action path="/doCopiaFichaAProductos"
+	      		type="panaderia.struts.actions.CopiaFichaAProductosAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFamiliasFormulario.do"/>
+	 	</action>
+	 	
+	 	<!--****************** Entregas ******************-->
+	 	
+	 	<action path="/doEntregasDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.EntregasDetalleGrabarAction"
+	      		name="EntregasDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoEntregasDetalle.do"/>
+	 	</action>
+	 	
+	 	<action path="/doEntregasGrabar"
+	      		type="panaderia.struts.formularios.actions.EntregasGrabarAction"
+	      		name="EntregasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoEntregas.do"/>
+	 	</action>
+	 	
+	 	<action path="/doEntregasDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.EntregasDetalleGrabarAction"
+	      		name="EntregasDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoEntregasDetalle.do"/>
+	 	</action>
+	 	
+	 	<action path="/doEntregasFormulario"
+	      		type="panaderia.struts.formularios.actions.EntregasFormularioAction"
+	      		name="EntregasForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="entregas.popup"/>
+	 	</action>
+	 	
+	 	<!--****************** Cuadrantes ******************-->
+	 	
+	 	<action path="/doCuadrantesGrabar"
+	      		type="panaderia.struts.formularios.actions.CuadrantesGrabarAction"
+	      		name="CuadrantesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoCuadrantes.do"/>
+	 	</action>
+	 	
+	 	<action path="/doCuadrantesDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.CuadrantesDetalleGrabarAction"
+	      		name="CuadrantesDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoCuadrantesDetalle.do"/>
+	 	</action>
+	 	
+	 	<action path="/doCuadrantesDetalleEditar"
+	      		type="panaderia.struts.formularios.actions.CuadrantesDetalleEditarAction"
+	      		name="CuadrantesDetalleForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoCuadrantesDetalle.do"/>
+	 	</action>
+	 	
+	 	<action path="/doCuadrantesFormulario"
+	      		type="panaderia.struts.formularios.actions.CuadrantesFormularioAction"
+	      		name="CuadrantesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cuadrantes.popup"/>
+	 	</action>
+	 	
+	 	<!--******************** Notas Entrega ******************-->
+	 	
+	 	<action path="/doNotasEntregaBorrar"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoNotasEntrega.do"/>
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaObs"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaObsAction"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="notasentrega.obs.popup"/>
+	 	</action>
+
+	
+		<!--************* Repartidores ******************-->
+		
+		<action path="/doRepartidoresFormulario"
+	      		type="panaderia.struts.formularios.actions.RepartidoresFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="repartidores.formulario"/>
+	 	</action>
+	 	
+		<action path="/doRepartidoresFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.RepartidoresFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doRepartidoresFormulario.do"/>
+	 	</action>
+
+		<action path="/doRepartidoresBorrar"
+	      		type="panaderia.struts.formularios.actions.RepartidoresBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoRepartidores.do"/>
+	 	</action>
+	 	
+	 	<!--************* Cobradores ******************-->
+	 	
+	 	<action path="/doCobradoresFormulario"
+	      		type="panaderia.struts.formularios.actions.CobradoresFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="cobradores.formulario"/>
+	 	</action>
+	 	
+		<action path="/doCobradoresFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.CobradoresFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doCobradoresFormulario.do"/>
+	 	</action>
+
+		<action path="/doCobradoresBorrar"
+	      		type="panaderia.struts.formularios.actions.CobradoresBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoCobradores.do"/>
+	 	</action>
+
+		<!--************* Repartidores_Cobradores ******************-->
+		
+		<action path="/doRepartidoresCobradoresFormulario"
+	      		type="panaderia.struts.formularios.actions.RepartidoresCobradoresFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="repartidores.formulario"/>
+	 	</action>
+	 	
+		<action path="/doRepartidoresCobradoresFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.RepartidoresCobradoresFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doRepartidoresCobradoresFormulario.do"/>
+	 	</action>
+
+		<action path="/doRepartidoresCobradoresBorrar"
+	      		type="panaderia.struts.formularios.actions.RepartidoresCobradoresBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoRepartidoresCobradores.do"/>
+	 	</action>
+
+		<!--************* Facturas de Venta ******************-->
+		
+		<action path="/doFacturasVentaFormulario"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="facturasventa.formulario"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaReferenciaCrear"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaReferenciaCrearAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasVentaFormulario.do"/>
+	 	</action>
+	 	
+		<action path="/doFacturasVentaformularioGrabar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasVentaFormulario.do"/>
+	 	</action>
+
+		<action path="/doFacturasVentaBorrar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFacturasVenta.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaDetalleGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<!-- <forward name="ok" path="searchProductosFactura.opener"/> -->
+	      		<forward name="ok" path="searchProductosClienteFactura.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaDetalleGrabarManual"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaDetalleGrabarManualAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasVentaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaDetalleBorrar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaDetalleBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasVentaFormulario.do"/>
+	 	</action>
+
+		<action path="/doFacturasVentaActualizarEstado"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaActualizarEstadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFacturasVenta.do"/>
+	      		<forward name="okCobros" path="/doListadoCobros.do"/>
+	 	</action>
+	 	
+	 	
+		<action path="/doFacturasVentaCerrar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaCerrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFacturasVenta.do"/>
+	 	</action>
+	 	
+		<action path="/doVentanaSearchClienteFactura"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchClienteFacturaAction"
+	      		scope="request" roles="logado"
+	      		name="ClientesForm">
+	      		<forward name="ok" path="searchClienteFactura.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosFactura"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosFacturaAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosFactura.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosClienteFactura"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosClienteFacturaAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosClienteFactura.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doGenerarFacturasVenta"
+	      		type="panaderia.struts.actions.GenerarFacturasVentaAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<!--*************** PRODUCTOS ***************-->
+	 	
+	 	<action path="/doProductosFormulario"
+	      		type="panaderia.struts.formularios.actions.ProductosFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="productos.formulario"/>
+	 	</action>
+	 	
+		<action path="/doProductosFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ProductosFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProductosFormulario.do"/>
+	 	</action>
+	 	
+		<action path="/doProductosBorrar"
+	      		type="panaderia.struts.formularios.actions.ProductosBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoProductos.do"/>
+	 	</action>	 	
+			
+		<action path="/doComponentesProductoGrabar"
+	      		type="panaderia.struts.formularios.actions.ComponentesProductoGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoComponentesProducto.do"/>
+	 	</action>
+	 	<!--************* Facturas de Compra ******************-->
+		
+		<action path="/doFacturasCompraFormulario"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="facturascompra.formulario"/>
+	 	</action>
+	 	
+		<action path="/doFacturasCompraformularioGrabar"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasCompraFormulario.do"/>
+	 	</action>
+
+		<action path="/doFacturasCompraBorrar"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFacturasCompra.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasCompraDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraDetalleGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasCompraFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasCompraDetalleBorrar"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraDetalleBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasCompraFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasCompraActualizarEstado"
+	      		type="panaderia.struts.formularios.actions.FacturasCompraActualizarEstadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFacturasCompra.do"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProveedoresFactura"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProveedoresFacturaAction"
+	      		scope="request" roles="logado"
+	      		name="ProveedoresForm">
+	      		<forward name="ok" path="searchProveedoresFactura.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doGenerarFacturasCompra"
+	      		type="panaderia.struts.actions.GenerarFacturasCompraAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doGenerarFabricacion"
+	      		type="panaderia.struts.actions.GenerarFabricacionAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doGenerarHistoricoInventarios"
+	      		type="panaderia.struts.actions.GenerarHistoricoInventariosAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<!--************* Usuarios ******************-->
+	 	
+		<action path="/doUsuariosFormulario"
+	      		type="panaderia.struts.formularios.actions.UsuariosFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="usuarios.formulario"/>
+	 	</action>
+	 	
+		<action path="/doUsuariosFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.UsuariosFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doUsuariosFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doUsuariosBorrar"
+	      		type="panaderia.struts.formularios.actions.UsuariosBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoUsuarios.do"/>
+	 	</action>
+	 	
+		<!--************* Notas de Entrega ******************-->
+		
+		<action path="/doNotasEntregaFormulario"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="notasentrega.formulario"/>
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaFormularioEditar"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaFormularioEditarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doNotasEntregaFormulario.do"/>
+	 	</action>
+	 	
+		<action path="/doNotasEntregaformularioGrabar"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doNotasEntregaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaDetalleGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="searchProductosClienteNotasEntrega.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaDetalleGrabarManual"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaDetalleGrabarManualAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doNotasEntregaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doNotasEntregaDetalleBorrar"
+	      		type="panaderia.struts.formularios.actions.NotasEntregaDetalleBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doNotasEntregaFormulario.do"/>
+	 	</action>
+	 	
+		<action path="/doVentanaSearchClienteNotasEntrega"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchClienteNotasEntregaAction"
+	      		scope="request" roles="logado"
+	      		name="ClientesForm">
+	      		<forward name="ok" path="searchClienteNotasEntrega.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosNotasEntrega"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosNotasEntregaAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosNotasEntrega.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosClienteNotasEntrega"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosClienteNotasEntregaAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosClienteNotasEntrega.opener"/>
+	 	</action>
+	 		 	
+	 	
+	 	<!--************* ALBARANES DE VENTA ******************-->
+		
+		<action path="/doAlbaranesVentaFormulario"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="albaranesventa.formulario"/>
+	 	</action>
+	 	
+		<action path="/doAlbaranesVentaformularioGrabar"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doAlbaranesVentaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaFormularioEditar"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaFormularioEditarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doAlbaranesVentaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doFacturasVentaFormularioEditar"
+	      		type="panaderia.struts.formularios.actions.FacturasVentaFormularioEditarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFacturasVentaFormulario.do"/>
+	 	</action>
+
+		<action path="/doAlbaranesVentaBorrar"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoAlbaranesVenta.do"/>
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaDetalleGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<!-- <forward name="ok" path="searchProductosFactura.opener"/> -->
+	      		<forward name="ok" path="searchProductosClienteAlbaran.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaDetalleGrabarManual"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaDetalleGrabarManualAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doAlbaranesVentaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doAlbaranesVentaDetalleBorrar"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaDetalleBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doAlbaranesVentaFormulario.do"/>
+	 	</action>
+
+		<action path="/doAlbaranesVentaActualizarEstado"
+	      		type="panaderia.struts.formularios.actions.AlbaranesVentaActualizarEstadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoAlbaranesVenta.do"/>
+	 	</action>
+	 	
+		<action path="/doVentanaSearchClienteAlbaran"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchClienteAlbaranAction"
+	      		scope="request" roles="logado"
+	      		name="ClientesForm">
+	      		<forward name="ok" path="searchClienteAlbaran.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosAlbaran"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosAlbaranAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosAlbaran.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doVentanaSearchProductosClienteAlbaran"
+	      		type="panaderia.struts.formularios.actions.VentanaSearchProductosClienteAlbaranAction"
+	      		scope="request" roles="logado"
+	      		name="ProductosForm">
+	      		<forward name="ok" path="searchProductosClienteAlbaran.opener"/>
+	 	</action>
+	 	
+	 	<action path="/doGenerarAlbaranesVenta"
+	      		type="panaderia.struts.actions.GenerarAlbaranesVentaAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doGenerarParteDiario"
+	      		type="panaderia.struts.actions.GenerarParteDiarioAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 		 	
+	 	
+	 	<!-- INFORMES DE PANADERIA -->
+	 	<action path="/doInformeListadoClientes"
+	      		type="panaderia.struts.informes.actions.InformeListadoClientesAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doInformeListadoProductosF"
+	      		type="panaderia.struts.informes.actions.InformesProductosFListadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="informesproductos.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doInformeListadoProductos"
+	      		type="panaderia.struts.informes.actions.InformeListadoProductosAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doInformeListadoPreciosF"
+	      		type="panaderia.struts.informes.actions.InformesPreciosFListadoAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="informesprecios.lista.page"/>
+	 	</action>
+	 	
+	 	<action path="/doInformeListadoPrecios"
+	      		type="panaderia.struts.informes.actions.InformeListadoPreciosAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doInformeListadoProveedores"
+	      		type="panaderia.struts.informes.actions.InformeListadoProveedoresAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<!--************* FICHAS GENERALES DE PRODUCTOS ******************-->
+		
+		<action path="/doFichasProductosFormulario"
+	      		type="panaderia.struts.formularios.actions.FichasProductosFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="fichasproductos.formulario"/>
+	 	</action>
+	 	
+		<action path="/doFichasProductosFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.FichasProductosFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFichasProductosFormulario.do"/>
+	 	</action>
+
+		<action path="/doFichasProductosBorrar"
+	      		type="panaderia.struts.formularios.actions.FichasProductosBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoFichasProductos.do"/>
+	 	</action>
+	 	
+	 	
+	 	<!--************* COMPOSICION CUALITATIVA Y CUANTITATIVA DE LOS PRODUCTOS DE LA FICHA ******************-->
+	 	
+	 	<action path="/doComposicionProductosFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ComposicionProductosFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFichasProductosFormulario.do"/>
+	 	</action>
+
+		<action path="/doComposicionProductosBorrar"
+	      		type="panaderia.struts.formularios.actions.ComposicionProductosBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doFichasProductosFormulario.do"/>
+	 	</action>
+	 	
+	 	
+	 	<!--************* FICHAS PRODUCTOS (FICHA DENTRO DE LA GESTION DE PRODUCTOS DIRECTAMENTE)*****************-->
+		
+		<action path="/doProductoFichaFormulario"
+	      		type="panaderia.struts.formularios.actions.ProductoFichaFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="productoficha.formulario"/>
+	 	</action>
+	 	
+		<action path="/doProductoFichaFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ProductoFichaFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProductoFichaFormulario.do"/>
+	 	</action>
+
+		<action path="/doProductoFichaBorrar"
+	      		type="panaderia.struts.formularios.actions.ProductoFichaBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProductosFormulario.do"/>
+	 	</action>
+	 	
+	 	
+	 	<!--************* COMPOSICION CUALITATIVA Y CUANTITATIVA DE LOS PRODUCTOS DE LA FICHA EN PRODUCTOS ******************-->
+	 	
+	 	<action path="/doProductoComposicionFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.ProductoComposicionFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProductoFichaFormulario.do"/>
+	 	</action>
+
+		<action path="/doProductoComposicionBorrar"
+	      		type="panaderia.struts.formularios.actions.ProductoComposicionBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doProductoFichaFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doGenerarFichasProductos"
+	      		type="panaderia.struts.actions.GenerarFichasProductosAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 		 	
+	 	<!--************* HISTORICO AC (CANTIDAD A CUENTA DEL CLIENTE) ******************-->
+	 	
+	 	<action path="/doHistoricoAcGrabar"
+	      		type="panaderia.struts.formularios.actions.HistoricoAcGrabarAction"
+	      		name="HistoricoAcForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoHistoricoAc.do"/>
+	 	</action>
+	 	
+	 	<action path="/doGenerarHistoricoAc"
+	      		type="panaderia.struts.actions.GenerarHistoricoAcAction"
+	      		scope="request" roles="logado">
+	 	</action>
+	 	
+	 	<action path="/doVentanaBarraProgreso"
+	      		type="panaderia.struts.formularios.actions.VentanaBarraProgresoAction"
+	      		scope="request" roles="logado"
+	      		name="FormVacio">
+	      		<forward name="ok" path="barraprogreso.opener"/>
+	 	</action>
+	 	
+	 	<!--************* VACACIONES CLIENTES ******************-->
+	 	<action path="/doVacacionesClientesGrabar"
+	      		type="panaderia.struts.formularios.actions.VacacionesClientesGrabarAction"
+	      		name="VacacionesClientesForm"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doListadoVacacionesClientes.do"/>
+	 	</action>
+
+
+	 	<!--************* HISTORICO INVENTARIOS Y REGULARIZACIONES ******************-->
+	 	 	
+	 	<action path="/doHistoricoInventariosFormulario"
+	      		type="panaderia.struts.formularios.actions.HistoricoInventariosFormularioAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="historicoinventarios.formulario"/>
+	 	</action>
+	 	
+	 	<action path="/doHistoricoInventariosFormularioGrabar"
+	      		type="panaderia.struts.formularios.actions.HistoricoInventariosFormularioGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doHistoricoInventariosFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doHistoricoInventariosDetalleGrabar"
+	      		type="panaderia.struts.formularios.actions.HistoricoInventariosDetalleGrabarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doHistoricoInventariosFormulario.do"/>
+	 	</action>
+	 	
+	 	<action path="/doHistoricoInventariosDetalleBorrar"
+	      		type="panaderia.struts.formularios.actions.HistoricoInventariosDetalleBorrarAction"
+	      		name="FormVacio"
+	      		scope="request" roles="logado">
+	      		<forward name="ok" path="/doHistoricoInventariosFormulario.do"/>
+	 	</action>
+	 	
+  </action-mappings>
+
+
+		
+
+	<!-- CONTROLLER MANAGER -->
+  <controller processorClass="panaderia.struts.actions.ControllerManager"/>
+
+  <message-resources parameter="panaderia.properties.Mensajes" />
+  <message-resources key="recursos" parameter="panaderia.properties.Recursos" />
+  
+  <!-- MAPEO DE TILES Y VALIDATOR -->
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+		<set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />
+		<set-property property="moduleAware" value="false" />
+  </plug-in>
+</struts-config>

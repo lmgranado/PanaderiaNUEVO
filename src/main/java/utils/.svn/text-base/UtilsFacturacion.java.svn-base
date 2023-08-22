@@ -1,0 +1,17 @@
+package utils;
+
+public class UtilsFacturacion {
+
+	public static float getImporte(float precio, float descuento, float iva, float cantidad){
+		float importe = 0;
+		try{
+			if(iva==0)
+				importe = (precio - (precio * descuento)) * cantidad;
+			else
+				importe = ((precio - (precio * descuento)) + (iva * precio)) * cantidad;
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		return importe;
+	}
+}

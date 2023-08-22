@@ -1,0 +1,497 @@
+CREATE TABLE `provincias` (
+  `prov_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prov_codigo` int(11) NOT NULL,
+  `prov_nombre` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`prov_id`),
+  UNIQUE KEY `prov_codigo_uk` (`prov_codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `localidades` (
+  `loc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `loc_codigo` int(11) DEFAULT NULL,
+  `loc_nombre` varchar(64) DEFAULT NULL,
+  `loc_prov_codigo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`loc_id`),
+  KEY `loc_prov_codigo_fk` (`loc_prov_codigo`),
+  CONSTRAINT `localidades_ibfk_1` FOREIGN KEY (`loc_prov_codigo`) REFERENCES `provincias` (`prov_codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `familias` (
+  `fam_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fam_nombre` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`fam_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `formas_pago` (
+  `fp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fp_descripcion` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`fp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `periodos_facturacion` (
+  `pf_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pf_descripcion` varchar(32) DEFAULT NULL,
+  `pf_dia` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pf_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `repartidores` (
+  `rep_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rep_nombre` varchar(32) NOT NULL,
+  `rep_apellidos` varchar(32) NOT NULL,
+  `rep_direccion` varchar(32) DEFAULT NULL,
+  `rep_codigo_postal` varchar(32) DEFAULT NULL,
+  `rep_telefono` varchar(32) DEFAULT NULL,
+  `rep_movil` varchar(32) DEFAULT NULL,
+  `rep_nif` varchar(10) NOT NULL,
+  `rep_prov_id` int(11) NOT NULL,
+  `rep_loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`rep_id`),
+  UNIQUE KEY `rep_nif_uk` (`rep_nif`),
+  KEY `rep_prov_id_fk` (`rep_prov_id`),
+  KEY `rep_loc_id_fk` (`rep_loc_id`),
+  CONSTRAINT `repartidores_ibfk_1` FOREIGN KEY (`rep_prov_id`) REFERENCES `provincias` (`prov_id`),
+  CONSTRAINT `repartidores_ibfk_2` FOREIGN KEY (`rep_loc_id`) REFERENCES `localidades` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `cobradores` (
+  `cob_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cob_nombre` varchar(32) NOT NULL,
+  `cob_apellidos` varchar(32) NOT NULL,
+  `cob_direccion` varchar(32) DEFAULT NULL,
+  `cob_codigo_postal` varchar(32) DEFAULT NULL,
+  `cob_telefono` varchar(32) DEFAULT NULL,
+  `cob_movil` varchar(32) DEFAULT NULL,
+  `cob_nif` varchar(10) NOT NULL,
+  `cob_prov_id` int(11) NOT NULL,
+  `cob_loc_id` int(11) NOT NULL,
+  PRIMARY KEY (`cob_id`),
+  UNIQUE KEY `cob_nif_uk` (`cob_nif`),
+  KEY `cob_prov_id_fk` (`cob_prov_id`),
+  KEY `cob_loc_id_fk` (`cob_loc_id`),
+  CONSTRAINT `cobradores_ibfk_1` FOREIGN KEY (`cob_prov_id`) REFERENCES `provincias` (`prov_id`),
+  CONSTRAINT `cobradores_ibfk_2` FOREIGN KEY (`cob_loc_id`) REFERENCES `localidades` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `clientes` (
+  `cl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cl_nombre` varchar(32) NOT NULL,
+  `cl_apellidos` varchar(32) NOT NULL,
+  `cl_nombre_comercial` varchar(64) NOT NULL,
+  `cl_direccion` varchar(64) NOT NULL,
+  `cl_codigo_postal` varchar(10) DEFAULT NULL,
+  `cl_nif` varchar(32) NOT NULL,
+  `cl_telefono` varchar(32) DEFAULT NULL,
+  `cl_movil` varchar(32) DEFAULT NULL,
+  `cl_fax` varchar(32) DEFAULT NULL,
+  `cl_web` varchar(32) DEFAULT NULL,
+  `cl_email` varchar(96) DEFAULT NULL,
+  `cl_persona_contacto` varchar(32) DEFAULT NULL,
+  `cl_nombre_banco` varchar(32) DEFAULT NULL,
+  `cl_ccc` varchar(32) DEFAULT NULL,
+  `cl_descuento` varchar(32) DEFAULT NULL,
+  `cl_prov_id` int(11) NOT NULL,
+  `cl_loc_id` int(11) NOT NULL,
+  `cl_fp_id` int(11) NOT NULL,
+  `cl_pf_id` int(11) NOT NULL,
+  `cl_cob_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`cl_id`),
+  UNIQUE KEY `cl_nif_uk` (`cl_nif`),
+  KEY `cl_fp_id_fk` (`cl_fp_id`),
+  KEY `cl_pf_id_fk` (`cl_pf_id`),
+  KEY `cl_prov_id_fk` (`cl_prov_id`),
+  KEY `cl_loc_id_fk` (`cl_loc_id`),
+  KEY `cl_cob_id_fk` (`cl_cob_id`),
+  CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`cl_fp_id`) REFERENCES `formas_pago` (`fp_id`),
+  CONSTRAINT `clientes_ibfk_2` FOREIGN KEY (`cl_pf_id`) REFERENCES `periodos_facturacion` (`pf_id`),
+  CONSTRAINT `clientes_ibfk_3` FOREIGN KEY (`cl_prov_id`) REFERENCES `provincias` (`prov_id`),
+  CONSTRAINT `clientes_ibfk_4` FOREIGN KEY (`cl_loc_id`) REFERENCES `localidades` (`loc_id`),
+  CONSTRAINT `clientes_ibfk_5` FOREIGN KEY (`cl_cob_id`) REFERENCES `cobradores` (`cob_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `rutas` (
+  `rut_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rut_nombre` varchar(64) NOT NULL,
+  PRIMARY KEY (`rut_id`),
+  UNIQUE KEY `rut_nombre_uk` (`rut_nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `productos` (
+  `prod_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prod_referencia` varchar(32) NOT NULL,
+  `prod_nombre` varchar(32) NOT NULL,
+  `prod_peso` varchar(32) DEFAULT NULL,
+  `prod_precio_general` varchar(32) NOT NULL,
+  `prod_stock` int(11) DEFAULT NULL,
+  `prod_stock_minimo` int(11) DEFAULT NULL,
+  `prod_iva` float DEFAULT NULL,
+  `prod_descuento` float DEFAULT '0',
+  `prod_cantidad_por_caja` int(11) DEFAULT '0',
+  `prod_fam_id` int(11) NOT NULL,
+  PRIMARY KEY (`prod_id`),
+  UNIQUE KEY `prod_referencia_uk` (`prod_referencia`),
+  KEY `prod_fam_id_fk` (`prod_fam_id`),
+  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`prod_fam_id`) REFERENCES `familias` (`fam_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `productos_cliente` (
+  `pcl_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pcl_prod_id` int(11) NOT NULL,
+  `pcl_cl_id` int(11) NOT NULL,
+  `pcl_precio` varchar(32) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`pcl_id`),
+  UNIQUE KEY `pcl_unico_uk` (`pcl_prod_id`,`pcl_cl_id`),
+  KEY `productos_cliente_ibfk_2` (`pcl_cl_id`),
+  CONSTRAINT `productos_cliente_ibfk_1` FOREIGN KEY (`pcl_prod_id`) REFERENCES `productos` (`prod_id`),
+  CONSTRAINT `productos_cliente_ibfk_2` FOREIGN KEY (`pcl_cl_id`) REFERENCES `clientes` (`cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `cuadrantes` (
+  `cu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cu_nombre` varchar(64) NOT NULL,
+  `cu_cl_id` int(11) NOT NULL,
+  `cu_rut_id` int(11) NOT NULL,
+  `cu_observaciones` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`cu_id`),
+  KEY `cu_rut_id_fk` (`cu_rut_id`),
+  KEY `cu_cl_id_fk` (`cu_cl_id`),
+  CONSTRAINT `cuadrantes_ibfk_1` FOREIGN KEY (`cu_rut_id`) REFERENCES `rutas` (`rut_id`),
+  CONSTRAINT `cuadrantes_ibfk_2` FOREIGN KEY (`cu_cl_id`) REFERENCES `clientes` (`cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `cuadrantes_detalle` (
+  `cud_id` int(11) NOT NULL AUTO_INCREMENT,
+  `cud_cu_id` int(11) NOT NULL,
+  `cud_pcl_id` int(11) NOT NULL,
+  `cud_cantidad1` varchar(16) DEFAULT NULL,
+  `cud_cantidad2` varchar(16) DEFAULT NULL,
+  `cud_cantidad3` varchar(16) DEFAULT NULL,
+  `cud_cantidad4` varchar(16) DEFAULT NULL,
+  `cud_cantidad5` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`cud_id`),
+  UNIQUE KEY `cuadrantes_detalle_unique_1` (`cud_cu_id`,`cud_pcl_id`),
+  KEY `cuadrantes_detalle_ibfk_2` (`cud_pcl_id`),
+  CONSTRAINT `cuadrantes_detalle_ibfk_1` FOREIGN KEY (`cud_cu_id`) REFERENCES `cuadrantes` (`cu_id`),
+  CONSTRAINT `cuadrantes_detalle_ibfk_2` FOREIGN KEY (`cud_pcl_id`) REFERENCES `productos_cliente` (`pcl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `entregas` (
+  `ent_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ent_nombre` varchar(32) NOT NULL,
+  PRIMARY KEY (`ent_id`),
+  UNIQUE KEY `ent_unico_uk` (`ent_nombre`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `entregas_detalle` (
+  `end_id` int(11) NOT NULL AUTO_INCREMENT,
+  `end_rut_id` int(11) NOT NULL,
+  `end_cl_id` int(11) NOT NULL,
+  `end_viaje` int(11) NOT NULL,
+  `end_cu_id` int(11) NOT NULL,
+  `end_orden` int(11) NOT NULL,
+  `end_ent_id` int(11) NOT NULL,
+  PRIMARY KEY (`end_id`),
+  UNIQUE KEY `ent_unico_uk` (`end_rut_id`,`end_cl_id`,`end_cu_id`,`end_viaje`),
+  KEY `ent_rut_id_fk` (`end_rut_id`),
+  KEY `ent_cl_id_fk` (`end_cl_id`),
+  KEY `ent_cu_id_fk` (`end_cu_id`),
+  KEY `entregas_detalle_ibfk_4` (`end_ent_id`),
+  CONSTRAINT `entregas_detalle_ibfk_1` FOREIGN KEY (`end_rut_id`) REFERENCES `rutas` (`rut_id`),
+  CONSTRAINT `entregas_detalle_ibfk_2` FOREIGN KEY (`end_cl_id`) REFERENCES `clientes` (`cl_id`),
+  CONSTRAINT `entregas_detalle_ibfk_3` FOREIGN KEY (`end_cu_id`) REFERENCES `cuadrantes` (`cu_id`),
+  CONSTRAINT `entregas_detalle_ibfk_4` FOREIGN KEY (`end_ent_id`) REFERENCES `entregas` (`ent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `proveedores` (
+  `pr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pr_nombre` varchar(32) NOT NULL,
+  `pr_apellidos` varchar(32) NOT NULL,
+  `pr_nombre_comercial` varchar(64) NOT NULL,
+  `pr_direccion` varchar(64) NOT NULL,
+  `pr_codigo_postal` varchar(10) DEFAULT NULL,
+  `pr_nif` varchar(32) NOT NULL,
+  `pr_telefono` varchar(32) DEFAULT NULL,
+  `pr_movil` varchar(32) DEFAULT NULL,
+  `pr_fax` varchar(32) DEFAULT NULL,
+  `pr_web` varchar(32) DEFAULT NULL,
+  `pr_email` varchar(96) DEFAULT NULL,
+  `pr_persona_contacto` varchar(32) DEFAULT NULL,
+  `pr_nombre_banco` varchar(32) DEFAULT NULL,
+  `pr_ccc` varchar(32) DEFAULT NULL,
+  `pr_descuento` varchar(32) DEFAULT NULL,
+  `pr_observaciones` varchar(2000) DEFAULT NULL,
+  `pr_prov_id` int(11) NOT NULL,
+  `pr_loc_id` int(11) NOT NULL,
+  `pr_fp_id` int(11) NOT NULL,
+  `pr_pf_id` int(11) NOT NULL,
+  PRIMARY KEY (`pr_id`),
+  UNIQUE KEY `pr_nif_uk` (`pr_nif`),
+  KEY `pr_fp_id_fk` (`pr_fp_id`),
+  KEY `pr_pf_id_fk` (`pr_pf_id`),
+  KEY `pr_prov_id_fk` (`pr_prov_id`),
+  KEY `pr_loc_id_fk` (`pr_loc_id`),
+  CONSTRAINT `proveedores_ibfk_1` FOREIGN KEY (`pr_fp_id`) REFERENCES `formas_pago` (`fp_id`),
+  CONSTRAINT `proveedores_ibfk_2` FOREIGN KEY (`pr_pf_id`) REFERENCES `periodos_facturacion` (`pf_id`),
+  CONSTRAINT `proveedores_ibfk_3` FOREIGN KEY (`pr_prov_id`) REFERENCES `provincias` (`prov_id`),
+  CONSTRAINT `proveedores_ibfk_4` FOREIGN KEY (`pr_loc_id`) REFERENCES `localidades` (`loc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `facturas_compra` (
+  `fc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fc_numero_factura` varchar(32),
+  `fc_fecha` date NOT NULL,
+  `fc_iva` varchar(32) DEFAULT NULL,
+  `fc_total` varchar(32) DEFAULT NULL,
+  `fc_pr_id` int(11) NOT NULL,
+  `fc_pagada` int(11) DEFAULT '0',
+  `fc_observaciones` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`fc_id`),
+  UNIQUE KEY `fc_numero_factura_uk` (`fc_numero_factura`),
+  KEY `fc_pr_id_fk` (`fc_pr_id`),
+  CONSTRAINT `facturas_compra_ibfk_1` FOREIGN KEY (`fc_pr_id`) REFERENCES `proveedores` (`pr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `facturas_compra_detalle` (
+  `fcd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fcd_fc_id` int(11) NOT NULL,
+  `fcd_referencia` varchar(32) NOT NULL,
+  `fcd_producto` varchar(64) NOT NULL,
+  `fcd_linea` int(11) NOT NULL,
+  `fcd_cantidad` int(11) NOT NULL,
+  `fcd_precio_compra` varchar(32) DEFAULT NULL,
+  `fcd_iva` varchar(32) NOT NULL,
+  `fcd_importe` varchar(32) NOT NULL,
+  PRIMARY KEY (`fcd_id`),
+  UNIQUE KEY `fcd_unico_uk` (`fcd_fc_id`,`fcd_linea`),
+  CONSTRAINT `facturas_compra_detalle_ibfk_1` FOREIGN KEY (`fcd_fc_id`) REFERENCES `facturas_compra` (`fc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `facturas_venta` (
+  `fv_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fv_numero_factura` varchar(32),
+  `fv_fecha` date NOT NULL,
+  `fv_iva` varchar(32) DEFAULT NULL,
+  `fv_total` varchar(32) DEFAULT NULL,
+  `fv_cl_id` int(11) NOT NULL,
+  `fv_pagada` int(11) DEFAULT '0',
+  `fv_observaciones` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`fv_id`),
+  UNIQUE KEY `fv_numero_factura_uk` (`fv_numero_factura`),
+  KEY `fv_cl_id_fk` (`fv_cl_id`),
+  CONSTRAINT `facturas_venta_ibfk_1` FOREIGN KEY (`fv_cl_id`) REFERENCES `clientes` (`cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `facturas_venta_detalle` (
+  `fvd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `fvd_fv_id` int(11) NOT NULL,
+  `fvd_producto` varchar(64) NOT NULL,
+  `fvd_linea` int(11) NOT NULL,
+  `fvd_cantidad` int(11) NOT NULL,
+  `fvd_precio_venta` varchar(32) DEFAULT NULL,
+  `fvd_iva` varchar(32) NOT NULL,
+  `fvd_importe` varchar(32) NOT NULL,
+  `fvd_referencia` varchar(32) default NULL,
+  PRIMARY KEY (`fvd_id`),
+  UNIQUE KEY `fvd_unico_uk` (`fvd_fv_id`,`fvd_linea`),
+  CONSTRAINT `facturas_venta_detalle_ibfk_1` FOREIGN KEY (`fvd_fv_id`) REFERENCES `facturas_venta` (`fv_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notas_entrega` (
+  `not_id` int(11) NOT NULL AUTO_INCREMENT,
+  `not_fecha` date NOT NULL,
+  `not_nombre` varchar(32) NOT NULL,
+  `not_rut_id` int(11) NOT NULL,
+  `not_cl_id` int(11) NOT NULL,
+  `not_orden` int(11) NOT NULL,
+  `not_observaciones` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`not_id`),
+  UNIQUE KEY `not_unico_uk` (`not_fecha`,`not_nombre`,`not_rut_id`,`not_cl_id`),
+  KEY `not_rut_id_fk` (`not_rut_id`),
+  KEY `not_cl_id_fk` (`not_cl_id`),
+  CONSTRAINT `notas_entrega_ibfk_1` FOREIGN KEY (`not_rut_id`) REFERENCES `rutas` (`rut_id`),
+  CONSTRAINT `notas_entrega_ibfk_2` FOREIGN KEY (`not_cl_id`) REFERENCES `clientes` (`cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `notas_entrega_detalle` (
+  `notdet_id` int(11) NOT NULL AUTO_INCREMENT,
+  `notdet_not_id` int(11) NOT NULL,
+  `notdet_linea` int(11) NOT NULL,
+  `notdet_producto` varchar(64) DEFAULT NULL,
+  `notdet_cantidad` int(11) NOT NULL,
+  `notdet_precio` varchar(32) DEFAULT NULL,
+  `notdet_importe` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`notdet_id`),
+  UNIQUE KEY `notdet_unico_uk` (`notdet_not_id`,`notdet_linea`),
+  CONSTRAINT `notas_entrega_detalle_ibfk_1` FOREIGN KEY (`notdet_not_id`) REFERENCES `notas_entrega` (`not_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `usuarios` (
+  `us_id` int(11) NOT NULL AUTO_INCREMENT,
+  `us_nombre` varchar(32) NOT NULL,
+  `us_apellidos` varchar(32) NOT NULL,
+  `us_direccion` varchar(64) NOT NULL,
+  `us_codigo_postal` varchar(10) DEFAULT NULL,
+  `us_nif` varchar(32) NOT NULL,
+  `us_telefono` varchar(32) DEFAULT NULL,
+  `us_movil` varchar(32) DEFAULT NULL,
+  `us_email` varchar(96) DEFAULT NULL,
+  `us_passw` varchar(32) NOT NULL,
+  `us_login` varchar(32) NOT NULL,
+  PRIMARY KEY (`us_id`),
+  UNIQUE KEY `us_login_uk` (`us_login`,`us_passw`),
+  UNIQUE KEY `us_nif_uk` (`us_nif`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+IVAN 13/03/2009
+-----------------
+ALTER TABLE panaderia.notas_entrega
+ ADD not_cierre INT AFTER not_observaciones;
+ 
+IVAN 16/03/2009
+-----------------
+ALTER TABLE panaderia.facturas_compra DROP INDEX fc_numero_factura_uk;
+ALTER TABLE panaderia.facturas_compra_detalle
+ CHANGE fcd_referencia fcd_referencia VARCHAR(32);
+ALTER TABLE panaderia.productos
+ CHANGE prod_peso prod_peso_total VARCHAR(32),
+ ADD prod_peso_masa VARCHAR(32) AFTER prod_fam_id;
+ALTER TABLE panaderia.productos
+ CHANGE prod_stock prod_stock INT(11) DEFAULT '0',
+ CHANGE prod_stock_minimo prod_stock_minimo INT(11) DEFAULT '0';
+ ALTER TABLE panaderia.productos
+ CHANGE prod_iva prod_iva VARCHAR(32),
+ CHANGE prod_descuento prod_descuento VARCHAR(32) DEFAULT '0';
+ ALTER TABLE panaderia.usuarios
+ ADD us_administrador VARCHAR(1) AFTER us_login;
+ 
+ IVAN 17//03/2009
+ -----------------
+ ALTER TABLE panaderia.notas_entrega
+ CHANGE not_rut_id not_rut_id INT(11),
+ CHANGE not_orden not_orden INT(11);
+ 
+ LUISMI 22/03/2009
+ -------------------------------------
+ CREATE TABLE `albaranes_venta` (
+  `av_id` int(11) NOT NULL AUTO_INCREMENT,  
+  `av_fecha` date NOT NULL,
+  `av_iva` varchar(32) DEFAULT NULL,
+  `av_total` varchar(32) DEFAULT NULL,
+  `av_cl_id` int(11) NOT NULL,
+  `av_pagado` int(11) DEFAULT '0',
+  `av_observaciones` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`av_id`),  
+  KEY `av_cl_id_fk` (`av_cl_id`),
+  CONSTRAINT `albaranes_venta_ibfk_1` FOREIGN KEY (`av_cl_id`) REFERENCES `clientes` (`cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `albaranes_venta_detalle` (
+  `avd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `avd_av_id` int(11) NOT NULL,
+  `avd_producto` varchar(64) NOT NULL,
+  `avd_linea` int(11) NOT NULL,
+  `avd_cantidad` int(11) NOT NULL,
+  `avd_precio_venta` varchar(32) DEFAULT NULL,
+  `avd_iva` varchar(32) NOT NULL,
+  `avd_importe` varchar(32) NOT NULL,
+  `avd_referencia` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`avd_id`),
+  UNIQUE KEY `avd_unico_uk` (`avd_av_id`,`avd_linea`),
+  CONSTRAINT `albaranes_venta_detalle_ibfk_1` FOREIGN KEY (`avd_av_id`) REFERENCES `albaranes_venta` (`av_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ IVAN 23/03/2009
+ -------------------------------------
+ ALTER TABLE panaderia.notas_entrega_detalle
+ ADD notdet_iva VARCHAR(32) AFTER notdet_importe;
+ 
+ ALTER TABLE panaderia.notas_entrega_detalle
+ ADD notdet_descuento VARCHAR(32) AFTER notdet_iva;
+ 
+ LUISMI 23/03/2009
+ -------------------------------------
+alter table facturas_venta_detalle add `fvd_descuento` varchar(32) DEFAULT NULL;
+alter table facturas_compra_detalle add `fvd_descuento` varchar(32) DEFAULT NULL;
+alter table albaranes_venta_detalle add `avd_descuento` varchar(32) DEFAULT NULL;
+
+LUISMI 20/04/2009
+--------------------------------------
+alter table familias add UNIQUE KEY `fam_nombre_uk` (`fam_nombre`);
+alter table formas_pago add UNIQUE KEY `fp_descripcion_uk` (`fp_descripcion`);
+alter table periodos_facturacion add UNIQUE KEY `pf_descripcion_uk` (`pf_descripcion`);
+
+IVAN 22/04/2009
+--------------------------------------
+ALTER TABLE panaderia.albaranes_venta
+ ADD av_cierre INT AFTER av_observaciones;
+ 
+ALTER TABLE panaderia.facturas_venta
+ ADD fv_cierre INT AFTER fv_observaciones;
+ 
+ALTER TABLE panaderia.facturas_compra
+ ADD fc_cierre INT AFTER fc_observaciones;
+
+ ALTER TABLE panaderia.facturas_venta_detalle
+ CHANGE fvd_importe fvd_importe DOUBLE(32,3),
+ CHANGE fvd_iva fvd_iva DOUBLE(32,3),
+ CHANGE fvd_cantidad fvd_cantidad DOUBLE(32,3),
+ CHANGE fvd_precio_venta fvd_precio_venta DOUBLE(32,3),
+ CHANGE fvd_descuento fvd_descuento DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.albaranes_venta
+ CHANGE av_iva av_iva DOUBLE(32,3),
+ CHANGE av_total av_total DOUBLE(32,3);
+
+ALTER TABLE panaderia.albaranes_venta_detalle
+ CHANGE avd_iva avd_iva DOUBLE(32,3),
+ CHANGE avd_importe avd_importe DOUBLE(32,3),
+ CHANGE avd_descuento avd_descuento DOUBLE(32,3),
+ CHANGE avd_precio_venta avd_precio_venta DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.facturas_compra
+ CHANGE fc_iva fc_iva DOUBLE(32,3),
+ CHANGE fc_total fc_total DOUBLE(32,3);
+
+ALTER TABLE panaderia.facturas_compra_detalle
+ CHANGE fcd_iva fcd_iva DOUBLE(32,3),
+ CHANGE fcd_importe fcd_importe DOUBLE(32,3),
+ CHANGE fvd_descuento fcd_descuento DOUBLE(32,3),
+ CHANGE fcd_precio_compra fcd_precio_compra DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.facturas_venta
+ CHANGE fv_iva fv_iva DOUBLE(32,3),
+ CHANGE fv_total fv_total DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.clientes
+ CHANGE cl_descuento cl_descuento DOUBLE(32,3);
+
+ALTER TABLE panaderia.notas_entrega_detalle
+ CHANGE notdet_iva notdet_iva DOUBLE(32,3),
+ CHANGE notdet_importe notdet_importe DOUBLE(32,3),
+ CHANGE notdet_descuento notdet_descuento DOUBLE(32,3),
+ CHANGE notdet_precio notdet_precio DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.proveedores
+ CHANGE pr_descuento pr_descuento DOUBLE(32,3);
+
+ALTER TABLE panaderia.productos_cliente
+ CHANGE pcl_precio pcl_precio DOUBLE(32,3);
+ 
+ ALTER TABLE panaderia.productos
+ CHANGE prod_peso_masa prod_peso_masa DOUBLE(32,3),
+ CHANGE prod_descuento prod_descuento DOUBLE(32,3),
+ CHANGE prod_iva prod_iva DOUBLE(32,3),
+ CHANGE prod_peso_total prod_peso_total DOUBLE(32,3),
+ CHANGE prod_precio_general prod_precio_general DOUBLE(32,3);
+ 
+ LUISMI 12/05/2009
+ ----------------------------------------------
+ alter table cuadrantes add UNIQUE KEY (cu_nombre,cu_cl_id,cu_rut_id);
+ 
+ 
+ 

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results
+END
+error.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results/error.jsp
+END
+mensaje_error.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results/mensaje_error.jsp
+END
+acceso_denegado.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results/acceso_denegado.jsp
+END
+mensaje_popup.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results/mensaje_popup.jsp
+END
+rol_no_ajustado.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/tiles/results/rol_no_ajustado.jsp
+END

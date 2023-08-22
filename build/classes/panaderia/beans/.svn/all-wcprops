@@ -1,0 +1,251 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/src/panaderia/beans
+END
+Cobradores.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Cobradores.java
+END
+ActualizadorPrecios.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/ActualizadorPrecios.java
+END
+Boton.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Boton.java
+END
+FacturasVentaDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/93/PanaderiaNUEVO/src/panaderia/beans/FacturasVentaDetalle.java
+END
+Provincias.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Provincias.java
+END
+Usuarios.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Usuarios.java
+END
+HistoricoInventariosDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/pinepan/!svn/ver/39/PanaderiaNUEVO/src/panaderia/beans/HistoricoInventariosDetalle.java
+END
+Rutas.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Rutas.java
+END
+FacturasCompraDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/74/PanaderiaNUEVO/src/panaderia/beans/FacturasCompraDetalle.java
+END
+Entregas.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/pinepan/!svn/ver/98/PanaderiaNUEVO/src/panaderia/beans/Entregas.java
+END
+Clientes.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Clientes.java
+END
+ProductoFicha.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/ProductoFicha.java
+END
+PeriodosFacturacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/PeriodosFacturacion.java
+END
+FacturasVenta_buena.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/95/PanaderiaNUEVO/src/panaderia/beans/FacturasVenta_buena.java
+END
+Stock.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/82/PanaderiaNUEVO/src/panaderia/beans/Stock.java
+END
+NotasEntrega.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/pinepan/!svn/ver/99/PanaderiaNUEVO/src/panaderia/beans/NotasEntrega.java
+END
+Repartidores.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Repartidores.java
+END
+HistoricoInventarios.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/63/PanaderiaNUEVO/src/panaderia/beans/HistoricoInventarios.java
+END
+FormasPago.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/FormasPago.java
+END
+AlbaranesVentaDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/src/panaderia/beans/AlbaranesVentaDetalle.java
+END
+Proveedores.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/pinepan/!svn/ver/41/PanaderiaNUEVO/src/panaderia/beans/Proveedores.java
+END
+FacturasVentaDetalle_buena.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/pinepan/!svn/ver/93/PanaderiaNUEVO/src/panaderia/beans/FacturasVentaDetalle_buena.java
+END
+ComponentesProducto.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/54/PanaderiaNUEVO/src/panaderia/beans/ComponentesProducto.java
+END
+AlbaranesVenta.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/pinepan/!svn/ver/100/PanaderiaNUEVO/src/panaderia/beans/AlbaranesVenta.java
+END
+ProductosCliente.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/ProductosCliente.java
+END
+Familias.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Familias.java
+END
+ComposicionFabricacion.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/pinepan/!svn/ver/63/PanaderiaNUEVO/src/panaderia/beans/ComposicionFabricacion.java
+END
+NotasEntregaDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/78/PanaderiaNUEVO/src/panaderia/beans/NotasEntregaDetalle.java
+END
+CuadrantesDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/CuadrantesDetalle.java
+END
+Pestana.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Pestana.java
+END
+EntregasDetalle.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/EntregasDetalle.java
+END
+ProductoComposicion.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/ProductoComposicion.java
+END
+FacturasCompra.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/41/PanaderiaNUEVO/src/panaderia/beans/FacturasCompra.java
+END
+FichasProductos.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/FichasProductos.java
+END
+ComposicionProductos.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/ComposicionProductos.java
+END
+Cuadrantes.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Cuadrantes.java
+END
+Localidades.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/Localidades.java
+END
+VacacionesClientes.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/pinepan/!svn/ver/4/PanaderiaNUEVO/src/panaderia/beans/VacacionesClientes.java
+END
+Productos.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/85/PanaderiaNUEVO/src/panaderia/beans/Productos.java
+END
+HistoricoAc.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/src/panaderia/beans/HistoricoAc.java
+END
+FacturasVenta.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/pinepan/!svn/ver/97/PanaderiaNUEVO/src/panaderia/beans/FacturasVenta.java
+END

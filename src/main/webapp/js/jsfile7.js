@@ -1,0 +1,1 @@
+setTimeout("myBar.loaded('')", 1000);

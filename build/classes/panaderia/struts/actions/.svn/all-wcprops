@@ -1,0 +1,239 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/74/PanaderiaNUEVO/panaderia/panaderia/struts/actions
+END
+GenerarAlbaranesVentaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarAlbaranesVentaAction.java
+END
+GenerarFacturasVentaAction_bueno.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarFacturasVentaAction_bueno.java
+END
+CargaRutasAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CargaRutasAction.java
+END
+NotasEntregaCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/pinepan/!svn/ver/49/PanaderiaNUEVO/panaderia/panaderia/struts/actions/NotasEntregaCrearAction.java
+END
+CargaLotesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/pinepan/!svn/ver/33/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CargaLotesAction.java
+END
+CompruebaCifClienteAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CompruebaCifClienteAction.java
+END
+LoginAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/LoginAction.java
+END
+GenerarFacturasCompraAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/pinepan/!svn/ver/24/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarFacturasCompraAction.java
+END
+CargaCuadrantesAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CargaCuadrantesAction.java
+END
+InicioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/InicioAction.java
+END
+AlbaranesVentaCerrarDiaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/AlbaranesVentaCerrarDiaAction.java
+END
+GenerarParteDiarioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarParteDiarioAction.java
+END
+AccesoDenegadoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/AccesoDenegadoAction.java
+END
+PrevisionCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/pinepan/!svn/ver/100/PanaderiaNUEVO/panaderia/panaderia/struts/actions/PrevisionCrearAction.java
+END
+ControllerManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/ControllerManager.java
+END
+IniciaDemonioAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/IniciaDemonioAction.java
+END
+FacturasVentaCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/actions/FacturasVentaCrearAction.java
+END
+CargaProvinciasAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CargaProvinciasAction.java
+END
+GenerarFabricacionAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/55/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarFabricacionAction.java
+END
+GenerarEtiquetasAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/pinepan/!svn/ver/91/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarEtiquetasAction.java
+END
+Ejemplo.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/Ejemplo.java
+END
+CopiaFichaAProductosAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CopiaFichaAProductosAction.java
+END
+RolNoAjustadoAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/RolNoAjustadoAction.java
+END
+CuadrantesCopiarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CuadrantesCopiarAction.java
+END
+GenerarFichasProductosAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarFichasProductosAction.java
+END
+ActualizadorPreciosAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/ActualizadorPreciosAction.java
+END
+GenerarTrazabilidadAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/pinepan/!svn/ver/74/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarTrazabilidadAction.java
+END
+ActualizadorPreciosGrabarAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/ActualizadorPreciosGrabarAction.java
+END
+CompruebaImportePendienteFacturasAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CompruebaImportePendienteFacturasAction.java
+END
+GenerarHistoricoAcAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarHistoricoAcAction.java
+END
+GraficasVentasCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GraficasVentasCrearAction.java
+END
+GenerarFacturasVentaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarFacturasVentaAction.java
+END
+ErrorLoginAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/ErrorLoginAction.java
+END
+GenerarNotasEntregaAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/pinepan/!svn/ver/61/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarNotasEntregaAction.java
+END
+GenerarHistoricoInventariosAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/pinepan/!svn/ver/33/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GenerarHistoricoInventariosAction.java
+END
+AlbaranesVentaCrearAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/AlbaranesVentaCrearAction.java
+END
+GeneraGraficos.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/panaderia/panaderia/struts/actions/GeneraGraficos.java
+END
+CargaStockLoteAction.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/pinepan/!svn/ver/43/PanaderiaNUEVO/panaderia/panaderia/struts/actions/CargaStockLoteAction.java
+END
+FacturasVentaCrearAction_buena.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/pinepan/!svn/ver/96/PanaderiaNUEVO/panaderia/panaderia/struts/actions/FacturasVentaCrearAction_buena.java
+END

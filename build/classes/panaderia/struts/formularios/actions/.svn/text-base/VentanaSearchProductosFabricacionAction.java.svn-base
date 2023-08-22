@@ -1,0 +1,166 @@
+package panaderia.struts.formularios.actions;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Enumeration;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+
+import panaderia.beans.ComponentesProducto;
+import panaderia.beans.ComposicionFabricacion;
+import panaderia.beans.FacturasCompraDetalle;
+import panaderia.beans.Productos;
+import panaderia.beans.Stock;
+import utils.SQLManager;
+import utils.Utils;
+
+
+public class VentanaSearchProductosFabricacionAction extends Action {
+	public ActionForward execute(ActionMapping mapping, 
+								ActionForm form, 
+								HttpServletRequest request, 
+								HttpServletResponse response) throws Exception 
+	{              		
+		
+		try{
+	        //1.- Obtenemos el producto y la cantidad que queremos fabricar
+			ArrayList listaFinal = new ArrayList();
+			String productoAFabricar = request.getParameter("prodId");
+			String cantidadAFabricar = request.getParameter("prodCantidad");
+			String stFCaducidad = request.getParameter("stFCaducidad");
+			String fcId = request.getParameter("fcId");
+			String fcdLote = request.getParameter("fcdLote");
+			Productos productoF = Productos.getProductosByProdId(productoAFabricar);
+			FacturasCompraDetalle fcd = FacturasCompraDetalle.getFacturasCompraDetalleByFcdProductoAndFcdLote(productoF.getProdNombre(), fcdLote);
+			if(!Utils.skipNull( fcd.getFcdId()).equals("")){
+				request.setAttribute("excepcion", "Se ha producido un error durante la fabricación de este producto. Ya existe ese lote para ese producto.");
+				return mapping.findForward("ok");
+			}
+			//2.- Cogemos todos los productos necesarios para la fabricación 
+			ArrayList listaComposiciom = ComponentesProducto.getComponentesProductoByCpProdIdFabricado(productoAFabricar, cantidadAFabricar);
+  			if(listaComposiciom.size()==0)
+  				throw new Exception("El producto no tiene configurados sus componentes para la fabricación.");
+			for(int i = 0;  i<listaComposiciom.size(); i++){
+  				String[] cproducto = (String[])listaComposiciom.get(i); //0 producto, 1 cantidad individual, 2 cantidad total
+  				//3.- Mandamos un listado con cada uno de esos productos, la cantidad necesario para fabricar uno y la cantidad que se puede fabricar con él
+  				Productos prod = Productos.getProductosByProdId(cproducto[0]);
+  				//Creamos un array con el nombre del producto, el id del mismo, y la lista con todo el stock de ese producto para que lo seleccione
+  				ArrayList listaStock = Stock.getAllStockNoVacioNoCaducadoByStProdId(cproducto[0], cproducto[1]);
+  				if(listaStock.size()==0)
+  					throw new Exception("No tiene Stock del producto: " + prod.getProdNombre());
+  				Object array[] = {prod.getProdNombre(), prod.getProdId(), listaStock};//{idDelStock, lote, cantidadTotalDelStock,fcaducidad,cantidadquesepuedefabricar}
+  				listaFinal.add(array); 
+  			}
+  			request.setAttribute("listaParaFabricar",listaFinal);
+  			request.setAttribute("prodCantidad", cantidadAFabricar);
+  			request.setAttribute("prodId", productoAFabricar);
+  			request.setAttribute("fcId", fcId);
+  			request.setAttribute("stFCaducidad", stFCaducidad);
+  			request.setAttribute("fcdLote", fcdLote);
+  			
+  			//Comprobamos si viene el formulario y vamos a fabricacion
+  			if(Utils.skipNull(request.getParameter("accion")).equals("fabricar")){
+  				//Comenzamos a guardar datos
+  				//todo esto debemos hacerlo en una transacción, si algo falla rollback.
+  				SQLManager manager = new SQLManager(); 
+  				Connection conexion = manager.getConnection(); 
+  				ActionMessages messages = new ActionMessages();
+  				int resultado = -2;
+  			    try
+  			    {
+  			    	conexion.setAutoCommit(false);
+  			      
+  			    	//Antes de nada, como necesitamos el id, insertamos el nuevo producto
+  			    	Stock nuevoStock = new Stock();
+  			    	nuevoStock.setStCantidadInicial(cantidadAFabricar);
+  			    	nuevoStock.setStCantidadFinal(cantidadAFabricar);
+  			    	nuevoStock.setStFCaducidad(stFCaducidad, Utils.DATE_SHORT);
+  			    	nuevoStock.setStProdId(productoAFabricar);
+  			    	int idNuevoStock = nuevoStock.inserta(conexion);
+  			    	
+  			    	//Modificamos el stock de los elementos usados
+  			    	Enumeration enumera = request.getParameterNames();
+  			    	while(enumera.hasMoreElements()){
+  			    		String nombrePS = (String)enumera.nextElement();
+  			    		if(nombrePS.indexOf("producto_")!=-1){
+  			    			Stock stockElegido = Stock.getStockByStId(request.getParameter(nombrePS));
+  			    			//Le quitamos al stock la cantidad Usado
+  			    			double cantidadFinalActual = Double.parseDouble(stockElegido.getStCantidadFinal());
+  			    			//Ahora vemos cuanto hace falta de este stock para fabricar
+  			    			ComponentesProducto cp = ComponentesProducto.getComponentesProductoByCpProdIdFabricadoAndUsado(nombrePS.replaceAll("producto_", ""), productoAFabricar);
+  			    			double cantidadNecesaria = Double.parseDouble(cp.getCpCantidad()) * Integer.parseInt(cantidadAFabricar);
+  			    			stockElegido.setStCantidadFinal(Double.toString(cantidadFinalActual-cantidadNecesaria));
+  			    			double cantidadSalidas = Double.parseDouble(stockElegido.getStSalidas()) + cantidadNecesaria;
+  			    			stockElegido.setStSalidas(Double.toString(cantidadSalidas));
+  			    			stockElegido.actualiza(conexion);
+  			    			//Ahora insertamos en la composicion del producto
+  			    			ComposicionFabricacion cf = new ComposicionFabricacion();
+  			    			cf.setCfCantidad(Double.toString(cantidadNecesaria));
+  			    			cf.setCfIdStFabricado(Double.toString(idNuevoStock));
+  			    			cf.setCfIdStUsado(request.getParameter(nombrePS));
+  			    			cf.inserta(conexion);
+  			    		}
+  			    	}
+  			    	
+  			    	//Por ultimos insertamos el elemento en la factura de compra
+  			    	FacturasCompraDetalle detalleFactura = new FacturasCompraDetalle();
+  			    	Productos prod = Productos.getProductosByProdId(productoAFabricar);
+  			    	detalleFactura.setFcdCantidad(cantidadAFabricar);
+  			    	detalleFactura.setFcdFCaducidad(stFCaducidad, Utils.DATE_SHORT);
+  			    	detalleFactura.setFcdFEntrada(new Timestamp(Utils.getFechaActualSinHora().getTime()));
+  			    	detalleFactura.setFcdLote(fcdLote);
+  			    	detalleFactura.setFcdProducto(prod.getProdNombre());
+  			    	detalleFactura.setFcdStId(Integer.toString(idNuevoStock));
+  			    	detalleFactura.setFcdFcId(fcId);
+  			    	detalleFactura.setFcdReferencia( prod.getProdReferencia() );	
+  			    	String lista = FacturasCompraDetalle.getFacturasCompraDetalleByFvdMaxLinea(request.getParameter("fcId"));
+  			    	int linea = Integer.parseInt(Utils.skipNullNumero(lista));
+  			    	detalleFactura.setFcdLinea(Integer.toString(linea + 1));
+  			    	resultado = detalleFactura.inserta(conexion);
+  			    	
+  			    	//Al final hacemos commit;
+  			    	conexion.commit();
+  			    }
+  			    catch( SQLException e ){ 
+  			    	request.setAttribute("excepcion", "Se ha producido un error durante la fabricación de este producto");
+  			    	if(e.toString().indexOf("fcd_unico_lote_uk")!=-1)
+  			    		request.setAttribute("excepcion", "Se ha producido un error durante la fabricación de este producto. Ya existe ese producto con ese mismo lote.");
+  			    	conexion.rollback();
+  			    }
+  			    finally{
+  			    	conexion.rollback();
+  			    	manager.closeConnection();  
+  			    }
+  			    
+  				if(resultado == 0 || resultado == -1){
+  		        	//mensaje de guardado
+  		        	messages.add("info", new ActionMessage("info.guardar.algunos"));						
+  		    		saveMessages(request.getSession(), messages);
+  		        }else if(resultado>0){
+  		        	//mensaje y mapeo de guardado o editado correcto
+  		        	messages.add("info", new ActionMessage("info.guardar.ok"));						
+  		    		saveMessages(request.getSession(), messages);
+  		        }
+  			}
+    		
+		}catch (Exception e) {
+			request.setAttribute("excepcion", e.toString());
+			System.out.println(e);
+		}
+		
+		ActionForward forward = null;
+		forward = mapping.findForward("ok");
+		
+		return forward;
+	}
+}

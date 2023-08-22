@@ -1,0 +1,336 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: fullnames 
+// Source File Name:   FacturasVentaDetalle.java
+
+package panaderia.beans;
+
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import org.displaytag.pagination.PaginatedListTest;
+import panaderia.beans.entidad.FacturasVentaDetalleEntidad;
+import panaderia.struts.forms.EntidadBean;
+import utils.Log4j;
+import utils.PoolConexiones;
+import utils.UtilesDAO;
+import utils.Utils;
+import utils.UtilsFacturacion;
+
+// Referenced classes of package panaderia.beans:
+//            FacturasVenta, ProductosCliente, Productos, Clientes
+
+public class FacturasVentaDetalle_o extends panaderia.beans.entidad.FacturasVentaDetalleEntidad
+{
+
+    public FacturasVentaDetalle_o()
+    {
+    }
+
+    public static int editaFacturaVentaDetalle(panaderia.beans.FacturasVentaDetalle facturaDetalle)
+        throws java.lang.Exception
+    {
+        int resultado = -2;
+        try
+        {
+            float importe = utils.UtilsFacturacion.getImporte(java.lang.Float.parseFloat(facturaDetalle.getFvdPrecioVenta()), java.lang.Float.parseFloat(facturaDetalle.getFvdDescuento()), java.lang.Float.parseFloat(facturaDetalle.getFvdIva()), java.lang.Float.parseFloat(facturaDetalle.getFvdCantidad()));
+            facturaDetalle.setFvdImporte(java.lang.String.valueOf(importe));
+            resultado = facturaDetalle.actualiza();
+        }
+        catch(java.lang.Exception e)
+        {
+            throw e;
+        }
+        return resultado;
+    }
+
+    public static void recalculaTotalesEImportePendiente(panaderia.beans.FacturasVenta facturaventa, java.lang.String totalAntes, java.lang.String totalDespues, boolean borradoDeDetalle)
+    {
+        float tot_antes = java.lang.Float.parseFloat(panaderia.struts.forms.EntidadBean.quitar_comas(totalAntes));
+        float tot_despues = java.lang.Float.parseFloat(panaderia.struts.forms.EntidadBean.quitar_comas(totalDespues));
+        float impPendiente = java.lang.Float.parseFloat(panaderia.struts.forms.EntidadBean.quitar_comas(facturaventa.getFvImportePendiente()));
+        float cantidadModificada = 0.0F;
+        if(borradoDeDetalle)
+        {
+            cantidadModificada = tot_antes - tot_despues;
+            impPendiente -= cantidadModificada;
+        } else
+        {
+            cantidadModificada = tot_despues - tot_antes;
+            impPendiente += cantidadModificada;
+        }
+        facturaventa.setFvTotal(totalDespues);
+        facturaventa.setFvImportePendiente(java.lang.String.valueOf(impPendiente));
+        facturaventa.actualiza();
+    }
+
+    public static panaderia.beans.FacturasVentaDetalle getFacturasVentaDetalleByFvdId(java.lang.String fvdId)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        elto.consultaReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle WHERE fvd_id='")).append(fvdId).append("'").toString());
+        return elto;
+    }
+
+    public static java.util.ArrayList getAllFacturasDetalleConversorByAlbaranesVentaDetalle(java.lang.String avId)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("select avd_producto as fvd_producto, \t\t\t sum(avd_cantidad) as fvd_cantidad, \t\t\t avd_precio_venta as fvd_precio_venta, \t\t\t sum(avd_importe) as fvd_importe, \t\t\t avd_descuento as fvd_descuento, \t\t\t avd_iva as fvd_iva from albaranes_venta join albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id where av_id = ")).append(avId).append(" group by fvd_producto, avd_descuento, avd_iva, avd_precio_venta").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getAllFacturasDetalleConversorByAlbaranesVentaDetalle(java.lang.String avId, float proporcion)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("\t\t\t\t\t\t\t\t\t\t   select avd_producto as fvd_producto, \t\t\t\t\t\t\t\t    \t\t\t\t\t\t CASE WHEN abs(round(avd_cantidad* ")).append(proporcion).append(") - (avd_cantidad* ").append(proporcion).append("))= ").append(proporcion).append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t \t\t\tTHEN sum(FLOOR(avd_cantidad* ").append(proporcion).append(" ))  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* ").append(proporcion).append(" )) END as fvd_cantidad,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t avd_precio_venta as fvd_precio_venta,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t CASE WHEN abs(round(avd_cantidad* ").append(proporcion).append(" ) - (avd_cantidad* ").append(proporcion).append(" ))= ").append(proporcion).append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t \t\t    THEN sum(FLOOR(avd_cantidad* ").append(proporcion).append(" )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* ").append(proporcion).append(" )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) END as fvd_importe,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t avd_descuento as fvd_descuento,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t avd_iva as fvd_iva,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t 'A' as tipo ").append("\t\t\t\t\t\t\t\t    \t\t\tfrom albaranes_venta  ").append("\t\t\t\t\t\t\t\t    \t\t\tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id  ").append("\t\t\t\t\t\t\t\t    \t\t\twhere avd_av_id = ").append(avId).append("\t\t\t\t\t\t\t\t\t\t\t\tgroup by avd_producto, avd_descuento, avd_iva, avd_precio_venta ").append("\t\t\t\t\t\t\t\t    \t\t\tunion ").append("\t\t\t\t\t\t\t\t    \t\tselect avd_producto as fvd_producto,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t CASE WHEN abs(round(avd_cantidad* (1 - ").append(proporcion).append(") ) - (avd_cantidad* (1 - ").append(proporcion).append(") ))= (1 - ").append(proporcion).append(")").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t \t\t\tTHEN sum(CEILING(avd_cantidad* (1 - ").append(proporcion).append(")  ))  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* (1 - ").append(proporcion).append(") )) END as fvd_cantidad,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t avd_precio_venta as fvd_precio_venta,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t CASE WHEN abs(round(avd_cantidad* (1 - ").append(proporcion).append(") ) - (avd_cantidad* (1 - ").append(proporcion).append(") ))= (1 - ").append(proporcion).append(") ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t \t\t\tTHEN sum(CEILING(avd_cantidad* (1 - ").append(proporcion).append(") )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* (1 - ").append(proporcion).append(") )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) END as fvd_importe,   ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t avd_descuento as fvd_descuento,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t 0 as fvd_iva,  ").append("\t\t\t\t\t\t\t\t    \t\t\t\t\t\t 'B' as tipo ").append("\t\t\t\t\t\t\t\t    \t\t\tfrom albaranes_venta  ").append("\t\t\t\t\t\t\t\t    \t\t\tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id  ").append("\t\t\t\t\t\t\t\t    \t\t\twhere avd_av_id = ").append(avId).append("\t\t\t\t\t\t\t\t\t\t\t\tgroup by avd_producto, avd_descuento, avd_iva, avd_precio_venta ").append("\t\t\t\t\t\t\t\t    \t\t\torder by tipo asc ").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getAllFacturasDetalleConversorByAlbaranesVentaDetalle(java.lang.String clId, float proporcion, java.lang.String dia1, java.lang.String dia2, java.lang.String tipoPeriodo)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("select avd_producto as fvd_producto, \t\t\t\t CASE WHEN abs(round(avd_cantidad*  ")).append(proporcion).append(") - (avd_cantidad*  ").append(proporcion).append("))= ").append(proporcion).append(" ").append("\t\t\t\t \t\t\tTHEN sum(FLOOR(avd_cantidad*  ").append(proporcion).append(" ))  ").append("\t\t\t\t\t\t\tELSE sum(round(avd_cantidad*  ").append(proporcion).append(" )) END as fvd_cantidad,  ").append("\t\t\t\t avd_precio_venta as fvd_precio_venta,  ").append("\t\t\t\t CASE WHEN abs(round(avd_cantidad*  ").append(proporcion).append(" ) - (avd_cantidad*  ").append(proporcion).append(" ))= ").append(proporcion).append(" ").append("\t\t\t\t \t\t  THEN sum(FLOOR(avd_cantidad*  ").append(proporcion).append(" )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) ").append("\t\t\t\t\t\t\tELSE sum(round(avd_cantidad*  ").append(proporcion).append(" )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) END as fvd_importe,  ").append("\t\t\t\t avd_descuento as fvd_descuento,  ").append("\t\t\t\t avd_iva as fvd_iva,  ").append("\t\t\t\t 'A' as tipo ").append("\tfrom albaranes_venta  ").append("\tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id  ").append(" join clientes ON clientes.cl_id = albaranes_venta.av_cl_id ").append(" join periodos_facturacion ON periodos_facturacion.pf_id = clientes.cl_pf_id ").append("\twhere ifnull(av_cierre,0) != '1' ").append("   and pf_descripcion = '").append(tipoPeriodo).append("' ").append("\t  and av_cl_id = ").append(clId).append("\t\tand av_fecha BETWEEN str_to_date('").append(dia1).append("','%d/%m/%Y') AND str_to_date('").append(dia2).append("','%d/%m/%Y') ").append("\t\tgroup by av_cl_id,avd_producto, avd_descuento, avd_iva, avd_precio_venta ").append("\tunion ").append("select avd_producto as fvd_producto,  ").append("\t\t\t\t CASE WHEN abs(round(avd_cantidad* (1 -  ").append(proporcion).append(") ) - (avd_cantidad* (1 -  ").append(proporcion).append(") ))= (1 -  ").append(proporcion).append(") ").append("\t\t\t\t \t\t\tTHEN sum(CEILING(avd_cantidad* (1 -  ").append(proporcion).append("))  )  ").append("\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* (1 -  ").append(proporcion).append(")) ) END as fvd_cantidad,  ").append("\t\t\t\t avd_precio_venta as fvd_precio_venta,  ").append("\t\t\t\t CASE WHEN abs(round(avd_cantidad* (1 -  ").append(proporcion).append(") ) - (avd_cantidad* (1 -  ").append(proporcion).append(") ))= (1 -  ").append(proporcion).append(") ").append("\t\t\t\t \t\t\tTHEN sum(CEILING(avd_cantidad* (1 -  ").append(proporcion).append(") )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) ").append("\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* (1 -  ").append(proporcion).append(") )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) END as fvd_importe,   ").append("\t\t\t\t avd_descuento as fvd_descuento,  ").append("\t\t\t\t 0 as fvd_iva,  ").append("\t\t\t\t 'B' as tipo ").append("\tfrom albaranes_venta  ").append("\tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id  ").append(" join clientes ON clientes.cl_id = albaranes_venta.av_cl_id ").append(" join periodos_facturacion ON periodos_facturacion.pf_id = clientes.cl_pf_id ").append("\twhere ifnull(av_cierre,0) != '1' ").append("   and pf_descripcion = '").append(tipoPeriodo).append("' ").append("\t  and av_cl_id = ").append(clId).append("\t\tand av_fecha BETWEEN str_to_date('").append(dia1).append("','%d/%m/%Y') AND str_to_date('").append(dia2).append("','%d/%m/%Y') ").append("\t\tgroup by av_cl_id,avd_producto, avd_descuento, avd_iva, avd_precio_venta ").append("\torder by tipo asc ").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getImporteTotalByAlbaranes(java.lang.String dia1, java.lang.String dia2)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("select \t\t\t\t CASE WHEN abs(round(avd_cantidad* clientes.cl_proporcion_iva) - (avd_cantidad* clientes.cl_proporcion_iva))=  clientes.cl_proporcion_iva \t\t\t\t \t\t  THEN sum(FLOOR(avd_cantidad* clientes.cl_proporcion_iva)*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) \t\t\t\t\t\t\tELSE sum(round(avd_cantidad* clientes.cl_proporcion_iva)*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * avd_iva))) END as fvd_importe  \tfrom albaranes_venta  \tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id   join clientes ON clientes.cl_id = albaranes_venta.av_cl_id  join periodos_facturacion ON periodos_facturacion.pf_id = clientes.cl_pf_id \twhere ifnull(av_cierre,0) != '1' \t\tand av_fecha BETWEEN str_to_date('")).append(dia1).append("','%d/%m/%Y') AND str_to_date('").append(dia2).append("','%d/%m/%Y') ").append("\tunion ").append("select ").append("\t\t\t\t CASE WHEN abs(round(avd_cantidad* (1 - clientes.cl_proporcion_iva) ) - (avd_cantidad* (1 - clientes.cl_proporcion_iva) ))= (1 - clientes.cl_proporcion_iva) ").append("\t\t\t\t \t\t\tTHEN sum(CEILING(avd_cantidad* (1 - clientes.cl_proporcion_iva) )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) ").append("\t\t\t\t\t\t\tELSE sum(round(avd_cantidad* (1 - clientes.cl_proporcion_iva) )*((avd_precio_venta - (avd_precio_venta * avd_descuento)) + (avd_precio_venta * 0))) END as fvd_importe   ").append("\tfrom albaranes_venta  ").append("\tjoin albaranes_venta_detalle ON albaranes_venta_detalle.avd_av_id = albaranes_venta.av_id  ").append(" join clientes ON clientes.cl_id = albaranes_venta.av_cl_id ").append(" join periodos_facturacion ON periodos_facturacion.pf_id = clientes.cl_pf_id ").append("\twhere ifnull(av_cierre,0) != '1' ").append("\t\tand av_fecha BETWEEN str_to_date('").append(dia1).append("','%d/%m/%Y') AND str_to_date('").append(dia2).append("','%d/%m/%Y') ").toString());
+        return lista;
+    }
+
+    public static int eliminaDetalles( String fvdFvId ) 
+    {
+  	   
+  	  Connection conexion  = utils.PoolConexiones.conexion(); 
+  	  int n = -1;
+  	  try{
+  	      PreparedStatement sentencia = conexion.prepareStatement("DELETE FROM facturas_venta_detalle WHERE fvd_fv_id=?");
+  	      sentencia.setString(1, fvdFvId);
+  	      n = sentencia.executeUpdate();
+  	      sentencia.close();
+  	  }catch( SQLException e ){ utils.Log4j.error("Error", e); return -1; }
+  	    finally{ utils.PoolConexiones.cerrarConexion(conexion); }
+  	    
+  	  return n;
+    }
+
+    public static panaderia.beans.FacturasVentaDetalle getFacturasVentaDetalleByFvdLinea(java.lang.String fvdLinea)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        elto.consultaReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle WHERE fvd_linea='")).append(fvdLinea).append("'").toString());
+        return elto;
+    }
+
+    public static java.lang.String getFacturasVentaDetalleByFvdMaxLinea(java.lang.String fvdFvId)
+    {
+        java.lang.String resultado = panaderia.struts.forms.EntidadBean.consultarValor((new StringBuilder("select max(fvd_linea) from facturas_venta_detalle where fvd_fv_id ='")).append(fvdFvId).append("'").toString());
+        return resultado;
+    }
+
+    public static java.util.ArrayList getAllFacturasVentaDetalle()
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle");
+        return lista;
+    }
+
+    public static java.util.ArrayList getFacturasVentaDetalleByFvNumeroFactura(java.lang.String fvNumeroFactura)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle WHERE fvd_fv_numero_factura='")).append(fvNumeroFactura).append("'").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getFacturasVentaDetalleByFvdFvId(java.lang.String fvId)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle WHERE fvd_fv_id='")).append(fvId).append("'").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getFacturasVentaDetalleAgrupadasByFvdFvIdsAndFvClId(java.lang.String fvIds, java.lang.String fvClId)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder(" select \t\t\t fvd_producto, \t\t\t sum(fvd_cantidad) as fvd_cantidad, \t\t\t fvd_precio_venta as fvd_precio_venta, \t\t\t fvd_iva, \t\t\t sum(fvd_importe) as fvd_importe, \t\t\t fvd_descuento  from facturas_venta_detalle  join facturas_venta ON facturas_venta_detalle.fvd_fv_id = facturas_venta.fv_id  where fv_cl_id = ")).append(fvClId).append(" and facturas_venta.fv_id in (").append(fvIds).append(") ").append(" and (facturas_venta.fv_invalida is null or facturas_venta.fv_invalida = 0) ").append(" group by fvd_producto, fvd_iva, fvd_descuento, fvd_precio_venta").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getFechasAgrupadas(java.lang.String fvIds, java.lang.String fvClId)
+    {
+        java.util.ArrayList lista = panaderia.struts.forms.EntidadBean.consulta((new StringBuilder("select max(fv_fecha), min(fv_fecha) \tfrom facturas_venta \twhere fv_cl_id = ")).append(fvClId).append(" \tand (facturas_venta.fv_invalida is null or facturas_venta.fv_invalida = 0) ").append("\tand fv_id in (").append(fvIds).append(")").toString());
+        return lista;
+    }
+
+    public static java.util.ArrayList getIdsClientesByFvdFvIds(java.lang.String fvIds)
+    {
+        java.util.ArrayList lista = panaderia.struts.forms.EntidadBean.consulta((new StringBuilder("select distinct fv_cl_id from facturas_venta_detalle join facturas_venta ON facturas_venta_detalle.fvd_fv_id = facturas_venta.fv_id where facturas_venta.fv_id in (")).append(fvIds).append(")").append(" and (facturas_venta.fv_invalida is null or facturas_venta.fv_invalida = 0) ").toString());
+        return lista;
+    }
+
+    public static panaderia.beans.FacturasVentaDetalle getFacturasVentaDetalleByFvdProdId(java.lang.String fvdProdId)
+    {
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        elto.consultaReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle WHERE fvd_prod_id='")).append(fvdProdId).append("'").toString());
+        return elto;
+    }
+
+    public static boolean existeProducto(java.lang.String fvdId, java.lang.String prodId, java.lang.String manual)
+    {
+        boolean existe = false;
+        java.lang.String nombreProducto = "";
+        if(utils.Utils.skipNull(manual).equals(""))
+        {
+            panaderia.beans.ProductosCliente producto = panaderia.beans.ProductosCliente.getProductosClienteByPclId(prodId);
+            nombreProducto = panaderia.beans.Productos.getProductosByProdId(producto.getPclProdId()).getProdNombre();
+        } else
+        {
+            panaderia.beans.Productos producto = panaderia.beans.Productos.getProductosByProdId(prodId);
+            nombreProducto = producto.getProdNombre();
+        }
+        panaderia.beans.FacturasVentaDetalle elto = new FacturasVentaDetalle();
+        java.util.ArrayList lista = elto.consultaAVectorReflexiva((new StringBuilder("SELECT facturas_venta_detalle.fvd_descuento,facturas_venta_detalle.fvd_cantidad,facturas_venta_detalle.fvd_fv_id,facturas_venta_detalle.fvd_id,facturas_venta_detalle.fvd_importe,facturas_venta_detalle.fvd_iva,facturas_venta_detalle.fvd_linea,facturas_venta_detalle.fvd_precio_venta,facturas_venta_detalle.fvd_producto FROM facturas_venta_detalle where fvd_fv_id='")).append(fvdId).append("' and fvd_producto='").append(nombreProducto).append("'").toString());
+        if(lista.size() > 0)
+            existe = true;
+        return existe;
+    }
+
+    public static int anadeDetalleALista(javax.servlet.http.HttpServletRequest request, java.lang.String manual, java.lang.String tipo)
+        throws java.lang.Exception
+    {
+        int resultado = -2;
+        try
+        {
+            panaderia.beans.FacturasVentaDetalle facturasventadetalle = new FacturasVentaDetalle();
+            java.lang.String prodId = request.getParameter("prodId");
+            java.lang.String fvClId = request.getParameter("fvClId");
+            panaderia.beans.Clientes cliente = panaderia.beans.Clientes.getClientesByClId(fvClId);
+            java.lang.String nombreProducto = "";
+            float cantidad = 0.0F;
+            float precio = 0.0F;
+            float iva = 0.0F;
+            float descuento = 0.0F;
+            if(utils.Utils.skipNull(manual).equals(""))
+            {
+                panaderia.beans.ProductosCliente productoCliente = panaderia.beans.ProductosCliente.getProductosClienteByPclId(prodId);
+                panaderia.beans.Productos producto = panaderia.beans.Productos.getProductosByProdId(productoCliente.getPclProdId());
+                nombreProducto = producto.getProdNombre();
+                cantidad = java.lang.Float.parseFloat(panaderia.beans.FacturasVentaDetalle.quitar_comas(utils.Utils.skipNullNumero(request.getParameter("cantidad"))));
+                if(tipo.equals("A"))
+                    iva = java.lang.Float.parseFloat(utils.Utils.skipNullNumero(producto.getProdIva()));
+                descuento = java.lang.Float.parseFloat(utils.Utils.skipNullNumero(cliente.getClDescuento()));
+                precio = java.lang.Float.parseFloat(utils.Utils.skipNullNumero(productoCliente.getPclPrecio()));
+            } else
+            {
+                panaderia.beans.Productos producto = panaderia.beans.Productos.getProductosByProdId(prodId);
+                cantidad = java.lang.Float.parseFloat(panaderia.beans.FacturasVentaDetalle.quitar_comas(utils.Utils.skipNullNumero(request.getParameter("prodCantidad"))));
+                if(tipo.equals("A"))
+                    iva = java.lang.Float.parseFloat(utils.Utils.skipNullNumero(producto.getProdIva()));
+                precio = java.lang.Float.parseFloat(panaderia.beans.FacturasVentaDetalle.quitar_comas(utils.Utils.skipNullNumero(request.getParameter("prodPrecio"))));
+                nombreProducto = producto.getProdNombre();
+                descuento = java.lang.Float.parseFloat(utils.Utils.skipNullNumero(cliente.getClDescuento()));
+            }
+            float importeNeto = utils.UtilsFacturacion.getImporte(precio, descuento, iva, cantidad);
+            facturasventadetalle.setFvdProducto(nombreProducto);
+            facturasventadetalle.setFvdCantidad(java.lang.String.valueOf(cantidad));
+            facturasventadetalle.setFvdPrecioVenta(java.lang.String.valueOf(precio));
+            facturasventadetalle.setFvdDescuento(java.lang.String.valueOf(descuento));
+            facturasventadetalle.setFvdImporte(java.lang.String.valueOf(importeNeto));
+            facturasventadetalle.setFvdIva(java.lang.String.valueOf(iva));
+            facturasventadetalle.setFvdFvId(request.getParameter("fvId"));
+            java.lang.String lista = panaderia.beans.FacturasVentaDetalle.getFacturasVentaDetalleByFvdMaxLinea(request.getParameter("fvId"));
+            int linea = java.lang.Integer.parseInt(utils.Utils.skipNullNumero(lista));
+            facturasventadetalle.setFvdLinea(java.lang.Integer.toString(linea + 1));
+            resultado = facturasventadetalle.inserta();
+        }
+        catch(java.lang.Exception e)
+        {
+            throw e;
+        }
+        return resultado;
+    }
+
+    public static java.util.ArrayList eliminaDetalleDeLista(java.util.ArrayList detalles, java.lang.String chkValues[])
+        throws java.lang.Exception
+    {
+        if(!detalles.isEmpty())
+        {
+            for(int i = 0; i < chkValues.length; i++)
+                detalles.remove(java.lang.Integer.parseInt(chkValues[i]) - i);
+
+        }
+        return detalles;
+    }
+
+    protected java.lang.Object rsToBean(java.sql.ResultSet rs)
+        throws java.lang.Exception
+    {
+        panaderia.beans.FacturasVentaDetalle facturasventadetalle = new FacturasVentaDetalle();
+        try
+        {
+            facturasventadetalle.setFvdCantidad(rs.getString("fvd_cantidad"));
+            facturasventadetalle.setFvdFvId(rs.getString("fvd_fv_id"));
+            facturasventadetalle.setFvdId(rs.getString("fvd_id"));
+            facturasventadetalle.setFvdImporte(rs.getString("fvd_importe"));
+            facturasventadetalle.setFvdIva(rs.getString("fvd_iva"));
+            facturasventadetalle.setFvdLinea(rs.getString("fvd_linea"));
+            facturasventadetalle.setFvdPrecioVenta(rs.getString("fvd_precio_venta"));
+            facturasventadetalle.setFvdProducto(rs.getString("fvd_producto"));
+            facturasventadetalle.setFvdStId(rs.getString("fvd_st_id"));
+            java.lang.String prodDatosRelacionados[] = new java.lang.String[6];
+            prodDatosRelacionados[0] = rs.getString("prod_referencia");
+            prodDatosRelacionados[1] = rs.getString("prod_nombre");
+            prodDatosRelacionados[2] = rs.getString("prod_precio_general");
+            prodDatosRelacionados[3] = rs.getString("prod_peso");
+            prodDatosRelacionados[4] = rs.getString("prod_descuento");
+            prodDatosRelacionados[5] = rs.getString("prod_iva");
+            facturasventadetalle.setProdDatosRelacionados(prodDatosRelacionados);
+        }
+        catch(java.lang.Exception e)
+        {
+            throw e;
+        }
+        return facturasventadetalle;
+    }
+
+    public static java.lang.Object[] getFacturasVentaDetalleLista(org.displaytag.pagination.PaginatedListTest listaPaginada)
+    {
+        java.lang.String sqlAF1adido = " ";
+        panaderia.beans.FacturasVentaDetalle facturasventadetalle = new FacturasVentaDetalle();
+        java.lang.String sql = "SELECT fvd.*,   prod.prod_referencia,   prod.prod_nombre,   prod.prod_precio_general,   prod.prod_peso,   prod.prod_descuento,   prod.prod_iva,   prod.prod_referencia FROM facturas_venta_detalle fvd JOIN productos prod ON prod.prod_id=fvd.fvd_prod_id WHERE 1 = 1";
+        try
+        {
+            panaderia.beans.FacturasVentaDetalle facturasventadetalleFiltro = new FacturasVentaDetalle();
+            if(listaPaginada.getRequest().getSession().getAttribute("FFACTURASVENTADETALLE") != null)
+                facturasventadetalleFiltro = (panaderia.beans.FacturasVentaDetalle)listaPaginada.getRequest().getSession().getAttribute("FFACTURASVENTADETALLE");
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdCantidad()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_cantidad = '").append(facturasventadetalleFiltro.getFvdCantidad()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdFvId()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_fv_id = '").append(facturasventadetalleFiltro.getFvdFvId()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdId()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_id = '").append(facturasventadetalleFiltro.getFvdId()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdImporte()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_importe = '").append(facturasventadetalleFiltro.getFvdImporte()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdIva()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_iva = '").append(facturasventadetalleFiltro.getFvdIva()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdLinea()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_linea = '").append(facturasventadetalleFiltro.getFvdLinea()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdPrecioVenta()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND fvd_precio_venta = '").append(facturasventadetalleFiltro.getFvdPrecioVenta()).append("'").toString();
+            if(!utils.Utils.empty(facturasventadetalleFiltro.getFvdProducto()))
+                sqlAF1adido = (new StringBuilder(java.lang.String.valueOf(sqlAF1adido))).append("AND UPPER(fvd_producto) like UPPER('%").append(facturasventadetalleFiltro.getFvdProducto()).append("%')").toString();
+        }
+        catch(java.lang.Exception e)
+        {
+            java.lang.System.out.println(e);
+        }
+        return utils.UtilesDAO.generaSqlListadoPaginado((new StringBuilder(java.lang.String.valueOf(sql))).append(sqlAF1adido).toString(), listaPaginada, facturasventadetalle);
+    }
+
+    private static final long serialVersionUID = 1L;
+}

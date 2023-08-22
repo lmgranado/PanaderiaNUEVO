@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/pinepan/!svn/ver/90/PanaderiaNUEVO/WebRoot/WEB-INF
+END
+x-1_0-rt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/x-1_0-rt.tld
+END
+fn.tld
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/fn.tld
+END
+fmt-1_0-rt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/fmt-1_0-rt.tld
+END
+fmt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/fmt.tld
+END
+x-1_0.tld
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/x-1_0.tld
+END
+sql.tld
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/sql.tld
+END
+struts-layout.tld
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-layout.tld
+END
+struts-html.tld
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-html.tld
+END
+taglibs-string.tld
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/taglibs-string.tld
+END
+struts-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/pinepan/!svn/ver/91/PanaderiaNUEVO/WebRoot/WEB-INF/struts-config.xml
+END
+displaytag.tld
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/displaytag.tld
+END
+struts-bean.tld
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-bean.tld
+END
+.validation.mex
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/.validation.mex
+END
+struts-tiles.tld
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-tiles.tld
+END
+struts-nested.tld
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-nested.tld
+END
+fmt-1_0.tld
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/fmt-1_0.tld
+END
+c.tld
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/c.tld
+END
+sql-1_0.tld
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/sql-1_0.tld
+END
+struts-template.tld
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-template.tld
+END
+validation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/validation.xml
+END
+validator-rules.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/validator-rules.xml
+END
+sql-1_0-rt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/sql-1_0-rt.tld
+END
+permittedTaglibs.tld
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/permittedTaglibs.tld
+END
+.struts-config.mex
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/.struts-config.mex
+END
+struts-logic.tld
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/struts-logic.tld
+END
+c-1_0-rt.tld
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/c-1_0-rt.tld
+END
+scriptfree.tld
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/scriptfree.tld
+END
+.tiles-defs.mex
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/.tiles-defs.mex
+END
+c-1_0.tld
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/c-1_0.tld
+END
+x.tld
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/x.tld
+END
+Copy of struts-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/pinepan/!svn/ver/45/PanaderiaNUEVO/WebRoot/WEB-INF/Copy%20of%20struts-config.xml
+END
+web.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/pinepan/!svn/ver/2/PanaderiaNUEVO/WebRoot/WEB-INF/web.xml
+END
+tiles-defs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/pinepan/!svn/ver/66/PanaderiaNUEVO/WebRoot/WEB-INF/tiles-defs.xml
+END

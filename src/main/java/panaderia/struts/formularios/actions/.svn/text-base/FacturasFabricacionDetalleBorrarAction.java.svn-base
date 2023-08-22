@@ -1,0 +1,110 @@
+package panaderia.struts.formularios.actions;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
+
+import panaderia.beans.ComponentesProducto;
+import panaderia.beans.ComposicionFabricacion;
+import panaderia.beans.FacturasCompra;
+import panaderia.beans.FacturasCompraDetalle;
+import panaderia.beans.Stock;
+import utils.SQLManager;
+
+public class FacturasFabricacionDetalleBorrarAction extends Action {
+	public ActionForward execute(ActionMapping mapping, 
+								ActionForm form, 
+								HttpServletRequest request, 
+								HttpServletResponse response) throws Exception 
+	{              		
+		ActionForward forward = null;
+		ActionMessages messages = new ActionMessages();
+		int resultado = -2;
+		String[] chkValues = request.getParameterValues("checkList");
+
+		for(int i=0; i<chkValues.length; i++){
+			//Eliminamos los marcados de nuestra lista de detalles
+			//Ademas de eliminar debemos elimirlo de nuestro stock y añadirlo al resto del stock usado
+			FacturasCompraDetalle detalle = FacturasCompraDetalle.getFacturasCompraDetalleByFcdId( chkValues[i] );
+			FacturasCompra factura = FacturasCompra.getFacturasCompraByFcId(detalle.getFcdFcId());
+			//Lo hacemos en una transicion
+			SQLManager manager = new SQLManager(); 
+				Connection conexion = manager.getConnection(); 
+			    try
+			    {
+			    	conexion.setAutoCommit(false);
+			    	//Eliminamos el detalle de la factura
+			    	resultado = detalle.elimina(conexion);	
+			    	
+			    	Stock stock = detalle.getStock();
+				    	
+			    	//verificamos que se puede eliminar, sabiendo si existen bastantes productos no usados.
+			    	if(Double.parseDouble(detalle.getFcdCantidad())>Double.parseDouble(stock.getStCantidadFinal())){
+			    		throw new Exception("No se puede eliminar más cantidad de la que ya se ha usado/vendido");
+			    	}
+			    	
+			    	//Ahora actualizamos la composicion de fabricacion
+			    	ArrayList listaCp = ComposicionFabricacion.getComposicionFabricacionByCfIdStFabricado(stock.getStId());
+			    	for(int w=0; w<listaCp.size(); w++){
+			    		ComposicionFabricacion cf = (ComposicionFabricacion)listaCp.get(w);
+			    		Stock stockUsado = Stock.getStockByStId(cf.getCfIdStUsado());
+				    	ComponentesProducto cp = ComponentesProducto.getComponentesProductoByCpProdIdFabricadoAndUsado(stockUsado.getStProdId(), stock.getStProdId());
+		    			double cantidadNecesaria = Double.parseDouble(cp.getCpCantidad()) * Double.parseDouble(detalle.getFcdCantidad());
+		    			cf.setCfCantidad(Double.toString(Double.parseDouble(cf.getCfCantidad()) - cantidadNecesaria));
+		    			if(Double.parseDouble(cf.getCfCantidad())==0)
+		    				cf.elimina(conexion);
+		    			else
+		    				cf.actualiza(conexion);
+		    			//Ademas debemos actualizar el stock usado
+		    			stockUsado.setStCantidadFinal(Double.toString(Double.parseDouble(stockUsado.getStCantidadFinal()) + cantidadNecesaria));
+		    			double cantidadSalidas = Double.parseDouble(stockUsado.getStSalidas()) - cantidadNecesaria;
+		    			stockUsado.setStSalidas(Double.toString(cantidadSalidas));
+		    			stockUsado.actualiza(conexion);
+			    	}
+			    	
+				    	
+			    	//Actualizamos el stock
+			    	stock.setStCantidadFinal(Double.toString(Double.parseDouble(stock.getStCantidadFinal()) - Double.parseDouble(detalle.getFcdCantidad())));
+			    	//Si la cantidad final es 0 eliminamos
+			    	if(Double.parseDouble(stock.getStCantidadFinal())==0)
+			    		stock.elimina(conexion);
+			    	else
+			    		stock.actualiza(conexion);
+			    	
+			    	conexion.commit();
+			    }
+  			    catch( SQLException e ){ 
+  			    	request.setAttribute("excepcion", "Se ha producido un error durante la eliminación de este producto " + e);
+  			    	conexion.rollback();
+  			    }
+  			    finally{ manager.closeConnection();  }
+		}
+		
+		request.setAttribute("facturacompra", FacturasCompra.getFacturasCompraByFcId(request.getParameter("fcId")));
+		
+		
+		if(resultado == 0 || resultado == -1){
+        	//mensaje de guardado
+        	messages.add("info", new ActionMessage("info.delete.algunos"));						
+    		saveMessages(request.getSession(), messages);
+        }else if(resultado>0){
+        	//mensaje y mapeo de guardado o editado correcto
+        	messages.add("info", new ActionMessage("info.delete.ok"));						
+    		saveMessages(request.getSession(), messages);
+        }
+		
+		forward = mapping.findForward("ok");
+		
+		return forward;
+	}
+}

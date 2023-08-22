@@ -1,0 +1,17 @@
+mysql --default-character-set=utf8 --database panaderia -u root  < script_final.sql;
+
+ALTER TABLE panaderia.cuadrantes DROP FOREIGN KEY cuadrantes_ibfk_1, DROP FOREIGN KEY cuadrantes_ibfk_2, DROP cu_rut_id;
+ 
+ALTER TABLE panaderia.cuadrantes ADD CONSTRAINT cuadrantes_ibfk_1 FOREIGN KEY (cu_rut_id) REFERENCES panaderia.rutas (rut_id) ON UPDATE RESTRICT ON DELETE RESTRICT, ADD CONSTRAINT cuadrantes_ibfk_2 FOREIGN KEY (cu_cl_id) REFERENCES panaderia.clientes (cl_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+ALTER TABLE panaderia.cuadrantes ADD CONSTRAINT cuadrante_cliente_fk FOREIGN KEY (cu_cl_id) REFERENCES panaderia.clientes (cl_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+ALTER TABLE panaderia.entregas_detalle DROP INDEX ent_unico_uk;
+
+//28-01-2010
+
+ALTER TABLE notas_entrega DROP INDEX not_unico_uk;
+
+ALTER TABLE notas_entrega ADD UNIQUE INDEX not_unico_uk (not_fecha, not_nombre, not_rut_id, not_cl_id, not_orden);
+

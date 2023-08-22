@@ -1,0 +1,290 @@
+<%-- /WEB-INF/modulos/seguridad/perfiles.ficha.jsp --%>
+<%@taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
+<%@taglib uri="/WEB-INF/struts-bean.tld" prefix="bean"%>
+<%@taglib uri="/WEB-INF/c-1_0-rt.tld" prefix="c"%>
+<%@taglib uri="/WEB-INF/struts-tiles.tld" prefix="tiles"%>
+<%@taglib uri="/WEB-INF/displaytag.tld" prefix="display"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@taglib uri="/WEB-INF/taglibs-string.tld" prefix="str" %>
+
+<script type="text/javascript">
+	vFormName = "frmDetalle";
+	
+	function doSubmit(){
+		vForm = document.getElementById(vFormName);		
+		if( document.getElementById('hinvFecha').value=='' ){
+			alert('Debe elegir una Fecha válida');
+			return;
+		}else{
+			 document.getElementById('frmDetalle').action = 'doHistoricoInventariosFormularioGrabar.do';
+        	_enviarDetalle('frmDetalle');
+		}
+	}
+	
+	
+	function doEliminarDetalle(){
+		vForm = document.getElementById(vFormName);				
+		var idDetalles = hayChecked(vForm);
+		if( idDetalles == '-1' ){
+			alert('Debe elegir al menos un producto para eliminar');
+		}
+		else{
+			document.getElementById('frmDetalle').action = 'doHistoricoInventariosDetalleBorrar.do';
+			_enviarDetalle('frmDetalle');
+		}
+	}
+		
+	function doAñadirDetalle(){
+		vForm = document.getElementById(vFormName); 
+
+		if(document.getElementById('prodId').value==''){
+			alert('Debe indicar un producto para insertar');
+			return;
+		}else if(document.getElementById('hinvdLote').value==''){
+			alert('Debe indicar un lote de producto');
+			return;
+		}else if( formato_numero(document.getElementById('hinvdRecuento').value) < formato_numero(0)){
+			alert('La cantidad del producto debe ser mayor a 0');
+			return;
+		}else{ 
+			document.getElementById('frmDetalle').action='doHistoricoInventariosDetalleGrabar.do';
+			document.getElementById('frmDetalle').submit();
+		}
+	}
+	
+	
+	function devolverDatosLotes(lote, producto)
+	{
+		 var campoProducto = document.getElementById(producto);
+		 var prodId = campoProducto[campoProducto.selectedIndex].value;
+	
+		 var url = 'doCargaLotes.do?prodId='+prodId;
+		 
+		 // Ponemos en blanco
+		 document.getElementById(lote).length = 0;
+		 
+		 setTimeout("loadXMLDoc('"+url+"','"+lote+"')", 0); 
+	}
+	
+	function devolverStockLote(stock, lote)
+	{
+		 var campoLote = document.getElementById(lote);
+		 var stId = campoLote[campoLote.selectedIndex].value;
+	
+		 var url = 'doCargaStockLote.do?stId='+stId;
+		 
+		 // Ponemos en blanco
+		 document.getElementById(stock).value = "";;
+		 
+		 setTimeout("loadXMLDocInput('"+url+"','"+stock+"')", 0); 
+	}
+	
+	/* Comprueba se hay algún paroducto seleccionado, devuelve -1 si no hay ninguno */
+	function hayChecked(form){
+		hayCheck = false;
+		vForm = document.getElementById("frmDetalle");
+		value = -1;
+		if(vForm.checkList!= undefined){
+			size = vForm.checkList.length;
+			value = vForm.checkList.value;
+			if (value != undefined)
+				hayCheck = vForm.checkList.checked;
+			if (size != undefined){
+				i=0; 		
+				while (i<size && !hayCheck){
+					hayCheck = vForm.checkList[i].checked;
+					value = vForm.checkList[i].value;
+					i++;
+				}		
+			}
+		}
+		if( !hayCheck ){
+			value=-1;
+		}
+		return value;
+	}
+	
+	
+
+</script>
+
+<html:form styleId="frmDetalle" action="/doHistoricoInventariosFormularioGrabar" method="post">
+<table style="background-color: white; border: 1px solid #E5E5E5; width: 100%">
+		&nbsp;&nbsp;&nbsp;<span style="color: #2DACE4; font-size: 16px; font-weight: bold;">
+		<img src="img/factura.png"/> Histórico de Inventarios y Regularizaciones</span>
+		<br><br>
+	<tr>          
+		  <td colspan="4" align="right">
+		  	<span style='color: #FA7D3D; font-size: 12px; font-weight: bold;'>
+				<c:if test="${!empty historicoinventarios.hinvId}">
+					Número Inventario: ${historicoinventarios.hinvId}
+				</c:if>	
+			</span>
+		  </td>
+	    </tr>
+	<tr>
+		<td colspan="7" style="font-family: Verdana; font-size: 11px; color: #2DACE4;padding: 5px 0px 0px 5px">
+			<img src="img/play.gif"/>&nbsp;Datos Básicos del Inventario/Regularización<br>
+			<hr style="color: #DFDEDE">
+		</td>
+	</tr>	   
+        <tr> 
+          <td align="left" colspan='4' style="padding-left: 20px;"> 
+			<table width="40%" cellpadding="0" cellspacing="0" class="texto">
+              <tr> 
+                <td style='width: 10%' align="left" class="texto_negrita">Fecha</td>
+                 <td style='width: 40%' align="left">
+					<fmt:formatDate value="${historicoinventarios.hinvFecha}" pattern="dd/MM/yyyy" var="fecha" />   	
+	            	<html:text style="background-color: #CCCCCC;" readonly="true" disabled="${DISABLED}" styleId="hinvFecha" property="hinvFecha" name="hinvFecha" value="${fecha}"/>
+	            	<c:if test="${empty historicoinventarios.hinvId}">
+		            	<img style="cursor: pointer;" class="vtop" id="calendario1" title="Seleccione fecha" alt="Seleccione fecha" src="img/calendario.gif"/>
+		            	<script type="text/javascript">
+		                      Calendar.setup({
+		                          inputField     :    "hinvFecha"   // id of the input field
+		                      ,
+		                          button         :    "calendario1"  // trigger for the calendar (button ID)
+		                      });
+		            	</script>
+		            </c:if>
+	            </td>
+	             <c:if test="${!empty historicoinventarios.hinvId}">  
+	         		<td style='width: 10%' align="left" class="texto_negrita">Usuario</td>
+	         		 <td style='width: 40%' align="left">
+						  <html:select disabled="true" style="width: 250px" styleId="hinvUsId" property="hinvUsId" value="${historicoinventarios.hinvUsId}">
+						  <html:option value="">[Seleccionar]</html:option>
+						  <html:options property="usId" labelProperty="usNombre" collection="LISTAUSUARIOS"/>
+				    </html:select>				    
+			    	</td>
+  			</c:if>	
+              </tr>
+            </table>
+		  </td>		
+        </tr>       
+        
+        <tr ><td height="10px"></td></tr>   
+		<!-- Fin Linea 21 -->
+		
+		
+<!-- DETALLES DE LA FACTURAS -->		
+<c:if test="${!empty historicoinventarios.hinvId}">
+	<tr>
+		<td colspan="7" style="font-family: Verdana; font-size: 11px; color: #2DACE4;padding: 5px 0px 0px 5px">
+			<img src="img/play.gif"/>&nbsp;Detalles del Inventario/Regularización<br>
+			<hr style="color: #DFDEDE">
+			
+				<table width="70%">
+				<tr>
+					<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 15%">
+							Producto<br>
+							<html:select style="width: 250px" styleId="prodId" property="prodId" value="" onchange="javascript: devolverDatosLotes('hinvdLote','prodId');">
+							  <html:option value="">[Seleccionar]</html:option>
+							  <html:options property="prodId" labelProperty="prodNombre" collection="LISTAPRODUCTOS"/>
+						    </html:select>
+						</td>
+						
+						<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 10%">
+							Lote<br>
+							<html:select style="width: 250px" styleId="hinvdLote" property="hinvdLote" value="" onchange="javascript: devolverStockLote('stCantidad','hinvdLote');">
+							  <html:option value="">[Seleccionar]</html:option>
+							  <html:options property="hinvdLote" labelProperty="hinvdLote" collection="LISTALOTES"/>
+						    </html:select>
+						</td>
+						<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 10%">
+							Stock<br>
+							<input size="16" readonly="readonly" id="stCantidad" name="stCantidad" maxlength="11" style="text-align: right;" type="text" value="">
+						</td>
+						<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 10%">
+							Recuento<br>
+							<input onblur="this.value=formato_numero(this.value,1)" size="16" id="hinvdRecuento" name="hinvdRecuento" maxlength="11" style="text-align: right;" type="text" value="">
+						</td>						
+						<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 4%">
+							<a onclick="javascript: doAñadirDetalle();">
+								<img src="img/add.png" title="Añadir Producto"/>
+								</a>
+						</td>
+						<td style="font-family: Verdana; font-size: 11px; color: #666666; width: 4%">
+							<a onclick="javascript: doEliminarDetalle();"> 
+								<img  src="img/remove.png" title="eliminar detalle"/></a>
+						</td>						
+					</tr>
+					<tr>
+						<td colspan="3" style="font-family: Verdana; font-size: 11px; color: #666666; width: 50%">
+							Observaciones<br>
+							<input size="105" id="hinvObservaciones" name="hinvObservaciones" maxlength="11" type="text" value="">
+						</td>
+					</tr>
+				</table>	
+		</td>
+	</tr>
+	<tr>
+		<td  style="width: 70%">
+				<table cellpadding="1" class="displaytag_tabla" cellspacing="1" style="margin-bottom: 20px">
+				<c:set var="contador" value="0"/>
+				<c:set var="indice" value="-1"/>
+					<thead>
+						<tr class="${estilo}">
+							<th class="columna sortable">
+								&nbsp;
+							</th>
+							<th class="columna sortable">
+								código
+							</th>							
+							<th class="columna sortable">
+								producto
+							</th>
+							<th class="columna sortable">
+								lote
+							</th>
+							<th class="columna sortable">
+								recuento
+							</th>			
+						</tr>
+					</thead>
+					<c:forEach items="${LISTADETALLES}" var="detalle">
+						<c:choose>
+							<c:when test="${contador%2==0}">
+								<c:set value="odd" var="estilo"/>
+								<c:set var="contador" value="3"/>
+							</c:when>
+							<c:otherwise>
+								<c:set value="even" var="estilo"/>
+								<c:set var="contador" value="2"/>
+							</c:otherwise>
+						</c:choose>
+						<c:set var="indice" value="${indice+1}"/>
+						<tr class="${estilo}">
+							<td class="columna" style="text-align: center;">
+								<input type="checkbox" id="checkList" name="checkList" class="check" value="${detalle.hinvdId}"/>
+							</td>
+							<td class="columna" style="text-align: left;">
+								<c:out value="${detalle.hinvdProdId}"/>
+							</td>
+							<td class="columna" style="text-align: left;">
+								<c:out value="${detalle.hinvdNombreProducto}"/>
+							</td>
+							<td class="columna" style="text-align: left;">
+								<c:out value="${detalle.hinvdLote}"/>
+							</td>
+							<td class="columna" style="text-align: right;">
+								<fmt:formatNumber pattern="###,###.###" var="recuento">${detalle.hinvdRecuento}</fmt:formatNumber>
+								<c:out value="${recuento}"/>
+							</td>							
+						</tr>						
+					</c:forEach>
+				</table>
+			</td>
+			
+				<td width="28%" style="vertical-align: top;">					
+				</td>
+			
+		</tr>
+</c:if>
+</table>
+
+<script>
+		setTimeout("devolverDatosLotes('hinvdLote','provId')",400);
+		setTimeout("devolverStockLote('stCantidad','hinvdLote')",400);
+</script>
+<html:hidden property="hinvId" styleId="hinvId" value="${historicoinventarios.hinvId}"/>
+
+</html:form> 
