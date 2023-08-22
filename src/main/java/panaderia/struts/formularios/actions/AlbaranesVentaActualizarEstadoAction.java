@@ -1,6 +1,6 @@
 package panaderia.struts.formularios.actions;
 
-
+//cambio para probar git
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
