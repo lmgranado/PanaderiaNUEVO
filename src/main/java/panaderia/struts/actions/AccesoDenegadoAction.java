@@ -8,7 +8,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-
+sdf
 public class AccesoDenegadoAction extends Action {
 	public ActionForward execute(ActionMapping mapping, 
 								ActionForm form, 
