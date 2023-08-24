@@ -13,14 +13,14 @@ import org.displaytag.pagination.PaginatedListTest;
 import panaderia.beans.entidad.ActualizadorPreciosEntidad;
 import panaderia.struts.forms.EntidadBean;
 
-
+ver si actualiza en github
 import utils.UtilesDAO;
 import utils.Utils;
 
 public class ActualizadorPrecios extends ActualizadorPreciosEntidad{
 	  public static Object[] getActualizadorLista(PaginatedListTest listaPaginada) 
 	  {
-		String sqlAñadido = " ";
+		String sqlAï¿½adido = " ";
 		String tipo = listaPaginada.getRequest().getParameter("actTipo");
 		String cantidad = listaPaginada.getRequest().getParameter("actCantidad");
 		cantidad = quitar_comas(cantidad);
@@ -41,16 +41,16 @@ public class ActualizadorPrecios extends ActualizadorPreciosEntidad{
 						"join rutas r ON ed.end_rut_id = r.rut_id";
 	  	try{
 	    	if(!Utils.empty(listaPaginada.getRequest().getParameter("clId")))
-	    		sqlAñadido += "AND c.cl_id = " + listaPaginada.getRequest().getParameter("clId") + " ";
+	    		sqlAï¿½adido += "AND c.cl_id = " + listaPaginada.getRequest().getParameter("clId") + " ";
 	    	if(!Utils.empty(listaPaginada.getRequest().getParameter("rutId")))
-	    		sqlAñadido += "AND r.rut_id = " + listaPaginada.getRequest().getParameter("rutId") + " ";
+	    		sqlAï¿½adido += "AND r.rut_id = " + listaPaginada.getRequest().getParameter("rutId") + " ";
 	    	if(!Utils.empty(listaPaginada.getRequest().getParameter("locId")))
-	    		sqlAñadido += "AND c.cl_loc_id = " + listaPaginada.getRequest().getParameter("locId") + " ";
+	    		sqlAï¿½adido += "AND c.cl_loc_id = " + listaPaginada.getRequest().getParameter("locId") + " ";
 	    	
 	  	}catch(Exception e){
 	  		System.out.println(e);
 	  	}
-	    return UtilesDAO.generaSqlListadoPaginado(sql + sqlAñadido, listaPaginada, actualizador);
+	    return UtilesDAO.generaSqlListadoPaginado(sql + sqlAï¿½adido, listaPaginada, actualizador);
 	  }
 	  
 	  public static int actualizar(HttpServletRequest request) 
@@ -60,7 +60,7 @@ public class ActualizadorPrecios extends ActualizadorPreciosEntidad{
 		  Connection conexion  = utils.PoolConexiones.conexion(); 
 		  try
 		    {
-			  String sqlAñadido = " ";
+			  String sqlAï¿½adido = " ";
 				String tipo = request.getParameter("actTipo");
 				String cantidad = request.getParameter("actCantidad");
 				cantidad = quitar_comas(cantidad);
@@ -83,13 +83,13 @@ public class ActualizadorPrecios extends ActualizadorPreciosEntidad{
 				"join rutas r ON ed.end_rut_id = r.rut_id";
 			  
 				if(!Utils.empty(request.getParameter("clId")))
-					sqlAñadido += "AND c.cl_id = " + request.getParameter("clId") + " ";
+					sqlAï¿½adido += "AND c.cl_id = " + request.getParameter("clId") + " ";
 				if(!Utils.empty(request.getParameter("rutId")))
-					sqlAñadido += "AND r.rut_id = " + request.getParameter("rutId") + " ";
+					sqlAï¿½adido += "AND r.rut_id = " + request.getParameter("rutId") + " ";
 				if(!Utils.empty(request.getParameter("locId")))
-					sqlAñadido += "AND c.cl_loc_id = " + request.getParameter("locId") + " ";
+					sqlAï¿½adido += "AND c.cl_loc_id = " + request.getParameter("locId") + " ";
 				
-				sql = sql + sqlAñadido;
+				sql = sql + sqlAï¿½adido;
 				String cadenaIn = "";
 				ArrayList listaIn = EntidadBean.consulta(sql);
 				for(int i=0; i<listaIn.size(); i++){
