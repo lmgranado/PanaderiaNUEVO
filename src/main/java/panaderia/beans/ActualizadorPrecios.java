@@ -13,7 +13,7 @@ import org.displaytag.pagination.PaginatedListTest;
 import panaderia.beans.entidad.ActualizadorPreciosEntidad;
 import panaderia.struts.forms.EntidadBean;
 
-ver si actualiza en github
+ver si actualiza en github 2
 import utils.UtilesDAO;
 import utils.Utils;
 
